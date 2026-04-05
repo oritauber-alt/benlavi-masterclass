@@ -9,8 +9,8 @@ const notoHebrew = Noto_Sans_Hebrew({
 });
 
 export const metadata: Metadata = {
-  title: "אקת��ן AI לבעלי עסקים",
-  description: "בנה אייג'נט AI שעובד בשביל העסק שלך",
+  title: "אקתון AI לבעלי עסקים | 30 באפריל 2026",
+  description: "בנה אייג׳נט AI לעסק שלך ביום אחד. אקתון מעשי לבעלי עסקים בתל אביב.",
 };
 
 export default function RootLayout({
