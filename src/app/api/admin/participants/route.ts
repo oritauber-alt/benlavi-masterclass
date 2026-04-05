@@ -31,9 +31,10 @@ export async function GET() {
       })),
     });
   } catch (err) {
+    console.error("[admin/participants] failed:", err);
     return NextResponse.json(
       { error: (err as Error).message, participants: [] },
-      { status: 200 }
+      { status: 500 }
     );
   }
 }

@@ -17,7 +17,7 @@ export function StepInstallation() {
         <h4 className="font-medium text-zinc-300">התקנת Antigravity</h4>
         <ol className="list-decimal list-inside space-y-2 text-zinc-400 text-sm">
           <li>פתחו את הדפדפן ועברו לאתר <a href="https://antigravity.dev" target="_blank" className="text-blue-400 hover:underline">antigravity.dev</a></li>
-          <li>לחצו על "Download" והתקינו את האפליקציה</li>
+          <li>לחצו על &quot;Download&quot; והתקינו את האפליקציה</li>
           <li>פתחו את Antigravity</li>
           <li>התחברו עם חשבון Anthropic (Claude) שלכם</li>
           <li>אם אין לכם חשבון - צרו אחד ב-<a href="https://console.anthropic.com" target="_blank" className="text-blue-400 hover:underline">console.anthropic.com</a></li>

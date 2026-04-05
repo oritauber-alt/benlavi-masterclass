@@ -70,8 +70,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    console.error("[brief-submitted] failed:", err);
     return NextResponse.json(
-      { error: (err as Error).message },
+      { error: "שליחת הטופס נכשלה, נסה שוב" },
       { status: 500 }
     );
   }

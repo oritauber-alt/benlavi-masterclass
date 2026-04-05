@@ -3,12 +3,7 @@
 import { supabaseAdmin } from "@/db";
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-
-function generatePassword(name: string): string {
-  const cleanName = name.split(" ")[0].toLowerCase().replace(/[^a-z\u0590-\u05FF]/g, "");
-  const random = Math.floor(1000 + Math.random() * 9000);
-  return `${cleanName || "user"}-${random}`;
-}
+import { generateSecurePassword } from "@/lib/password";
 
 export async function createParticipant(formData: FormData) {
   const fullName = formData.get("fullName") as string;
@@ -16,7 +11,7 @@ export async function createParticipant(formData: FormData) {
   const phone = formData.get("phone") as string;
   const businessName = formData.get("businessName") as string;
 
-  const password = generatePassword(fullName);
+  const password = generateSecurePassword();
 
   const supabaseAuth = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -14,11 +14,15 @@ import { McpGuides } from "@/components/dashboard/mcp-guides";
 export default async function DashboardPage() {
   const user = await requireAuth();
 
-  const { data: participantRows } = await supabaseAdmin
+  const { data: participantRows, error: participantError } = await supabaseAdmin
     .from("participants")
     .select("*")
     .eq("id", user.id)
     .limit(1);
+
+  if (participantError) {
+    console.error("[dashboard] failed to load participant:", participantError);
+  }
 
   const participant = participantRows?.[0] ?? null;
 
@@ -32,9 +36,23 @@ export default async function DashboardPage() {
 
   const skill = skillRows?.[0] ?? null;
 
-  const { data: allPrompts } = await supabaseAdmin.from("prompts").select("*");
-  const { data: allTracks } = await supabaseAdmin.from("agent_tracks").select("*");
-  const { data: allGuides } = await supabaseAdmin.from("mcp_guides").select("*");
+  const [promptsRes, tracksRes, guidesRes] = await Promise.all([
+    supabaseAdmin.from("prompts").select("*"),
+    supabaseAdmin.from("agent_tracks").select("*"),
+    supabaseAdmin.from("mcp_guides").select("*"),
+  ]);
+
+  const allPrompts = promptsRes.data;
+  const allTracks = tracksRes.data;
+  const allGuides = guidesRes.data;
+
+  if (promptsRes.error || tracksRes.error || guidesRes.error) {
+    console.error("[dashboard] load errors:", {
+      prompts: promptsRes.error?.message,
+      tracks: tracksRes.error?.message,
+      guides: guidesRes.error?.message,
+    });
+  }
 
   const selectedPrompt =
     participant?.selected_site_type && participant?.selected_design_style

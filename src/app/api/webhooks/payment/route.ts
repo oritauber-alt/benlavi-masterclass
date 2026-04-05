@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/db";
 import { createClient } from "@supabase/supabase-js";
-
-function generatePassword(name: string): string {
-  const cleanName = name.split(" ")[0].toLowerCase().replace(/[^a-z\u0590-\u05FF]/g, "");
-  const random = Math.floor(1000 + Math.random() * 9000);
-  return `${cleanName || "user"}-${random}`;
-}
+import { generateSecurePassword } from "@/lib/password";
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "חסר שם או אימייל" }, { status: 400 });
     }
 
-    const password = generatePassword(fullName);
+    const password = generateSecurePassword();
 
     const supabaseAuth = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
