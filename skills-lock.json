@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "skills": {
+    "brainstorming": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "computedHash": "8df9b47092524833138b58682d03f2e153a242e550d1693657afdbee0cc9cdb0"
+    },
+    "customer-training-curriculum": {
+      "source": "dengineproblem/agents-monorepo",
+      "sourceType": "github",
+      "computedHash": "eaaee4f104967b9763c7324eebe3a2b226893777461ac0531ecb2e3c5be5bb52"
+    },
+    "supabase-nextjs": {
+      "source": "alinaqi/claude-bootstrap",
+      "sourceType": "github",
+      "computedHash": "d8f51be6db5f5f8df8d2a13db95e90058b4c273249e68359e193c2b651be0c8b"
+    },
+    "system-architect": {
+      "source": "aj-geddes/claude-code-bmad-skills",
+      "sourceType": "github",
+      "computedHash": "df27ff056c0e08795070e597105707843f48b153aac5123793efea82838d289a"
+    },
+    "youtube-scriptwriting": {
+      "source": "cdeistopened/skill-stack",
+      "sourceType": "github",
+      "computedHash": "4fc5cb87a4214eb745603a4c6ed7c4381645c310b300e705dcdfc9f0e5c66064"
+    }
+  }
+}
