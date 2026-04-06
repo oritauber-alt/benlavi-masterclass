@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Hebrew } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const notoHebrew = Noto_Sans_Hebrew({
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="he" dir="rtl" className={`${notoHebrew.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-[family-name:var(--font-noto-hebrew)] bg-zinc-950 text-zinc-100">
         {children}
+        <Analytics />
       </body>
     </html>
   );
