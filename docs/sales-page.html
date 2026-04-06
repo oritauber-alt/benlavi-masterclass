@@ -1027,12 +1027,13 @@
     .container-narrow.fade-up.visible .terminal-body > *:nth-child(1) { animation: termLineIn 0.3s 0s var(--ease) forwards; }
     .container-narrow.fade-up.visible .terminal-body > *:nth-child(2) { animation: termLineIn 0.3s 0.15s var(--ease) forwards; }
     .container-narrow.fade-up.visible .terminal-body > *:nth-child(3) { animation: termLineIn 0.3s 0.4s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .terminal-body > *:nth-child(4) { animation: termLineIn 0.3s 1.1s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .terminal-body > *:nth-child(5) { animation: termLineIn 0.3s 1.8s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .terminal-body > *:nth-child(6) { animation: termLineIn 0.3s 2.5s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .term-progress { animation: termLineIn 0.3s 3.2s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .term-progress-bar { animation: termBarFill 0.7s 3.4s var(--ease) forwards; }
-    .container-narrow.fade-up.visible .term-done { animation: termLineIn 0.3s 4.15s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .terminal-body > *:nth-child(4) { animation: termLineIn 0.3s 1.0s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .terminal-body > *:nth-child(5) { animation: termLineIn 0.3s 1.6s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .terminal-body > *:nth-child(6) { animation: termLineIn 0.3s 2.2s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .terminal-body > *:nth-child(7) { animation: termLineIn 0.3s 2.8s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .term-progress { animation: termLineIn 0.3s 3.4s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .term-progress-bar { animation: termBarFill 0.7s 3.6s var(--ease) forwards; }
+    .container-narrow.fade-up.visible .term-done { animation: termLineIn 0.3s 4.35s var(--ease) forwards; }
 
     @keyframes termLineIn {
       to { opacity: 1; transform: translateX(0); }
@@ -2327,6 +2328,365 @@
       opacity: 0.6;
     }
 
+    /* ══════ SECTION: CAPABILITIES (After Workshop) ══════ */
+    .sec-capabilities {
+      position: relative;
+      padding: 100px 24px;
+      background: var(--bg-alt);
+    }
+
+    .sec-capabilities h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .sec-capabilities .subtitle {
+      text-align: center;
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      font-weight: 600;
+    }
+
+    .cap-list {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cap-card {
+      padding: 32px 36px;
+      background: var(--bg-white);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--ease);
+    }
+
+    .cap-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--warm-deep) 100%);
+    }
+
+    .cap-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .cap-card h3 {
+      font-size: clamp(18px, 2.2vw, 22px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+      padding-right: 32px;
+      position: relative;
+    }
+
+    .cap-card h3::before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .cap-card p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .cap-saving {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent-deep);
+    }
+
+    .value-summary {
+      max-width: 820px;
+      margin: 48px auto 0;
+      padding: 32px 40px;
+      background: var(--bg-dark);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(26,22,19,0.15);
+    }
+
+    .value-summary .value-total {
+      font-size: 16px;
+      color: var(--text-on-dark-muted);
+      margin-bottom: 8px;
+    }
+
+    .value-summary .value-price {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      color: var(--text-on-dark);
+      margin-bottom: 6px;
+    }
+
+    .value-summary .value-note {
+      font-size: 14px;
+      color: var(--text-on-dark-muted);
+    }
+
+    /* ══════ SECTION: WHY NOW ══════ */
+    .sec-whynow {
+      position: relative;
+      padding: 100px 24px;
+      background: var(--bg);
+    }
+
+    .sec-whynow h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .whynow-body {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .whynow-body p {
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .whynow-body p strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    /* ══════ SECTION: PREP STEPS ══════ */
+    .sec-prep {
+      position: relative;
+      padding: 100px 24px;
+      background: var(--bg);
+    }
+
+    .sec-prep h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .sec-prep .subtitle {
+      text-align: center;
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      font-weight: 600;
+    }
+
+    .prep-steps {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .prep-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 32px 36px;
+      background: var(--bg-white);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s var(--ease);
+    }
+
+    .prep-step:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .prep-num {
+      font-family: var(--font-mono);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .prep-step h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .prep-step p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* ══════ WHY nCODE section ══════ */
+    .sec-whyncode {
+      position: relative;
+      padding: 100px 24px;
+      background: var(--bg-alt);
+    }
+
+    .sec-whyncode h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .whyncode-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 44px;
+      background: var(--bg-white);
+      border-radius: 20px;
+      box-shadow: var(--shadow-float);
+      position: relative;
+    }
+
+    .whyncode-body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--warm-deep) 100%);
+      border-radius: 0 20px 20px 0;
+    }
+
+    .whyncode-body p {
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ══════ Schedule accordion (dark bg) ══════ */
+    .schedule-list {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .schedule-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(217,119,87,0.15);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.3s var(--ease);
+    }
+
+    .schedule-item:hover {
+      border-color: var(--accent);
+      background: rgba(217,119,87,0.06);
+    }
+
+    .schedule-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.2s var(--ease);
+    }
+
+    .schedule-summary::-webkit-details-marker { display: none; }
+
+    .schedule-num {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(217,119,87,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .schedule-summary h3 {
+      font-size: clamp(16px, 1.9vw, 19px);
+      font-weight: 700;
+      color: var(--text-on-dark);
+      flex: 1;
+      margin: 0;
+    }
+
+    .schedule-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: rgba(245,241,232,0.4);
+      transition: transform 0.3s var(--ease), color 0.2s var(--ease);
+    }
+
+    .schedule-item[open] .schedule-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .schedule-body {
+      padding: 0 28px 22px;
+      padding-right: 80px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+      animation: slideDown 0.3s var(--ease);
+    }
+
+    .schedule-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(245,241,232,0.65);
+    }
+
+    @media (max-width: 640px) {
+      .schedule-body { padding-right: 28px; }
+      .prep-step { flex-direction: column; gap: 12px; padding: 24px; }
+      .cap-card { padding: 24px; }
+    }
+
     /* ─── Animations ─── */
     .fade-up {
       opacity: 0;
@@ -2466,19 +2826,16 @@
 
   <div class="hero-content">
     <div class="hero-text fade-up visible">
-      <div class="hero-badge">סדנה פרונטלית · 30 באפריל · תל אביב</div>
+      <div class="hero-badge">סדנה פרונטלית · 30 באפריל · 18:00 · תל אביב · מקומות מוגבלים</div>
       <h1>
-        <span class="line">איך אני משתמש</span>
-        <span class="line">ב-<span class="highlight">Claude Code</span></span>
-        <span class="line">בעסקים שלי</span>
+        <span class="line">מה אם העסק שלך</span>
+        <span class="line">ימשיך לרוץ <span class="highlight">בלעדיך?</span></span>
       </h1>
       <p class="hero-sub">
-        <span class="hero-sub-line">הפעם הראשונה שאני מלמד את זה.</span>
-        <span class="hero-sub-line">40 בעלי עסקים, ערב פרונטלי</span>
-        <span class="hero-sub-line">ב-30.4.</span>
+        בערב אחד תבנה מערכת שעובדת על העסק שלך 24/7 - עם בן לביא והצוות של nCode לצידך.
       </p>
       <a href="#checkout" class="pill-btn pill-btn-solid" data-checkout-url="TODO">
-        <span>שריין מקום</span>
+        <span>לשריין מקום עכשיו | 2,997 ₪</span>
       </a>
     </div>
 
@@ -2501,11 +2858,47 @@
       <div class="offer-body">
         <p>יש בעלי עסקים שכבר בנו לעצמם סוכן AI שכותב להם תוכן. סוכן שעונה ללקוחות במקומם. סוכן שמוציא חשבוניות מהמייל באוטומט.</p>
         <p><strong>כולם משתמשים בדבר אחד: Claude Code.</strong></p>
-        <p>ב-30.4 אני לוקח 40 בעלי עסקים, סוגר אותם בחדר, ובסוף הערב כולם יוצאים עם סוכן משלהם שעובד.</p>
+        <p>ב-30.4 אני יושב עם 40 בעלי עסקים, ובסוף הערב כל אחד יוצא עם מערכת שעובדת בשבילו.</p>
       </div>
     </div>
     <div class="offer-photo">
       <img src="https://benla.co.il/images/timeline/today.jpg" alt="בן לביא">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHO IS THIS FOR ══════════════ -->
+<section class="sec-filter">
+  <div class="container-narrow fade-up">
+    <h2>למי הסדנה הזו מתאימה (ולמי לא)</h2>
+    <div class="filter-grid">
+      <div class="filter-col">
+        <div class="filter-col-title" style="color: #27c93f">זה בשבילך אם:</div>
+        <ul>
+          <li><span class="filter-v">✓</span> יש לך עסק פעיל ולקוחות</li>
+          <li><span class="filter-v">✓</span> אתה מבזבז זמן על דברים שחוזרים על עצמם כל יום</li>
+          <li><span class="filter-v">✓</span> ניסית כלי AI ולא הצלחת להפוך אותם למשהו שעובד באמת על העסק</li>
+          <li><span class="filter-v">✓</span> אתה מוכן להשקיע ערב אחד כדי לבנות משהו שיחסוך לך שעות כל שבוע</li>
+        </ul>
+      </div>
+      <div class="filter-col">
+        <div class="filter-col-title" style="color: var(--accent-deep)">זה לא בשבילך אם:</div>
+        <ul>
+          <li><span class="filter-x">✕</span> אין לך עסק קיים עם לקוחות - הסדנה בנויה סביב עסק פעיל.</li>
+          <li><span class="filter-x">✕</span> אתה מחפש הרצאה תיאורטית על AI - פה בונים דברים אמיתיים.</li>
+          <li><span class="filter-x">✕</span> אין לך מחשב נייד - חובה להגיע עם אחד.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHY nCODE ══════════════ -->
+<section class="sec-whyncode">
+  <div class="container-narrow fade-up">
+    <h2>בנינו את זה לבעלי עסקים. לא למתכנתים.</h2>
+    <div class="whyncode-body">
+      <p>לא צריך לדעת קוד, לא צריך רקע טכני. בן לביא והצוות של nCode הכשירו כבר מעל 500 סטודנטים ובונים מוצרי AI כל יום. בסדנה הם לצידך - כל פרומפט, תבנית וחבילה אישית נבדקו על עסקים אמיתיים לפני שהגיעו אליך.</p>
     </div>
   </div>
 </section>
@@ -2543,10 +2936,41 @@
   </div>
 </section>
 
+<!-- ══════════════ BEFORE THE WORKSHOP ══════════════ -->
+<section class="sec-prep">
+  <div class="container-narrow fade-up">
+    <h2>מה קורה לפני ההגעה</h2>
+    <p class="subtitle"><strong>ברגע שנרשמת, מתחיל תהליך שעובד בשבילך:</strong></p>
+    <div class="prep-steps">
+      <div class="prep-step">
+        <div class="prep-num">01</div>
+        <div>
+          <h3>ממלא שאלון קצר על העסק שלך</h3>
+          <p>מספר על מה העסק, מה הכאבים, איפה אתה מבזבז הכי הרבה זמן.</p>
+        </div>
+      </div>
+      <div class="prep-step">
+        <div class="prep-num">02</div>
+        <div>
+          <h3>אנחנו בונים לך חבילה אישית</h3>
+          <p>סוכן AI מותאם לעסק שלך, פרומפטים, תבניות, הוראות - הכל מוכן לפני שהגעת.</p>
+        </div>
+      </div>
+      <div class="prep-step">
+        <div class="prep-num">03</div>
+        <div>
+          <h3>מגיע לסדנה עם הכל מחכה לך</h3>
+          <p>קובץ עם כל מה שצריך - לסדנה עצמה ולאחריה. אפס הכנה מצדך.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════ 4. מה תצא מהסדנה ══════════════ -->
 <section class="sec-outcomes">
   <div class="container-narrow fade-up">
-    <h2>עם מה אתה עומד לצאת</h2>
+    <h2>עם מה אתה יוצא</h2>
     <div class="outcomes-terminal">
       <div class="terminal-chrome">
         <div class="chrome-dots"><span></span><span></span><span></span></div>
@@ -2556,24 +2980,77 @@
         <div class="term-line term-cmd">$ ./workshop --night 30.4</div>
         <div class="term-line term-info">Running workshop...</div>
         <div class="term-group">
-          <div class="term-check">סוכן AI משלך שעובד בעסק</div>
-          <div class="term-detail" data-text="לא דמו. סוכן אמיתי שפועל בעסק שלך מהערב שיצאת."></div>
+          <div class="term-check">עובד דיגיטלי שרץ על העסק שלך</div>
+          <div class="term-detail" data-text="לא הדגמה. דבר אמיתי שפועל מהרגע שיצאת."></div>
         </div>
         <div class="term-group">
-          <div class="term-check">שליטה ב-Claude Code</div>
-          <div class="term-detail" data-text="הכלי שאני משתמש בו בכל עסק. תדע להפעיל אותו לבד."></div>
+          <div class="term-check">שליטה מלאה בכלים שבן משתמש בהם כל יום</div>
+          <div class="term-detail" data-text="תדע להפעיל אותם לבד, בלי עזרה."></div>
         </div>
         <div class="term-group">
-          <div class="term-check">שיטה לבנות עוד סוכנים בעצמך</div>
-          <div class="term-detail" data-text="מבינים פעם אחת. בונים לבד מכאן והלאה."></div>
+          <div class="term-check">חבילה אישית שנבנתה בשביל העסק שלך</div>
+          <div class="term-detail" data-text="הוראות, תבניות, וקובץ מוכן - בסדנה ואחריה."></div>
         </div>
         <div class="term-group">
-          <div class="term-check">ליווי אישי לאחר הסדנה</div>
-          <div class="term-detail" data-text="לא זורקים אותך. יש מי שיענה כשתתקע."></div>
+          <div class="term-check">3 תבניות מוכנות לסוכנים</div>
+          <div class="term-detail" data-text="שירות לקוחות, טיפול בלידים, ניהול תהליכים. בוחר ומריץ."></div>
+        </div>
+        <div class="term-group">
+          <div class="term-check">פרומפטים וכלים להמשך</div>
+          <div class="term-detail" data-text="לבנות סוכנים חדשים, לשפר קיימים, להרחיב - לבד בבית."></div>
         </div>
         <div class="term-progress"><div class="term-progress-bar"></div></div>
-        <div class="term-line term-done">Done ✓ (4/4 delivered)</div>
+        <div class="term-line term-done">Done ✓ (5/5 delivered)</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ AFTER THE WORKSHOP ══════════════ -->
+<section class="sec-capabilities">
+  <div class="container-narrow fade-up">
+    <h2>מה מקבלים אחרי הסדנה</h2>
+    <p class="subtitle"><strong>יכולות שתוכל להפעיל מהיום הבא:</strong></p>
+    <div class="cap-list">
+      <div class="cap-card">
+        <h3>לבנות דף נחיתה או אתר שלם - לבד</h3>
+        <p>אתה כותב מה אתה רוצה, הכלי בונה. דף למוצר חדש, אתר תדמית, דף מכירה - הכל לבד.</p>
+        <div class="cap-saving">במקום לשלם לפרילאנסר: 3,000-8,000 ₪</div>
+      </div>
+      <div class="cap-card">
+        <h3>להקים סוכן AI שעונה ללקוחות שלך 24/7</h3>
+        <p>סוכן שמכיר את העסק שלך, יודע לענות על שאלות, לטפל בפניות ולתאם פגישות - גם כשאתה לא זמין.</p>
+        <div class="cap-saving">במקום לשלם למפתח: 5,000-15,000 ₪</div>
+      </div>
+      <div class="cap-card">
+        <h3>לחבר בין הכלים שלך ככה שמידע זורם לבד</h3>
+        <p>ליד נכנס, נכנס אוטומטית ל-CRM, נשלחת הודעה ללקוח, מוקצה איש צוות. הכל קורה ברקע.</p>
+        <div class="cap-saving">במקום לשלם לאינטגרטור: 3,000-8,000 ₪</div>
+      </div>
+      <div class="cap-card">
+        <h3>לבנות אוטומציות שמחסלות עבודה ידנית חוזרת</h3>
+        <p>דוחות, מיילים, תזכורות ללקוחות - דברים שחוזרים על עצמם כל יום, עוברים לרוץ לבד.</p>
+        <div class="cap-saving">במקום לשלם: 2,000-6,000 ₪</div>
+      </div>
+      <div class="cap-card">
+        <h3>לייצר תוכן שיווקי - פוסטים, מיילים, סקריפטים - בדקות</h3>
+        <p>הסוכן מכיר את העסק שלך, את הטון שלך, את הקהל שלך. נותן לו בריף, מקבל טיוטה. עורך, מפרסם, עובר הלאה.</p>
+        <div class="cap-saving">במקום לשלם לקופירייטר: 1,500-4,000 ₪ לחודש</div>
+      </div>
+      <div class="cap-card">
+        <h3>ליווי אחרי הסדנה</h3>
+        <p>הדרכות וידאו, חומרים, ומישהו שיענה לך כשתיתקע. אתה לא נשאר לבד.</p>
+      </div>
+    </div>
+    <div class="value-summary">
+      <div class="value-total">סה"כ שווי יכולות: 14,500-41,000 ₪</div>
+      <div class="value-price">אתה משלם: 2,997 ₪</div>
+      <div class="value-note">ואת היכולת לעשות את זה שוב, לבד.</div>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="#checkout" class="pill-btn" data-checkout-url="TODO">
+        <span>אני רוצה את הכלים האלה | 2,997 ₪</span>
+      </a>
     </div>
   </div>
 </section>
@@ -2581,8 +3058,8 @@
 <!-- ══════════════ 5. BONUSES (moved before workshop) ══════════════ -->
 <section class="sec-bonuses">
   <div class="container-narrow fade-up">
-    <h2>בונוסים מיוחדים</h2>
-    <p class="subtitle">"רק הבונוסים לבד שווים יותר מהסדנה". הכל כלול למי שנרשם.</p>
+    <h2>בונוסים</h2>
+    <p class="subtitle">הכל כלול למי שנרשם.</p>
 
     <div class="bonuses-list">
       <div class="bonus-card fade-up">
@@ -2592,11 +3069,11 @@
         </div>
         <details class="bonus-details">
           <summary class="bonus-summary">
-            <h3>מערכת אישית שנבנית לך לפני הסדנה</h3>
+            <h3>חבילה אישית שמוכנה לפני שהגעת</h3>
             <svg class="bonus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="bonus-body-content">
-            <p>מהרגע שנרשמת, מתחילים לבנות לך מערכת עם פרומפטים מותאמים לעסק שלך. מגיע לסדנה, הכל מוכן.</p>
+            <p>ממלא שאלון קצר, מקבל חבילה שלמה שנבנתה בדיוק לעסק שלך - סוכן מותאם, פרומפטים, תבניות, הוראות. מגיע לסדנה מוכן.</p>
             <div class="bonus-status">READY</div>
           </div>
         </details>
@@ -2605,15 +3082,15 @@
       <div class="bonus-card fade-up">
         <div class="terminal-chrome">
           <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-filename">bonus_02 — guides.md</div>
+          <div class="chrome-filename">bonus_02 — templates.md</div>
         </div>
         <details class="bonus-details">
           <summary class="bonus-summary">
-            <h3>סרטוני הסבר על Claude Code ו-Antigravity</h3>
+            <h3>קובץ עם כל ההוראות והתבניות</h3>
             <svg class="bonus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="bonus-body-content">
-            <p>לא תישאר תקוע אחרי הסדנה. יש לך וידאו שמראה בדיוק איך להמשיך לבד.</p>
+            <p>הכל בקובץ אחד מסודר - לסדנה ולאחריה. כולל תבניות לסוכנים שתוכל לבנות לבד בבית ופרומפטים לפעולות נוספות בעסק.</p>
             <div class="bonus-status">READY</div>
           </div>
         </details>
@@ -2622,36 +3099,20 @@
       <div class="bonus-card fade-up">
         <div class="terminal-chrome">
           <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-filename">bonus_03 — prompts.lib</div>
+          <div class="chrome-filename">bonus_03 — videos.lib</div>
         </div>
         <details class="bonus-details">
           <summary class="bonus-summary">
-            <h3>הספרייה המלאה של הפרומפטים שלי</h3>
+            <h3>הדרכות וידאו להמשך</h3>
             <svg class="bonus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="bonus-body-content">
-            <p>לא רק מה שמראים בסדנה - כל הארסנל שאני משתמש בו. זה לבד שווה יותר מהסדנה.</p>
+            <p>סרטונים ממכללת nCode ומקורות נוספים. ממשיך ללמוד בקצב שלך, גם אחרי הסדנה.</p>
             <div class="bonus-status">READY</div>
           </div>
         </details>
       </div>
 
-      <div class="bonus-card fade-up">
-        <div class="terminal-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-filename">bonus_04 — examples.sh</div>
-        </div>
-        <details class="bonus-details">
-          <summary class="bonus-summary">
-            <h3>הדוגמאות החיות מהעסק שלי</h3>
-            <svg class="bonus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </summary>
-          <div class="bonus-body-content">
-            <p>הסוכנים שאני באמת מפעיל - עריכת פודקאסטים, מערכות חשבוניות, כלי תוכן. תראה איך עובד משהו אמיתי.</p>
-            <div class="bonus-status">READY</div>
-          </div>
-        </details>
-      </div>
     </div>
 
     <!-- Floating sticky CTA (bellapoint trick) -->
@@ -2667,7 +3128,24 @@
   </div>
 </section>
 
-<!-- ══════════════ 6. WORKSHOP (moved after bonuses) ══════════════ -->
+<!-- ══════════════ WHY NOW ══════════════ -->
+<section class="sec-whynow">
+  <div class="container-narrow fade-up">
+    <h2>למה עכשיו</h2>
+    <div class="whynow-body">
+      <p>AI לא מחכה. כל חודש יוצאים כלים חדשים, והפער בין מי שמשתמש בהם לבין מי שלא - רק גדל. בעלי עסקים שמטמיעים את הדברים האלה היום חוסכים שעות, מגיעים ליותר לקוחות, ועובדים אחרת.</p>
+      <p>הסדנה הזו בנויה סביב הכלים שעובדים עכשיו. לא תיאוריה על העתיד - דברים שתפעיל על העסק שלך כבר מחר.</p>
+      <p><strong>40 מקומות. החבילה האישית דורשת זמן הכנה, אז ההרשמה נסגרת 5 ימים לפני.</strong></p>
+      <div style="margin-top: 36px;">
+        <a href="#checkout" class="pill-btn" data-checkout-url="TODO">
+          <span>לשריין מקום | 2,997 ₪ | 30 באפריל | תל אביב</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 6. SCHEDULE (accordion dropdowns) ══════════════ -->
 <section class="sec-workshop">
   <svg class="workshop-pattern" viewBox="0 0 1440 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <g stroke="#D97757" stroke-width="1" fill="none" opacity="0.15">
@@ -2680,118 +3158,78 @@
   </svg>
 
   <div class="container fade-up">
-    <h2>ככה זה <span style="color: var(--accent-light)">הולך לעבוד</span></h2>
+    <h2>ככה זה <span style="color: var(--accent-light)">עומד לעבוד</span></h2>
 
-    <div class="wave-timeline fade-up">
-      <!-- Desktop wave (horizontal) -->
-      <svg class="wave-path-svg wave-path-desktop" viewBox="0 0 1200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#D97757" stop-opacity="0.2"/>
-            <stop offset="50%" stop-color="#D97757" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#B85A3F" stop-opacity="0.3"/>
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <path class="wave-path-line"
-              d="M 1150 80 Q 1050 80, 950 150 T 750 220 Q 650 220, 600 150 T 450 80 Q 350 80, 300 150 T 150 220 L 50 250"
-              fill="none"
-              stroke="url(#waveGrad)"
-              stroke-width="3"
-              stroke-linecap="round"
-              filter="url(#glow)"/>
-        <polygon class="wave-arrow" points="60,240 40,250 60,260 55,250" fill="#D97757"/>
-      </svg>
-
-      <!-- Mobile wave (vertical) -->
-      <svg class="wave-path-svg wave-path-mobile" viewBox="0 0 120 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="waveGradV" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#D97757" stop-opacity="0.4"/>
-            <stop offset="50%" stop-color="#D97757" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#B85A3F" stop-opacity="0.5"/>
-          </linearGradient>
-          <filter id="glowV">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <path class="wave-path-line-v"
-              d="M 60 20 Q 95 140, 60 260 T 60 500 Q 95 620, 60 740 T 60 980"
-              fill="none"
-              stroke="url(#waveGradV)"
-              stroke-width="3"
-              stroke-linecap="round"
-              filter="url(#glowV)"/>
-      </svg>
-
-      <div class="wave-steps">
-        <!-- Step 1 -->
-        <div class="wave-step">
-          <div class="wave-step-bignum">01</div>
-          <div class="wave-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <h3>נבין את עולם סוכני ה-AI</h3>
-          <p>מה זה סוכן, מה זה Claude Code, ואיך אני משתמש בזה יום-יום בעסקים שלי</p>
+    <div class="schedule-list">
+      <details class="schedule-item" open>
+        <summary class="schedule-summary">
+          <span class="schedule-num">01</span>
+          <h3>הגעה והתארגנות</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>מקבלים את הקובץ האישי, פותחים מחשבים, מתחילים.</p>
         </div>
+      </details>
 
-        <!-- Step 2 -->
-        <div class="wave-step">
-          <div class="wave-step-bignum">02</div>
-          <div class="wave-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 11l18-5v12L3 14v-3z"/>
-              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-            </svg>
-          </div>
-          <h3>נתקין את הכלים על המחשב שלך</h3>
-          <p>Claude Code, Antigravity, והחיבורים - הכל מוכן ועובד לפני שמתחילים</p>
+      <details class="schedule-item">
+        <summary class="schedule-summary">
+          <span class="schedule-num">02</span>
+          <h3>שיחת פתיחה עם בן לביא</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>בן מראה איך הסוכנים שלו עובדים על העסקים שלו - בזמן אמת. תראה בדיוק מה אפשר לעשות.</p>
         </div>
+      </details>
 
-        <!-- Step 3 -->
-        <div class="wave-step">
-          <div class="wave-step-bignum">03</div>
-          <div class="wave-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"/>
-              <polyline points="8 6 2 12 8 18"/>
-            </svg>
-          </div>
-          <h3>תבחר משימה אמיתית מהעסק שלך</h3>
-          <p>משהו שגוזל לך זמן כל שבוע. זה מה שהסוכן שלך יפתור</p>
+      <details class="schedule-item">
+        <summary class="schedule-summary">
+          <span class="schedule-num">03</span>
+          <h3>פרויקט ראשון</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>מתחברים לכלים, מדביקים את הפרומפטים שהכנו לך, ותוך דקות - משהו עובד.</p>
         </div>
+      </details>
 
-        <!-- Step 4 -->
-        <div class="wave-step">
-          <div class="wave-step-bignum">04</div>
-          <div class="wave-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <h3>נבנה ביחד סוכן שעושה אותה בשבילך</h3>
-          <p>יוצא מהערב עם סוכן שעובד לך בעסק. אמיתי. לא דמו</p>
+      <details class="schedule-item">
+        <summary class="schedule-summary">
+          <span class="schedule-num">04</span>
+          <h3>העמקה: סוכנים, חיבורים, אוטומציות</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>בן מראה איך לחבר כלים, לבנות סוכנים שעובדים לבד, ולמנף את מה שכבר יש לך בעסק.</p>
         </div>
-      </div>
+      </details>
+
+      <details class="schedule-item">
+        <summary class="schedule-summary">
+          <span class="schedule-num">05</span>
+          <h3>בונים סוכן לעסק שלך</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>שבלונות מוכנות ל-3 סוגי סוכנים: שירות לקוחות, טיפול בלידים, וניהול תהליכים. בוחר, מתאים, מריץ. מי שרוצה - בונה אחד מאפס.</p>
+        </div>
+      </details>
+
+      <details class="schedule-item">
+        <summary class="schedule-summary">
+          <span class="schedule-num">06</span>
+          <h3>סיכום ומה הלאה</h3>
+          <svg class="schedule-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="schedule-body">
+          <p>מוודאים שהכל עובד, מקבלים חומרים להמשך.</p>
+        </div>
+      </details>
     </div>
 
     <div class="workshop-cta-wrap">
-      <a href="#checkout" class="pill-btn" data-checkout-url="TODO">
+      <a href="#checkout" class="pill-btn pill-btn-solid" data-checkout-url="TODO">
         <span>שריין מקום</span>
       </a>
     </div>
@@ -2806,41 +3244,61 @@
     <div class="faq-list">
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-question">
-          <div class="faq-question-text">אני לא טכני, זה בשבילי?</div>
+          <div class="faq-question-text">"אני לא טכני בכלל. זה יתאים לי?"</div>
           <div class="faq-icon"></div>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          גם אני לא יודע לכתוב קוד. אני כותב הוראות בעברית. אם אתה יודע לדבר עברית ולעקוב אחרי הוראות, זה בשבילך. יש מנטורים שמלווים את כולם ברצף.
+          בדיוק בשביל זה בנינו את הסדנה. הכלים שנעבוד איתם לא דורשים ידע בתכנות. אם אתה יודע להשתמש במחשב - אתה מספיק טכני. בנוסף, מקבלים פרומפטים מוכנים שפשוט מדביקים.
         </div></div>
       </div>
 
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-question">
-          <div class="faq-question-text">מה אני צריך להביא?</div>
+          <div class="faq-question-text">"מה אני מקבל לפני הסדנה?"</div>
           <div class="faq-icon"></div>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          מחשב נייד. זה הכל. כל השאר - הפרומפטים, המערכת, החומרים - מוכן מראש.
+          שאלון קצר על העסק שלך. אנחנו לוקחים את התשובות ובונים לך חבילה אישית - סוכן מותאם, תבניות מוכנות, וקובץ שמחכה לך כשתגיע. אפס הכנה מצדך.
         </div></div>
       </div>
 
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-question">
-          <div class="faq-question-text">מה יקרה אם אני לא אסתדר עם התוכנות?</div>
+          <div class="faq-question-text">"מה ההבדל בין זה לבין ללמוד לבד מיוטיוב?"</div>
           <div class="faq-icon"></div>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          יש מנטורים שמסתובבים בחדר כל הערב. אתה לא לבד רגע. המטרה שכולם יוצאים עם סוכן שעובד.
+          ביוטיוב יש מלא מידע, אבל אין מישהו שיגיד לך מה רלוונטי לעסק שלך, יבנה את זה איתך, ויוודא שזה עובד. בסדנה כן.
         </div></div>
       </div>
 
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-question">
-          <div class="faq-question-text">מתי ואיפה?</div>
+          <div class="faq-question-text">"מה אם אני לא מסתדר אחרי הסדנה?"</div>
           <div class="faq-icon"></div>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          30 באפריל 2026, 18:00 עד 22:15. בית הצעירים, מזא"ה 9, תל אביב.
+          יש ליווי אחרי הסדנה - הדרכות וידאו, חומרים, ואנשים שיענו לך. אתה לא נשאר לבד. בנוסף, הקובץ שתקבל כולל הוראות מפורטות שמאפשרות לך להמשיך לבד.
+        </div></div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-question">
+          <div class="faq-question-text">"2,997 ₪ זה הרבה כסף בשבילי"</div>
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          דף נחיתה אחד עולה 3,000-8,000 שקל אצל פרילאנסר. סוכן שירות לקוחות - 5,000-15,000. אחרי הסדנה תדע לבנות את שניהם לבד, וגם דברים נוספים.
+        </div></div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-question">
+          <div class="faq-question-text">"מה צריך להביא?"</div>
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          מחשב נייד. זה הכל. כל השאר - כלים, חבילה אישית, תבניות, פרומפטים - מחכה לך.
         </div></div>
       </div>
     </div>
@@ -2873,12 +3331,11 @@
   <div class="final-content fade-up">
     <div class="final-pre">30 באפריל · תל אביב</div>
     <h2>
-      <span class="line">10 שנות ניסיון</span>
-      <span class="line accent-line">מסתכמות בערב אחד.</span>
+      <span class="line">30 באפריל. ערב אחד.</span>
+      <span class="line accent-line">עובד דיגיטלי שרץ.</span>
     </h2>
-    <div class="final-body">
-      בוא ללמוד איך להשתמש ב-AI<br>
-      בשביל להכניס כסף לעסק שלך.
+    <div class="final-body" style="color: var(--accent-light); font-weight: 700;">
+      40 מקומות בלבד. ההרשמה נסגרת 25 באפריל.
     </div>
 
     <div class="price-box">
@@ -2937,7 +3394,7 @@
         typeObs.unobserve(e.target);
         const details = e.target.querySelectorAll('.term-detail');
         // Start delays aligned with group fade-in animations (0.4s, 1.1s, 1.8s, 2.5s)
-        const startDelays = [400, 1100, 1800, 2500];
+        const startDelays = [400, 1000, 1600, 2200, 2800];
         const groupFadeDuration = 200; // time for group to finish fading in before typing starts
         details.forEach((el, i) => {
           const text = el.dataset.text || '';
