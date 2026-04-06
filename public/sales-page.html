@@ -2819,23 +2819,28 @@
         padding: 20px 24px;
       }
       .wave-path-desktop { display: none; }
-      .wave-path-mobile {
-        display: block;
-        width: 64px;
-        height: 100%;
-        top: 0;
-        bottom: 0;
-        left: auto;
-        right: 0;
-        transform: none;
-      }
+      .wave-path-mobile { display: none; }
       .wave-steps {
         grid-template-columns: 1fr;
-        gap: 56px;
+        gap: 48px;
+        position: relative;
+        padding-left: 80px;
+      }
+      /* Vertical line through circle centers */
+      .wave-steps::before {
+        content: '';
+        position: absolute;
+        left: 31px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, rgba(217,119,87,0.2) 0%, var(--accent) 30%, var(--accent) 70%, rgba(217,119,87,0.2) 100%);
+        border-radius: 2px;
+        z-index: 1;
       }
       .wave-step {
         text-align: right;
-        padding: 0 90px 0 0;
+        padding: 0;
         align-self: auto !important;
         position: relative;
         min-height: auto;
@@ -2846,8 +2851,8 @@
       .wave-circle {
         position: absolute;
         top: 50%;
-        left: auto;
-        right: 0;
+        right: auto;
+        left: -80px;
         transform: translateY(-50%);
         margin: 0;
         width: 64px;
@@ -2856,8 +2861,8 @@
       }
       .wave-circle svg { width: 28px; height: 28px; }
       .wave-step-bignum { display: none !important; }
-      .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; }
-      .wave-step p { margin-right: 0; max-width: 100%; font-size: 14px; text-align: right; }
+      .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; text-align: right; }
+      .wave-step p { margin: 0; max-width: 100%; font-size: 14px; text-align: right; }
     }
 
     @media (max-width: 680px) {
@@ -3023,8 +3028,7 @@
     <div class="hero-text fade-up visible">
       <div class="hero-badge">בן לביא מציג את</div>
       <h1>
-        <span class="line">הסדנה הכי פרקטית</span>
-        <span class="line"><span class="highlight">בישראל:</span></span>
+        <span class="line">הסדנה הכי פרקטית <span class="highlight">בישראל:</span></span>
         <span class="line hero-h1-sub">איך למנף את העסק שלך</span>
         <span class="line hero-h1-sub">בסוכני AI שמריצים אותו על אוטומט</span>
       </h1>
