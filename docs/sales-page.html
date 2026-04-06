@@ -2784,45 +2784,46 @@
         height: 100%;
         top: 0;
         bottom: 0;
-        left: auto;
-        right: 40px;
-        transform: none;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
       }
       .wave-steps {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 56px;
       }
       .wave-step {
-        text-align: right;
-        padding: 0 120px 0 16px;
+        text-align: center;
+        padding: 0 24px;
         align-self: auto !important;
         position: relative;
-        min-height: 100px;
+        min-height: auto;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
       }
       .wave-circle {
-        position: absolute;
-        top: 30%;
-        right: 22px;
-        transform: translateY(-50%);
-        margin: 0;
-        width: 60px;
-        height: 60px;
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        margin: 0 auto 14px;
+        width: 64px;
+        height: 64px;
         z-index: 4;
       }
-      .wave-circle svg { width: 26px; height: 26px; }
+      .wave-circle svg { width: 28px; height: 28px; }
       .wave-step-bignum {
-        font-size: 90px !important;
-        right: 140px !important;
-        top: 30% !important;
+        font-size: 80px !important;
+        right: auto !important;
+        left: 50% !important;
+        top: -20px !important;
         bottom: auto !important;
-        transform: translateY(-50%);
+        transform: translateX(-50%);
         color: rgba(217,119,87,0.06) !important;
       }
-      .wave-step h3 { margin-top: 0; margin-bottom: 6px; }
-      .wave-step p { margin-right: 0; max-width: 100%; font-size: 13px; }
+      .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; }
+      .wave-step p { margin-right: 0; max-width: 280px; font-size: 14px; text-align: center; }
     }
 
     @media (max-width: 680px) {
@@ -2856,65 +2857,102 @@
       .pill-btn-large { padding: 20px 40px; font-size: 18px; }
     }
 
-    /* ─── Mobile: consistent terminal sections ─── */
+    /* ─── H2 gradient text on light sections ─── */
+    .sec-offer h2,
+    .sec-filter h2,
+    .sec-whyncode h2,
+    .sec-prep h2,
+    .sec-outcomes h2,
+    .sec-bonuses h2,
+    .sec-whynow h2,
+    .sec-faq h2 {
+      background: linear-gradient(180deg, #1A1613 0%, #8B8578 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── Mobile: spacious, readable layout ─── */
     @media (max-width: 768px) {
-      /* Same container width for all terminal windows */
+      /* Bigger, more readable h2 on all sections */
+      h2 {
+        font-size: clamp(28px, 8vw, 42px) !important;
+        margin-bottom: 36px !important;
+        line-height: 1.15 !important;
+      }
+
+      /* Spacious terminal windows */
       .outcomes-terminal {
-        border-radius: 10px;
+        border-radius: 12px;
       }
       .terminal-body {
-        padding: 24px 20px !important;
+        padding: 28px 24px !important;
         display: block !important;
       }
 
-      /* Uniform font sizes across all terminal sections */
+      /* Bigger, readable fonts in terminal */
       .term-check {
-        font-size: 16px !important;
-        line-height: 1.5 !important;
+        font-size: 19px !important;
+        line-height: 1.6 !important;
         font-weight: 700 !important;
+        margin-bottom: 16px !important;
       }
       .term-x {
-        font-size: 16px !important;
-        line-height: 1.8 !important;
+        font-size: 18px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 12px !important;
       }
       .term-detail {
-        font-size: 13px !important;
+        font-size: 15px !important;
+        line-height: 1.6 !important;
       }
 
-      /* Lighter subtitles everywhere */
-      .term-detail,
-      .cap-card p,
-      .offer-body p,
-      .whynow-body p,
-      .wave-step p,
-      .bonus-body-content p,
-      .faq-answer-inner {
-        opacity: 0.65;
-      }
-
-      /* Consistent section spacing */
+      /* Spacious sections */
       .sec-filter, .sec-whyncode, .sec-prep, .sec-capabilities, .sec-whynow {
-        padding: 80px 20px;
+        padding: 80px 16px;
       }
 
-      /* Lighter sub-headings on all sections */
-      .hero-sub,
-      .offer-body p,
-      .leadform-sub,
-      .sec-bonuses .subtitle,
-      .sec-capabilities .subtitle {
-        opacity: 0.7;
+      /* Readable body text */
+      .offer-body p {
+        font-size: 18px !important;
+        line-height: 1.8 !important;
+      }
+      .faq-answer-inner {
+        font-size: 16px !important;
+        line-height: 1.7 !important;
+      }
+      .faq-question-text {
+        font-size: 18px !important;
       }
 
-      /* Consistent h2 sizes on mobile */
-      .sec-filter h2,
-      .sec-whyncode h2,
-      .sec-prep h2,
-      .sec-capabilities h2,
-      .sec-whynow h2 {
-        font-size: clamp(26px, 7vw, 36px);
-        margin-bottom: 32px;
+      /* Capability cards more spacious */
+      .cap-card {
+        padding: 24px 28px !important;
+        margin-bottom: 4px;
       }
+      .cap-card h3 {
+        font-size: 18px !important;
+        margin-bottom: 10px !important;
+      }
+      .cap-card p {
+        font-size: 15px !important;
+        line-height: 1.7 !important;
+      }
+      .cap-saving {
+        font-size: 14px !important;
+        margin-top: 6px;
+      }
+
+      /* Bonus cards more spacious */
+      .bonus-summary h3 {
+        font-size: 17px !important;
+      }
+      .bonus-body-content p {
+        font-size: 15px !important;
+      }
+
+      /* CTA buttons */
+      .bonuses-sticky-cta { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -2949,7 +2987,7 @@
 
   <div class="hero-content">
     <div class="hero-text fade-up visible">
-      <div class="hero-badge">סדנה פרונטלית · 30 באפריל · 18:00 · תל אביב · מקומות מוגבלים</div>
+      <div class="hero-badge">סדנה פרונטלית · מקומות מוגבלים</div>
       <h1>
         <span class="line">מה אם העסק שלך</span>
         <span class="line">ימשיך לרוץ <span class="highlight">בלעדיך?</span></span>
@@ -3520,7 +3558,7 @@
 
     <div class="price-box">
       <div class="price-old">5,429 ₪</div>
-      <div class="price">2,997 <span class="currency">₪</span></div>
+      <div class="price">2,540 <span class="currency">₪</span></div>
       <div class="price-sub">40 מקומות בלבד</div>
       <div class="price-vat">בתוספת מע"מ</div>
     </div>
