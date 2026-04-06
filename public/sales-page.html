@@ -3723,29 +3723,28 @@
   // ── Registration form handler ──
   const PAYMENT_URL = 'https://secure.cardcom.solutions/EA/EA5/zs0Yo1Hc2EeVUBP7RsQYg/PaymentSP';
 
-  document.querySelectorAll('[data-register-form]').forEach(form => {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = form.querySelector('.leadform-submit');
-      btn.disabled = true;
-      btn.textContent = 'מעביר לתשלום...';
+  document.querySelectorAll('[data-register-form]').forEach(function(form) {
+    // Set form to submit directly to Cardcom as GET
+    form.setAttribute('action', PAYMENT_URL);
+    form.setAttribute('method', 'GET');
 
-      var name = form.querySelector('input[name="name"]').value.trim();
-      var phone = form.querySelector('input[name="phone"]').value.trim();
-      var business = form.querySelector('input[name="business"]').value.trim();
+    // Add hidden fields for Cardcom params
+    var hName = document.createElement('input');
+    hName.type = 'hidden'; hName.name = 'CustomerName';
+    form.appendChild(hName);
+    var hPhone = document.createElement('input');
+    hPhone.type = 'hidden'; hPhone.name = 'CustomerPhone';
+    form.appendChild(hPhone);
 
-      // Save to Supabase in background
-      try {
-        fetch('/api/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name, phone: phone, business: business }),
-        }).catch(function(){});
-      } catch(e) {}
-
-      // Redirect to Cardcom payment page
-      var url = PAYMENT_URL + '?CustomerName=' + encodeURIComponent(name) + '&CustomerPhone=' + encodeURIComponent(phone);
-      window.location.href = url;
+    form.addEventListener('submit', function() {
+      var n = form.querySelector('input[name="name"]').value.trim();
+      var p = form.querySelector('input[name="phone"]').value.trim();
+      var b = form.querySelector('input[name="business"]').value.trim();
+      hName.value = n;
+      hPhone.value = p;
+      // Save to Supabase via sendBeacon (doesn't block navigation)
+      try { navigator.sendBeacon('/api/register', JSON.stringify({name:n,phone:p,business:b})); } catch(e){}
+      // No preventDefault - form submits natively to Cardcom
     });
   });
 </script>
