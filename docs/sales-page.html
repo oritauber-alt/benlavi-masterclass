@@ -2528,7 +2528,7 @@
   <div class="leadform-container fade-up">
     <h2>נשמע לך מתאים?</h2>
     <p class="leadform-sub">השאר פרטים ותבטיח לעצמך מקום בסדנה שתמנף לך את העסק</p>
-    <form class="leadform-body" action="TODO" method="POST">
+    <form class="leadform-body" data-register-form>
       <div class="leadform-row">
         <label class="sr-only" for="lead-name-1">שם מלא</label>
         <input class="leadform-input" id="lead-name-1" type="text" name="name" placeholder="איך קוראים לך?" autocomplete="name" required>
@@ -2968,6 +2968,58 @@
       const target = document.getElementById('final-cta');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Registration form handler ──
+  // TODO: Replace this URL with your real payment page URL
+  const PAYMENT_URL = '#checkout';
+
+  document.querySelectorAll('[data-register-form]').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.leadform-submit');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'שולח...';
+
+      const data = {
+        name: form.querySelector('input[name="name"]').value.trim(),
+        phone: form.querySelector('input[name="phone"]').value.trim(),
+        business: form.querySelector('input[name="business"]').value.trim(),
+      };
+
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error('failed');
+
+        // Redirect to payment page
+        if (PAYMENT_URL && PAYMENT_URL !== '#checkout') {
+          window.location.href = PAYMENT_URL;
+        } else {
+          btn.textContent = 'נרשמת בהצלחה!';
+          btn.style.background = '#2d7a4f';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.textContent = originalText;
+            btn.style.background = '';
+            form.reset();
+          }, 3000);
+        }
+      } catch {
+        btn.textContent = 'שגיאה, נסה שוב';
+        btn.style.background = '#a33';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = originalText;
+          btn.style.background = '';
+        }, 2000);
       }
     });
   });
