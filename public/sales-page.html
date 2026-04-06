@@ -579,7 +579,7 @@
     /* ═══════════════════════════════════════ */
     .sec-offer {
       position: relative;
-      padding: 140px 24px 120px;
+      padding: 100px 24px;
       background: var(--bg-alt);
       overflow: hidden;
     }
@@ -2908,61 +2908,57 @@
       .wave-path-mobile { display: none; }
       .wave-steps {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 36px;
         position: relative;
-        padding-right: 0;
-        padding-left: 24px;
-        max-width: 360px;
-        margin-right: auto;
-        margin-left: auto;
+        padding: 0;
+        max-width: 340px;
+        margin: 0 auto;
       }
-      /* Vertical line through circle centers */
       .wave-steps::before {
         content: '';
         position: absolute;
-        right: 32px;
+        right: 27px;
         top: 0;
         bottom: 0;
-        width: 3px;
-        background: linear-gradient(180deg, rgba(217,119,87,0.2) 0%, var(--accent) 30%, var(--accent) 70%, rgba(217,119,87,0.2) 100%);
+        width: 2px;
+        background: linear-gradient(180deg, rgba(217,119,87,0.1) 0%, var(--accent) 15%, var(--accent) 85%, rgba(217,119,87,0.1) 100%);
         border-radius: 2px;
         z-index: 1;
       }
       .wave-step {
-        text-align: right;
         padding: 0;
         align-self: auto !important;
         position: relative;
         min-height: auto;
         display: grid;
-        grid-template-columns: 1fr 64px;
+        grid-template-columns: 56px 1fr;
         grid-template-rows: auto auto;
         align-items: center;
-        gap: 0 16px;
-        direction: ltr;
+        column-gap: 16px;
+        row-gap: 0;
       }
       .wave-circle {
         position: static;
-        grid-column: 2;
+        grid-column: 1;
         grid-row: 1 / -1;
         justify-self: center;
         align-self: center;
         margin: 0;
-        width: 64px;
-        height: 64px;
+        width: 56px;
+        height: 56px;
         z-index: 4;
       }
-      .wave-circle svg { width: 28px; height: 28px; }
+      .wave-circle svg { width: 24px; height: 24px; }
       .wave-step-bignum { display: none !important; }
-      .wave-step h3 { grid-column: 1; grid-row: 1; margin-top: 0; margin-bottom: 4px; font-size: 18px !important; text-align: right; direction: rtl; }
-      .wave-step p { grid-column: 1; grid-row: 2; margin: 0; max-width: 100%; font-size: 14px; text-align: right; direction: rtl; }
+      .wave-step h3 { grid-column: 2; grid-row: 1; margin: 0 0 4px; font-size: 17px !important; text-align: right; }
+      .wave-step p { grid-column: 2; grid-row: 2; margin: 0; max-width: 100%; font-size: 14px; text-align: right; }
     }
 
     @media (max-width: 680px) {
       .hero-photo { height: 320px; }
       .hero-photo-wrap { padding: 12px; }
       .hero-photo-wrap::before, .hero-photo-wrap::after { width: 180px; height: 180px; }
-      .wave-steps { grid-template-columns: 1fr; gap: 48px; }
+      .wave-steps { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -3687,7 +3683,7 @@
       <div class="price-old">5,429 ₪</div>
       <div class="price">2,540 <span class="currency">₪</span></div>
       <div class="price-sub">40 מקומות בלבד</div>
-      <div class="price-vat">בתוספת מע"מ</div>
+      <div class="price-vat">+ מע"מ</div>
     </div>
 
     <form class="leadform-body" data-register-form style="max-width: 560px; margin: 0 auto;">
