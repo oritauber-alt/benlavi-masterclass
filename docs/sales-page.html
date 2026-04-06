@@ -2934,14 +2934,15 @@
         position: relative;
         min-height: auto;
         display: grid;
-        grid-template-columns: 1fr 64px;
+        grid-template-columns: 64px 1fr;
         grid-template-rows: auto auto;
         align-items: center;
         gap: 0 16px;
+        direction: ltr;
       }
       .wave-circle {
         position: static;
-        grid-column: 2;
+        grid-column: 1;
         grid-row: 1 / -1;
         justify-self: center;
         align-self: center;
@@ -2952,8 +2953,8 @@
       }
       .wave-circle svg { width: 28px; height: 28px; }
       .wave-step-bignum { display: none !important; }
-      .wave-step h3 { grid-column: 1; grid-row: 1; margin-top: 0; margin-bottom: 4px; font-size: 18px !important; text-align: right; }
-      .wave-step p { grid-column: 1; grid-row: 2; margin: 0; max-width: 100%; font-size: 14px; text-align: right; }
+      .wave-step h3 { grid-column: 2; grid-row: 1; margin-top: 0; margin-bottom: 4px; font-size: 18px !important; text-align: right; direction: rtl; }
+      .wave-step p { grid-column: 2; grid-row: 2; margin: 0; max-width: 100%; font-size: 14px; text-align: right; direction: rtl; }
     }
 
     @media (max-width: 680px) {
