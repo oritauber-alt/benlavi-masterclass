@@ -2813,58 +2813,51 @@
       .offer-layout { grid-template-columns: 1fr; gap: 40px; }
       .offer-photo { transform: none; height: 360px; max-width: 400px; margin: 0 auto; }
 
-      /* Vertical timeline for tablet/mobile (like zavitmedia) */
+      /* Vertical timeline for tablet/mobile */
       .wave-timeline {
-        max-width: 560px;
-        padding: 20px 0;
+        max-width: 100%;
+        padding: 20px 24px;
       }
       .wave-path-desktop { display: none; }
       .wave-path-mobile {
         display: block;
-        width: 80px;
+        width: 64px;
         height: 100%;
         top: 0;
         bottom: 0;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+        left: auto;
+        right: 0;
+        transform: none;
       }
       .wave-steps {
         grid-template-columns: 1fr;
         gap: 56px;
       }
       .wave-step {
-        text-align: center;
-        padding: 0 24px;
+        text-align: right;
+        padding: 0 90px 0 0;
         align-self: auto !important;
         position: relative;
         min-height: auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
       }
       .wave-circle {
-        position: relative;
-        top: auto;
-        right: auto;
-        transform: none;
-        margin: 0 auto 14px;
+        position: absolute;
+        top: 50%;
+        left: auto;
+        right: 0;
+        transform: translateY(-50%);
+        margin: 0;
         width: 64px;
         height: 64px;
         z-index: 4;
       }
       .wave-circle svg { width: 28px; height: 28px; }
-      .wave-step-bignum {
-        font-size: 80px !important;
-        right: auto !important;
-        left: 50% !important;
-        top: -20px !important;
-        bottom: auto !important;
-        transform: translateX(-50%);
-        color: rgba(217,119,87,0.06) !important;
-      }
+      .wave-step-bignum { display: none !important; }
       .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; }
-      .wave-step p { margin-right: 0; max-width: 280px; font-size: 14px; text-align: center; }
+      .wave-step p { margin-right: 0; max-width: 100%; font-size: 14px; text-align: right; }
     }
 
     @media (max-width: 680px) {
