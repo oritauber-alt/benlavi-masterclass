@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { supabaseAdmin } from "@/db";
 
 const WEBHOOK_URL =
   process.env.MAKE_WEBHOOK_URL ||
@@ -15,26 +16,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const payload = {
-      name: String(body.name).trim(),
-      phone: String(body.phone).trim(),
-      business: String(body.business).trim(),
-      timestamp: new Date().toISOString(),
-      source: "benlavi-masterclass-landing",
-    };
+    const name = String(body.name).trim();
+    const phone = String(body.phone).trim();
+    const business = String(body.business).trim();
 
-    const webhookRes = await fetch(WEBHOOK_URL, {
+    // Save to Supabase (primary storage)
+    const { error: dbError } = await supabaseAdmin
+      .from("hackathon_registrations")
+      .insert({ name, phone, business, source: "landing-page" });
+
+    if (dbError) {
+      console.error("[register] Supabase insert failed:", dbError.message);
+    }
+
+    // Also send to Make.com webhook (for Google Sheets sync)
+    fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        name,
+        phone,
+        business,
+        timestamp: new Date().toISOString(),
+        source: "benlavi-masterclass-landing",
+      }),
+    }).catch(() => {
+      // Fire-and-forget: don't block response if Make fails
     });
-
-    if (!webhookRes.ok) {
-      return NextResponse.json(
-        { error: "שליחה נכשלה" },
-        { status: 502 }
-      );
-    }
 
     return NextResponse.json({ success: true });
   } catch {
