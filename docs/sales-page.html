@@ -2966,10 +2966,10 @@
     @media (max-width: 768px) {
       .hero { padding: 60px 20px 80px; min-height: auto; }
       .sec-offer, .sec-ben, .sec-workshop, .sec-bonuses, .sec-different, .sec-faq, .sec-final {
-        padding: 48px 20px;
+        padding: 64px 20px;
       }
       .sec-outcomes {
-        padding: 48px 16px 20px;
+        padding: 64px 16px 20px;
       }
       .sec-different { padding-top: 140px; }
       .ben-card { padding: 40px 28px; }
@@ -3040,9 +3040,9 @@
         line-height: 1.6 !important;
       }
 
-      /* Tighter sections */
+      /* Section spacing */
       .sec-filter, .sec-whyncode, .sec-prep, .sec-capabilities, .sec-whynow {
-        padding: 48px 16px;
+        padding: 64px 16px;
       }
 
       /* Readable body text */
@@ -3834,16 +3834,13 @@
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         obs.unobserve(el);
-        const duration = 2000;
+        const duration = 2200;
         const start = performance.now();
-        function easeOutSpring(t) {
-          const c4 = (2 * Math.PI) / 3;
-          return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
-        }
         function tick(now) {
           const elapsed = now - start;
           const progress = Math.min(elapsed / duration, 1);
-          const value = Math.round(easeOutSpring(progress) * target);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const value = Math.round(eased * target);
           el.textContent = value.toLocaleString('en-US');
           if (progress < 1) requestAnimationFrame(tick);
         }
