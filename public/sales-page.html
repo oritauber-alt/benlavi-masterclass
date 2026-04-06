@@ -2614,8 +2614,14 @@
     }
 
     .glow-orange {
-      color: var(--accent);
-      text-shadow: 0 0 20px rgba(217,119,87,0.6), 0 0 40px rgba(217,119,87,0.3);
+      display: inline-block;
+      background: linear-gradient(135deg, #FF9966 0%, #D97757 50%, #B85A3F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      padding: 0 4px;
+      filter: drop-shadow(0 2px 20px rgba(217,119,87,0.4));
     }
 
     .whyncode-body {

@@ -2614,8 +2614,14 @@
     }
 
     .glow-orange {
-      color: var(--accent);
-      text-shadow: 0 0 20px rgba(217,119,87,0.6), 0 0 40px rgba(217,119,87,0.3);
+      display: inline-block;
+      background: linear-gradient(135deg, #FF9966 0%, #D97757 50%, #B85A3F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      padding: 0 4px;
+      filter: drop-shadow(0 2px 20px rgba(217,119,87,0.4));
     }
 
     .whyncode-body {
@@ -3718,42 +3724,28 @@
   const PAYMENT_URL = 'https://secure.cardcom.solutions/EA/EA5/zs0Yo1Hc2EeVUBP7RsQYg/PaymentSP';
 
   document.querySelectorAll('[data-register-form]').forEach(form => {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const btn = form.querySelector('.leadform-submit');
-      const originalText = btn.textContent;
+      var btn = form.querySelector('.leadform-submit');
       btn.disabled = true;
-      btn.textContent = 'שולח...';
+      btn.textContent = 'מעביר לתשלום...';
 
-      const data = {
-        name: form.querySelector('input[name="name"]').value.trim(),
-        phone: form.querySelector('input[name="phone"]').value.trim(),
-        business: form.querySelector('input[name="business"]').value.trim(),
-      };
+      var name = form.querySelector('input[name="name"]').value.trim();
+      var phone = form.querySelector('input[name="phone"]').value.trim();
+      var business = form.querySelector('input[name="business"]').value.trim();
 
+      // Save to Supabase in background
       try {
-        const res = await fetch('/api/register', {
+        fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
+          body: JSON.stringify({ name: name, phone: phone, business: business }),
+        }).catch(function(){});
+      } catch(e) {}
 
-        if (!res.ok) throw new Error('failed');
-
-        // Redirect to Cardcom payment page with user details
-        const payUrl = new URL(PAYMENT_URL);
-        payUrl.searchParams.set('CustomerName', data.name);
-        payUrl.searchParams.set('CustomerPhone', data.phone);
-        window.location.href = payUrl.toString();
-      } catch {
-        btn.textContent = 'שגיאה, נסה שוב';
-        btn.style.background = '#a33';
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.textContent = originalText;
-          btn.style.background = '';
-        }, 2000);
-      }
+      // Redirect to Cardcom payment page
+      var url = PAYMENT_URL + '?CustomerName=' + encodeURIComponent(name) + '&CustomerPhone=' + encodeURIComponent(phone);
+      window.location.href = url;
     });
   });
 </script>
