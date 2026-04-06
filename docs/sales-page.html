@@ -3893,7 +3893,7 @@
       var b = form.querySelector('input[name="business"]').value.trim();
       hName.value = n;
       hPhone.value = p;
-      try { navigator.sendBeacon('/api/register', JSON.stringify({name:n,phone:p,business:b})); } catch(e){}
+      try { navigator.sendBeacon('/api/register', new Blob([JSON.stringify({name:n,phone:p,business:b})], {type:'application/json'})); } catch(e){}
     });
   });
 </script>
