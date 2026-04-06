@@ -840,6 +840,33 @@
       margin-right: auto;
     }
 
+    .leadform-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      direction: rtl;
+    }
+    .leadform-consent input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .leadform-consent label {
+      font-size: 13px;
+      color: rgba(245,241,232,0.65);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .leadform-consent label a {
+      color: var(--accent-light);
+      text-decoration: underline;
+    }
+
     @media (max-width: 640px) {
       .leadform-row {
         grid-template-columns: 1fr;
@@ -3101,6 +3128,10 @@
       </div>
       <label class="sr-only" for="lead-business-1">סוג העסק</label>
       <input class="leadform-input" id="lead-business-1" type="text" name="business" placeholder="מה העסק שלך?" autocomplete="organization" required>
+      <div class="leadform-consent">
+        <input type="checkbox" id="consent-1" name="consent" required>
+        <label for="consent-1">אני מאשר/ת את <a href="terms.html" target="_blank">התקנון ומדיניות הפרטיות</a> ומסכים/ה לקבל עדכונים בנוגע לסדנה</label>
+      </div>
       <button type="submit" class="leadform-submit">שריין לעצמך מקום</button>
     </form>
     <p class="leadform-note">* מקבלים רק 40 בעלי עסקים לסדנה. מוודאים שזה באמת מתאים לפני שסוגרים מקום.</p>
@@ -3574,6 +3605,10 @@
       </div>
       <label class="sr-only" for="lead-business-2">סוג העסק</label>
       <input class="leadform-input" id="lead-business-2" type="text" name="business" placeholder="מה העסק שלך?" autocomplete="organization" required>
+      <div class="leadform-consent">
+        <input type="checkbox" id="consent-2" name="consent" required>
+        <label for="consent-2">אני מאשר/ת את <a href="terms.html" target="_blank">התקנון ומדיניות הפרטיות</a> ומסכים/ה לקבל עדכונים בנוגע לסדנה</label>
+      </div>
       <button type="submit" class="leadform-submit">שריין לעצמך מקום</button>
     </form>
 
@@ -3714,12 +3749,33 @@
   // ── Registration form handler ──
   const PAYMENT_URL = 'https://secure.cardcom.solutions/EA/EA5/zs0Yo1Hc2EeVUBP7RsQYg/PaymentSP';
 
-  document.querySelectorAll('[data-register-form]').forEach(function(form) {
-    // Set form to submit directly to Cardcom as GET
+  // Sync form fields between top and bottom forms
+  var allForms = document.querySelectorAll('[data-register-form]');
+  allForms.forEach(function(form) {
+    form.querySelectorAll('input[name="name"], input[name="phone"], input[name="business"]').forEach(function(input) {
+      input.addEventListener('input', function() {
+        allForms.forEach(function(otherForm) {
+          if (otherForm === form) return;
+          var match = otherForm.querySelector('input[name="' + input.name + '"]');
+          if (match) match.value = input.value;
+        });
+      });
+    });
+    // Sync checkbox too
+    form.querySelector('input[name="consent"]').addEventListener('change', function() {
+      allForms.forEach(function(otherForm) {
+        if (otherForm === form) return;
+        var cb = otherForm.querySelector('input[name="consent"]');
+        if (cb) cb.checked = this.checked;
+      }.bind(this));
+    });
+  });
+
+  // Registration form submit handler
+  allForms.forEach(function(form) {
     form.setAttribute('action', PAYMENT_URL);
     form.setAttribute('method', 'GET');
 
-    // Add hidden fields for Cardcom params
     var hName = document.createElement('input');
     hName.type = 'hidden'; hName.name = 'CustomerName';
     form.appendChild(hName);
@@ -3733,9 +3789,7 @@
       var b = form.querySelector('input[name="business"]').value.trim();
       hName.value = n;
       hPhone.value = p;
-      // Save to Supabase via sendBeacon (doesn't block navigation)
       try { navigator.sendBeacon('/api/register', JSON.stringify({name:n,phone:p,business:b})); } catch(e){}
-      // No preventDefault - form submits natively to Cardcom
     });
   });
 </script>
