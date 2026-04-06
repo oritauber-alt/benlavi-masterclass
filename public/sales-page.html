@@ -2843,10 +2843,71 @@
 
     @media (max-width: 480px) {
       .hero { padding: 48px 20px 64px; }
-      .terminal-body { padding: 16px; font-size: 11px; }
+      .terminal-body { padding: 20px !important; font-size: 11px; }
       .price-box { padding: 24px 28px; }
       .pill-btn { padding: 16px 32px; font-size: 16px; }
       .pill-btn-large { padding: 20px 40px; font-size: 18px; }
+    }
+
+    /* ─── Mobile: consistent terminal sections ─── */
+    @media (max-width: 768px) {
+      /* Same container width for all terminal windows */
+      .outcomes-terminal {
+        border-radius: 10px;
+      }
+      .terminal-body {
+        padding: 24px 20px !important;
+        display: block !important;
+      }
+
+      /* Uniform font sizes across all terminal sections */
+      .term-check {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        font-weight: 700 !important;
+      }
+      .term-x {
+        font-size: 16px !important;
+        line-height: 1.8 !important;
+      }
+      .term-detail {
+        font-size: 13px !important;
+      }
+
+      /* Lighter subtitles everywhere */
+      .term-detail,
+      .cap-card p,
+      .offer-body p,
+      .whynow-body p,
+      .wave-step p,
+      .bonus-body-content p,
+      .faq-answer-inner {
+        opacity: 0.65;
+      }
+
+      /* Consistent section spacing */
+      .sec-filter, .sec-whyncode, .sec-prep, .sec-capabilities, .sec-whynow {
+        padding: 80px 20px;
+      }
+
+      /* Lighter sub-headings on all sections */
+      .hero-sub,
+      .offer-body p,
+      .leadform-sub,
+      .sec-bonuses .subtitle,
+      .sec-capabilities .subtitle {
+        opacity: 0.7;
+      }
+
+      /* Consistent h2 sizes on mobile */
+      .sec-filter h2,
+      .sec-whyncode h2,
+      .sec-prep h2,
+      .sec-capabilities h2,
+      .sec-whynow h2 {
+        font-size: clamp(26px, 7vw, 36px);
+        margin-bottom: 32px;
+      }
     }
   </style>
 </head>
