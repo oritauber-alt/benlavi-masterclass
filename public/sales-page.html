@@ -2824,13 +2824,13 @@
         grid-template-columns: 1fr;
         gap: 48px;
         position: relative;
-        padding-left: 80px;
+        padding-right: 80px;
       }
       /* Vertical line through circle centers */
       .wave-steps::before {
         content: '';
         position: absolute;
-        left: 31px;
+        right: 31px;
         top: 0;
         bottom: 0;
         width: 3px;
@@ -2846,13 +2846,14 @@
         min-height: auto;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: flex-start;
+        direction: rtl;
       }
       .wave-circle {
         position: absolute;
         top: 50%;
-        right: auto;
-        left: -80px;
+        left: auto;
+        right: -80px;
         transform: translateY(-50%);
         margin: 0;
         width: 64px;
@@ -2861,8 +2862,8 @@
       }
       .wave-circle svg { width: 28px; height: 28px; }
       .wave-step-bignum { display: none !important; }
-      .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; text-align: right; }
-      .wave-step p { margin: 0; max-width: 100%; font-size: 14px; text-align: right; }
+      .wave-step h3 { margin-top: 0; margin-bottom: 6px; font-size: 18px; text-align: right; direction: rtl; }
+      .wave-step p { margin: 0; max-width: 100%; font-size: 14px; text-align: right; direction: rtl; }
     }
 
     @media (max-width: 680px) {
@@ -3333,27 +3334,6 @@
   </div>
 </section>
 
-<!-- ══════════════ WHY NOW ══════════════ -->
-<section class="sec-whynow">
-  <div class="container-narrow fade-up">
-    <h2>למה עכשיו</h2>
-    <div class="outcomes-terminal">
-      <div class="terminal-chrome">
-        <div class="chrome-dots"><span></span><span></span><span></span></div>
-        <div class="chrome-filename">why-now.log</div>
-      </div>
-      <div class="terminal-body" style="display: block; padding: 32px 40px;">
-        <p style="color: rgba(245,241,232,0.78); font-size: 17px; line-height: 1.7; margin-bottom: 16px; font-family: 'Heebo', sans-serif;">AI לא מחכה. כל חודש יוצאים כלים חדשים, והפער בין מי שמשתמש בהם לבין מי שלא - רק גדל. בעלי עסקים שמטמיעים את הדברים האלה היום חוסכים שעות, מגיעים ליותר לקוחות, ועובדים אחרת.</p>
-        <p style="color: rgba(245,241,232,0.78); font-size: 17px; line-height: 1.7; font-family: 'Heebo', sans-serif;">הסדנה הזו בנויה סביב הכלים שעובדים עכשיו. לא תיאוריה על העתיד - דברים שתפעיל על העסק שלך כבר מחר.</p>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 36px;">
-      <a href="#checkout" class="pill-btn" data-checkout-url="TODO">
-        <span>שריין מקום</span>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════════ 6. SYLLABUS (wave timeline) ══════════════ -->
 <section class="sec-workshop">
