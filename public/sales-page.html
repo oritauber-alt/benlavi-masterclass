@@ -1003,11 +1003,11 @@
       font-family: var(--font-mono);
       margin-right: 2px;
       opacity: 0;
-      animation: blink 1s step-end infinite;
+      animation: none;
     }
 
-    .term-detail.typing::after { opacity: 1; }
-    .term-detail.done::after { opacity: 0; }
+    .term-detail.typing::after { opacity: 1; animation: blink 1s step-end infinite; }
+    .term-detail.done::after { opacity: 0; animation: none; }
 
     .term-progress {
       height: 6px;
