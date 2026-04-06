@@ -2613,6 +2613,11 @@
       text-align: center;
     }
 
+    .glow-orange {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(217,119,87,0.6), 0 0 40px rgba(217,119,87,0.3);
+    }
+
     .whyncode-body {
       width: 100%;
       margin: 0 auto;
@@ -2622,14 +2627,14 @@
       box-shadow: 0 20px 60px rgba(26,22,19,0.18);
       overflow: hidden;
       position: relative;
-      font-family: var(--font-mono);
     }
 
     .whyncode-body p {
-      font-size: clamp(16px, 2vw, 19px);
-      line-height: 1.7;
-      color: rgba(245,241,232,0.78);
-      font-weight: 500;
+      font-size: clamp(17px, 2.2vw, 21px);
+      line-height: 1.8;
+      color: rgba(245,241,232,0.92);
+      font-weight: 700;
+      font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif;
     }
 
     /* ══════ Schedule accordion (dark bg) ══════ */
@@ -3040,14 +3045,14 @@
       <div class="terminal-body" style="display: block; padding: 32px 40px;">
         <div style="font-family: var(--font-mono); color: var(--accent-light); font-size: 16px; font-weight: 700; direction: ltr; text-align: left; margin-bottom: 20px;">$ check --workshop-fit</div>
         <div style="margin-bottom: 24px;">
-          <div class="term-check">יש לך עסק פעיל ולקוחות</div>
+          <div class="term-check">יש לך עסק פעיל עם לקוחות</div>
           <div class="term-check">אתה מבזבז זמן על דברים שחוזרים על עצמם כל יום</div>
           <div class="term-check">ניסית כלי AI ולא הצלחת להפוך אותם למשהו שעובד באמת על העסק</div>
           <div class="term-check">אתה מוכן להשקיע ערב אחד כדי לבנות משהו שיחסוך לך שעות כל שבוע</div>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; font-family: var(--font-mono); color: rgba(245,241,232,0.4); font-size: 13px; direction: ltr; text-align: left; margin-bottom: 16px;">// not for you if:</div>
         <div>
-          <div class="term-x">אין לך עסק קיים עם לקוחות</div>
+          <div class="term-x">אין לך עסק קיים ולקוחות</div>
           <div class="term-x">אתה מחפש הרצאה תיאורטית על AI</div>
           <div class="term-x">אין לך מחשב נייד</div>
         </div>
@@ -3059,7 +3064,7 @@
 <!-- ══════════════ WHY nCODE ══════════════ -->
 <section class="sec-whyncode">
   <div class="container-narrow fade-up">
-    <h2>בנינו את זה לבעלי עסקים. לא למתכנתים.</h2>
+    <h2>בנינו את הסדנה ל<span class="glow-orange">בעלי עסקים</span>. לא למתכנתים.</h2>
     <div class="whyncode-body">
       <div class="terminal-chrome">
         <div class="chrome-dots"><span></span><span></span><span></span></div>
@@ -3710,54 +3715,31 @@
   });
 
   // ── Registration form handler ──
-  // TODO: Replace this URL with your real payment page URL
-  const PAYMENT_URL = '#checkout';
+  const PAYMENT_URL = 'https://secure.cardcom.solutions/EA/EA5/zs0Yo1Hc2EeVUBP7RsQYg/PaymentSP';
 
   document.querySelectorAll('[data-register-form]').forEach(form => {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const btn = form.querySelector('.leadform-submit');
-      const originalText = btn.textContent;
+      var btn = form.querySelector('.leadform-submit');
       btn.disabled = true;
-      btn.textContent = 'שולח...';
+      btn.textContent = 'מעביר לתשלום...';
 
-      const data = {
-        name: form.querySelector('input[name="name"]').value.trim(),
-        phone: form.querySelector('input[name="phone"]').value.trim(),
-        business: form.querySelector('input[name="business"]').value.trim(),
-      };
+      var name = form.querySelector('input[name="name"]').value.trim();
+      var phone = form.querySelector('input[name="phone"]').value.trim();
+      var business = form.querySelector('input[name="business"]').value.trim();
 
+      // Save to Supabase in background
       try {
-        const res = await fetch('/api/register', {
+        fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
+          body: JSON.stringify({ name: name, phone: phone, business: business }),
+        }).catch(function(){});
+      } catch(e) {}
 
-        if (!res.ok) throw new Error('failed');
-
-        // Redirect to payment page
-        if (PAYMENT_URL && PAYMENT_URL !== '#checkout') {
-          window.location.href = PAYMENT_URL;
-        } else {
-          btn.textContent = 'נרשמת בהצלחה!';
-          btn.style.background = '#2d7a4f';
-          setTimeout(() => {
-            btn.disabled = false;
-            btn.textContent = originalText;
-            btn.style.background = '';
-            form.reset();
-          }, 3000);
-        }
-      } catch {
-        btn.textContent = 'שגיאה, נסה שוב';
-        btn.style.background = '#a33';
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.textContent = originalText;
-          btn.style.background = '';
-        }, 2000);
-      }
+      // Redirect to Cardcom payment page
+      var url = PAYMENT_URL + '?CustomerName=' + encodeURIComponent(name) + '&CustomerPhone=' + encodeURIComponent(phone);
+      window.location.href = url;
     });
   });
 </script>
