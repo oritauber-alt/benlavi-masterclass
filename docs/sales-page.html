@@ -408,6 +408,18 @@
       display: block;
     }
 
+    .hero-h1-sub {
+      font-size: 0.55em;
+      font-weight: 800;
+      color: var(--text-on-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .hero h1 .hero-h1-sub:nth-of-type(3) {
+      margin-top: 16px;
+    }
+
     .highlight {
       display: inline-block;
       background: linear-gradient(135deg, #FF9966 0%, #D97757 50%, #B85A3F 100%);
@@ -3016,13 +3028,16 @@
 
   <div class="hero-content">
     <div class="hero-text fade-up visible">
-      <div class="hero-badge">סדנה פרונטלית · מקומות מוגבלים</div>
+      <div class="hero-badge">בן לביא מציג את</div>
       <h1>
-        <span class="line">מה אם העסק שלך</span>
-        <span class="line">ימשיך לרוץ <span class="highlight">בלעדיך?</span></span>
+        <span class="line">הסדנה הכי פרקטית</span>
+        <span class="line"><span class="highlight">בישראל:</span></span>
+        <span class="line hero-h1-sub">איך למנף את העסק שלך</span>
+        <span class="line hero-h1-sub">בסוכני AI שמריצים אותו על אוטומט</span>
       </h1>
       <p class="hero-sub">
-        בערב אחד תבנה מערכת שעובדת על העסק שלך 24/7 - עם בן לביא והצוות של nCode לצידך.
+        <span class="hero-sub-line">תוך פחות מ-24 שעות תצא עם מערכת שעובדת 24/7</span>
+        <span class="hero-sub-line">בליווי של בן והצוות שלו בלי לדעת קוד או להיות טכני</span>
       </p>
       <a href="#checkout" class="pill-btn pill-btn-solid" data-checkout-url="TODO">
         <span>שריין מקום</span>
