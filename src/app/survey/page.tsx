@@ -368,7 +368,7 @@ export default function SurveyPage() {
 
               {/* Content satisfaction */}
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-100 font-medium">כמה מרוצה מהתכנים?</label>
+                <label className="block text-sm text-zinc-100 font-medium">כמה את/ה מרוצה מהתכנים?</label>
                 <RatingButtons value={contentSatisfaction} onChange={setContentSatisfaction} />
                 <div className="flex justify-between text-xs text-zinc-400 px-0.5">
                   <span>בכלל לא</span>
@@ -390,7 +390,7 @@ export default function SurveyPage() {
 
               {/* Sessions satisfaction */}
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-100 font-medium">כמה מרוצה מהזומים/פרונטלים?</label>
+                <label className="block text-sm text-zinc-100 font-medium">כמה את/ה מרוצה מהזומים/פרונטלים?</label>
                 <RatingButtons value={sessionsSatisfaction} onChange={setSessionsSatisfaction} />
                 <div className="flex justify-between text-xs text-zinc-400 px-0.5">
                   <span>בכלל לא</span>
@@ -412,7 +412,7 @@ export default function SurveyPage() {
 
               {/* Overall satisfaction */}
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-100 font-medium">כמה מרוצה באופן כללי מ-nCode?</label>
+                <label className="block text-sm text-zinc-100 font-medium">כמה את/ה מרוצה באופן כללי מ-nCode?</label>
                 <RatingButtons value={overallSatisfaction} onChange={setOverallSatisfaction} />
                 <div className="flex justify-between text-xs text-zinc-400 px-0.5">
                   <span>בכלל לא</span>
