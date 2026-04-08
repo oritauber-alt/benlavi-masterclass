@@ -54,6 +54,25 @@ export const agentTracks = pgTable("agent_tracks", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const surveyResponses = pgTable("survey_responses", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  fullName: text("full_name").notNull(),
+  phone: text("phone").notNull(),
+  projectStage: text("project_stage").notNull(),
+  projectStageOther: text("project_stage_other"),
+  saasDescription: text("saas_description"),
+  stuckAreas: text("stuck_areas").array(),
+  whatHelpsProgress: text("what_helps_progress"),
+  contentSatisfaction: integer("content_satisfaction"),
+  contentFeedback: text("content_feedback"),
+  sessionsSatisfaction: integer("sessions_satisfaction"),
+  sessionsFeedback: text("sessions_feedback"),
+  overallSatisfaction: integer("overall_satisfaction"),
+  overallFeedback: text("overall_feedback"),
+  additionalNotes: text("additional_notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const mcpGuides = pgTable("mcp_guides", {
   id: uuid("id").primaryKey().defaultRandom(),
   mcpName: text("mcp_name").notNull().unique(),
