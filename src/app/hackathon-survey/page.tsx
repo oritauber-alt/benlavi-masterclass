@@ -101,6 +101,7 @@ export default function HackathonSurveyPage() {
   const [phone, setPhone] = useState("");
   const [saasDescription, setSaasDescription] = useState("");
   const [productDetails, setProductDetails] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [customerCount, setCustomerCount] = useState("");
   const [customerCountOther, setCustomerCountOther] = useState("");
   const [lifespan, setLifespan] = useState("");
@@ -125,6 +126,7 @@ export default function HackathonSurveyPage() {
     const marketingStr = marketingChannels.length > 0 ? marketingChannels.join(", ") : null;
     const detailsAndMarketing = [
       productDetails ? `פירוט מוצר: ${productDetails}` : null,
+      websiteUrl ? `אתר: ${websiteUrl}` : null,
       marketingStr ? `דרכי שיווק: ${marketingStr}` : null,
     ].filter(Boolean).join("\n\n");
 
@@ -269,6 +271,17 @@ export default function HackathonSurveyPage() {
                   onChange={(e) => setProductDetails(e.target.value)}
                   className={inputClass + " h-28 resize-none"}
                   placeholder={"למשל: איך המוצר עובד, מה הפיצ׳רים העיקריים, מה מבדיל אתכם מהמתחרים..."}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-zinc-100 font-medium mb-1.5">קישור לאתר</label>
+                <input
+                  type="url"
+                  value={websiteUrl}
+                  onChange={(e) => setWebsiteUrl(e.target.value)}
+                  className={inputClass}
+                  placeholder="https://your-product.com"
                 />
               </div>
 
