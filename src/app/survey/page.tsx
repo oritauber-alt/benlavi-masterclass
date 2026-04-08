@@ -71,13 +71,13 @@ function RatingButtons({
   max?: number;
 }) {
   return (
-    <div className="flex gap-1.5 flex-wrap">
+    <div className="grid grid-cols-10 gap-1">
       {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
         <button
           key={n}
           type="button"
           onClick={() => onChange(n)}
-          className={`w-9 h-9 rounded-lg text-sm font-medium transition-all duration-200 ${
+          className={`aspect-square rounded-lg text-sm font-medium transition-all duration-200 ${
             value === n
               ? n <= 3
                 ? "bg-red-500/80 text-white shadow-lg shadow-red-500/20"
@@ -350,7 +350,7 @@ export default function SurveyPage() {
                   value={whatHelpsProgress}
                   onChange={(e) => setWhatHelpsProgress(e.target.value)}
                   className={inputClass + " h-24 resize-none"}
-                  placeholder="למשל: משוב על המוצר, עזרה עם שיווק, בהירות לגבי הכיוון..."
+                  placeholder="תפרטו כמה שיותר - למשל: משוב על המוצר, עזרה עם שיווק, בהירות לגבי הכיוון..."
                 />
               </div>
             </div>
