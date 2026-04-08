@@ -350,8 +350,9 @@ export default function SurveyPage() {
                   value={whatHelpsProgress}
                   onChange={(e) => setWhatHelpsProgress(e.target.value)}
                   className={inputClass + " h-24 resize-none"}
-                  placeholder="תפרטו כמה שיותר - למשל: משוב על המוצר, עזרה עם שיווק, בהירות לגבי הכיוון..."
+                  placeholder="למשל: משוב על המוצר, עזרה עם שיווק, בהירות לגבי הכיוון..."
                 />
+                <p className="text-xs text-zinc-400 mt-1">(תפרטו כמה שיותר)</p>
               </div>
             </div>
           </div>
