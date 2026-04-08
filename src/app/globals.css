@@ -104,6 +104,14 @@ body {
   opacity: 1;
 }
 
+.spotlight-card.spotlight-orange::before {
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(224, 122, 95, 0.15),
+    transparent 40%
+  );
+}
+
 /* Animated border gradient */
 @keyframes border-flow {
   0%, 100% { background-position: 0% 50%; }
