@@ -3603,6 +3603,12 @@
         </div>
       </div>
     </div>
+
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="#lead-form-top" class="pill-btn pill-btn-solid" data-lead-form>
+        <span>שריין מקום</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -3682,7 +3688,7 @@
       <path d="M0,160 Q360,120 720,160 T1440,160" stroke-dasharray="3,8"/>
     </g>
   </svg>
-  <div class="leadform-container fade-up">
+  <div class="leadform-container fade-up" id="lead-form-top">
     <h2>נשמע לך מתאים?</h2>
     <p class="leadform-sub">השאר פרטים ותבטיח לעצמך מקום בסדנה שתמנף לך את העסק</p>
     <form class="leadform-body" data-register-form>
@@ -4319,6 +4325,17 @@
     btn.addEventListener('click', e => {
       e.preventDefault();
       const target = document.getElementById('final-cta');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Handle lead form button clicks - scroll to mid-page lead form
+  document.querySelectorAll('a[data-lead-form]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById('lead-form-top');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
