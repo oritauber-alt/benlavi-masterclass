@@ -3072,6 +3072,266 @@
       /* CTA buttons */
       .bonuses-sticky-cta { flex-direction: column; text-align: center; }
     }
+
+    /* ═══════════════════════════════════════ */
+    /* ══════ SECTION: LIFE SHIFT ══════════ */
+    /* ═══════════════════════════════════════ */
+    .sec-lifeshift {
+      position: relative;
+      padding: 110px 24px 130px;
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+
+    .sec-lifeshift::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(217,119,87,0.12) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sec-lifeshift::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232,143,111,0.08) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sec-lifeshift .container-narrow {
+      position: relative;
+      z-index: 2;
+    }
+
+    .lifeshift-intro {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 72px;
+    }
+
+    .lifeshift-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-light);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 22px;
+      opacity: 0.95;
+    }
+
+    .lifeshift-headline {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-on-dark);
+      margin-bottom: 20px;
+    }
+
+    .lifeshift-subheadline {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 800;
+      color: var(--text-on-dark);
+      margin-bottom: 24px;
+      letter-spacing: -0.015em;
+    }
+
+    .lifeshift-description {
+      font-size: clamp(16px, 1.7vw, 19px);
+      line-height: 1.75;
+      color: rgba(245,241,232,0.72);
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+
+    .lifeshift-bridge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 8px 20px;
+      border: 1px solid rgba(217,119,87,0.3);
+      border-radius: 100px;
+      background: rgba(217,119,87,0.06);
+    }
+
+    .lifeshift-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .lifeshift-grid > :nth-child(5) {
+      grid-column: 1 / -1;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .lifeshift-card {
+      position: relative;
+      background: #1F1A17;
+      border: 1px solid rgba(217,119,87,0.15);
+      border-radius: 22px;
+      padding: 0;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    .lifeshift-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(217,119,87,0.13),
+        transparent 45%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .lifeshift-card:hover::before {
+      opacity: 1;
+    }
+
+    .lifeshift-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(217,119,87,0.35);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    }
+
+    .lifeshift-card-topic {
+      position: relative;
+      z-index: 2;
+      padding: 20px 32px 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(245,241,232,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .lifeshift-card-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 18px 0 32px;
+    }
+
+    .lifeshift-side {
+      padding: 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 140px;
+    }
+
+    .lifeshift-side-before {
+      border-left: 1px solid rgba(217,119,87,0.12);
+    }
+
+    .lifeshift-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lifeshift-label-before {
+      color: rgba(245,241,232,0.35);
+    }
+
+    .lifeshift-label-before::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(245,241,232,0.35);
+    }
+
+    .lifeshift-label-after {
+      color: var(--accent-light);
+      filter: drop-shadow(0 0 6px rgba(217,119,87,0.5));
+    }
+
+    .lifeshift-label-after::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(217,119,87,0.8);
+    }
+
+    .lifeshift-text {
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .lifeshift-text-before {
+      color: rgba(245,241,232,0.42);
+    }
+
+    .lifeshift-text-after {
+      color: var(--text-on-dark);
+      font-weight: 500;
+    }
+
+    @media (max-width: 960px) {
+      .sec-lifeshift { padding: 80px 20px 90px; }
+      .lifeshift-intro { margin-bottom: 56px; }
+      .lifeshift-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .lifeshift-grid > :nth-child(5) {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sec-lifeshift { padding: 70px 16px 80px; }
+      .lifeshift-card-inner {
+        grid-template-columns: 1fr;
+      }
+      .lifeshift-side {
+        padding: 18px 24px;
+        min-height: auto;
+      }
+      .lifeshift-side-before {
+        border-left: none;
+        border-bottom: 1px solid rgba(217,119,87,0.12);
+      }
+      .lifeshift-card-topic {
+        padding: 18px 24px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3127,6 +3387,95 @@
 </section>
 
 <div class="color-strip"></div>
+
+<!-- ══════════════ LIFE SHIFT (Before/After) ══════════════ -->
+<section class="sec-lifeshift">
+  <div class="container-narrow">
+    <div class="lifeshift-intro fade-up">
+      <div class="lifeshift-eyebrow">אחרי הסדנה</div>
+      <h2 class="lifeshift-headline">
+        החיים שלכם <span class="highlight">לא יחזרו להיות אותו הדבר</span>
+      </h2>
+      <p class="lifeshift-subheadline">זה אתם כפול 10,000. 24/7.</p>
+      <p class="lifeshift-description">
+        כל פעולה בעסק הופכת לאוטונומית, יודעת לעבוד לבד. כמו אוטו שנוסע לבד. ואתם עושים את זה בלי לדעת קוד, כי AI היום לא דורש להיות טכנולוגי, רק שכל, עיניים ושפה.
+      </p>
+      <div class="lifeshift-bridge">דוגמאות</div>
+    </div>
+
+    <div class="lifeshift-grid">
+      <div class="lifeshift-card fade-up">
+        <div class="lifeshift-card-topic">מיילים</div>
+        <div class="lifeshift-card-inner">
+          <div class="lifeshift-side lifeshift-side-before">
+            <div class="lifeshift-label lifeshift-label-before">לפני</div>
+            <div class="lifeshift-text lifeshift-text-before">עוברים על כל מייל ידנית.</div>
+          </div>
+          <div class="lifeshift-side lifeshift-side-after">
+            <div class="lifeshift-label lifeshift-label-after">אחרי</div>
+            <div class="lifeshift-text lifeshift-text-after">מערכת שקוראת, ממיינת, מגיבה, ומתאמת פגישות לבד. מגיע אליכם רק מה שבאמת חשוב.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lifeshift-card fade-up">
+        <div class="lifeshift-card-topic">וואטסאפ</div>
+        <div class="lifeshift-card-inner">
+          <div class="lifeshift-side lifeshift-side-before">
+            <div class="lifeshift-label lifeshift-label-before">לפני</div>
+            <div class="lifeshift-text lifeshift-text-before">לקוחות מחכים לתשובה עד הבוקר.</div>
+          </div>
+          <div class="lifeshift-side lifeshift-side-after">
+            <div class="lifeshift-label lifeshift-label-after">אחרי</div>
+            <div class="lifeshift-text lifeshift-text-after">מערכת שעונה בשם שלכם 24/7. מציגה שירותים, נותנת מחירים, מעבירה רק לידים חמים.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lifeshift-card fade-up">
+        <div class="lifeshift-card-topic">תוכן לרשתות</div>
+        <div class="lifeshift-card-inner">
+          <div class="lifeshift-side lifeshift-side-before">
+            <div class="lifeshift-label lifeshift-label-before">לפני</div>
+            <div class="lifeshift-text lifeshift-text-before">שעה וחצי על פוסט אחד.</div>
+          </div>
+          <div class="lifeshift-side lifeshift-side-after">
+            <div class="lifeshift-label lifeshift-label-after">אחרי</div>
+            <div class="lifeshift-text lifeshift-text-after">מערכת שמכירה את הטון שלכם ומוציאה שבוע של תוכן בדקות.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lifeshift-card fade-up">
+        <div class="lifeshift-card-topic">לקוחות קיימים</div>
+        <div class="lifeshift-card-inner">
+          <div class="lifeshift-side lifeshift-side-before">
+            <div class="lifeshift-label lifeshift-label-before">לפני</div>
+            <div class="lifeshift-text lifeshift-text-before">שוכחים לחזור, שוכחים מבצעים.</div>
+          </div>
+          <div class="lifeshift-side lifeshift-side-after">
+            <div class="lifeshift-label lifeshift-label-after">אחרי</div>
+            <div class="lifeshift-text lifeshift-text-after">מערכת שעוקבת, יודעת מתי לחזור, שולחת עדכונים מותאמים אישית.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lifeshift-card fade-up">
+        <div class="lifeshift-card-topic">הצעות מחיר</div>
+        <div class="lifeshift-card-inner">
+          <div class="lifeshift-side lifeshift-side-before">
+            <div class="lifeshift-label lifeshift-label-before">לפני</div>
+            <div class="lifeshift-text lifeshift-text-before">עוצרים הכל, בונים מאפס, שולחים.</div>
+          </div>
+          <div class="lifeshift-side lifeshift-side-after">
+            <div class="lifeshift-label lifeshift-label-after">אחרי</div>
+            <div class="lifeshift-text lifeshift-text-after">מערכת שמכינה הצעה מותאמת ב-30 שניות. אתם רק מאשרים.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════ 2. OFFER ══════════════ -->
 <section class="sec-offer">
@@ -3806,6 +4155,15 @@
     }, { threshold: 0.12 });
 
     tObs.observe(terminal);
+  });
+
+  // Spotlight cursor tracking for lifeshift cards
+  document.querySelectorAll('.lifeshift-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+    });
   });
 
   // Savings counter - spring physics animation
