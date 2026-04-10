@@ -3334,28 +3334,7 @@
     }
 
     /* Sweep line animation when card appears */
-    .lifeshift-card-inner::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      box-shadow: 0 0 12px rgba(217,119,87,0.8), 0 0 24px rgba(217,119,87,0.5);
-      transform: translateY(-50%);
-      pointer-events: none;
-      opacity: 0;
-    }
-    .lifeshift-card.visible .lifeshift-card-inner::after {
-      animation: lifeshiftSweep 1.1s var(--ease) 0.35s forwards;
-    }
-    @keyframes lifeshiftSweep {
-      0%   { width: 0; right: 50%; opacity: 0; }
-      20%  { opacity: 1; }
-      80%  { opacity: 1; }
-      100% { width: 60%; right: 20%; opacity: 0; }
-    }
+    .lifeshift-card-inner::after { display: none; }
 
     /* Continuous glow pulse on the "after" dot */
     .lifeshift-card.visible .lifeshift-label-after::before {
