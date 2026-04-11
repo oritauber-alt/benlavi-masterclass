@@ -1,6 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/db";
 
+function num(v: unknown): number | null {
+  if (v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+function str(v: unknown): string | null {
+  if (v === null || v === undefined) return null;
+  const s = String(v).trim();
+  return s.length ? s : null;
+}
+
+function bool(v: unknown): boolean | null {
+  if (v === null || v === undefined) return null;
+  if (typeof v === "boolean") return v;
+  if (v === "true") return true;
+  if (v === "false") return false;
+  return null;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -18,37 +38,49 @@ export async function POST(req: NextRequest) {
         full_name: String(body.fullName).trim(),
         phone: String(body.phone).trim(),
         project_stage: String(body.projectStage).trim(),
-        project_stage_other: body.projectStageOther
-          ? String(body.projectStageOther).trim()
-          : null,
-        saas_description: body.saasDescription
-          ? String(body.saasDescription).trim()
-          : null,
+        project_stage_other: str(body.projectStageOther),
+        saas_description: str(body.saasDescription),
+        // Stuck areas
         stuck_areas: Array.isArray(body.stuckAreas) ? body.stuckAreas : null,
-        what_helps_progress: body.whatHelpsProgress
-          ? String(body.whatHelpsProgress).trim()
-          : null,
-        content_satisfaction: body.contentSatisfaction
-          ? Number(body.contentSatisfaction)
-          : null,
-        content_feedback: body.contentFeedback
-          ? String(body.contentFeedback).trim()
-          : null,
-        sessions_satisfaction: body.sessionsSatisfaction
-          ? Number(body.sessionsSatisfaction)
-          : null,
-        sessions_feedback: body.sessionsFeedback
-          ? String(body.sessionsFeedback).trim()
-          : null,
-        overall_satisfaction: body.overallSatisfaction
-          ? Number(body.overallSatisfaction)
-          : null,
-        overall_feedback: body.overallFeedback
-          ? String(body.overallFeedback).trim()
-          : null,
-        additional_notes: body.additionalNotes
-          ? String(body.additionalNotes).trim()
-          : null,
+        what_helps_progress: str(body.whatHelpsProgress),
+        // Content
+        content_satisfaction: num(body.contentSatisfaction),
+        training_percent_complete: str(body.trainingPercentComplete),
+        outdated_module_flag: bool(body.outdatedModuleFlag),
+        outdated_module_name: str(body.outdatedModuleName),
+        content_improvement_suggestion: str(body.contentImprovementSuggestion),
+        // Zooms
+        zooms_attended_last_month: str(body.zoomsAttendedLastMonth),
+        zoom_no_attend_reason: str(body.zoomNoAttendReason),
+        zoom_value_rating: num(body.zoomValueRating),
+        office_hours_attended: bool(body.officeHoursAttended),
+        office_hours_no_attend_reason: str(body.officeHoursNoAttendReason),
+        // Mentors: Eilon
+        mentor_eilon_experience: num(body.mentorEilonExperience),
+        mentor_eilon_availability: num(body.mentorEilonAvailability),
+        mentor_eilon_feedback: str(body.mentorEilonFeedback),
+        // Mentors: Daniel
+        mentor_daniel_experience: num(body.mentorDanielExperience),
+        mentor_daniel_availability: num(body.mentorDanielAvailability),
+        mentor_daniel_feedback: str(body.mentorDanielFeedback),
+        // Mentors: Ido
+        mentor_ido_experience: num(body.mentorIdoExperience),
+        mentor_ido_availability: num(body.mentorIdoAvailability),
+        mentor_ido_feedback: str(body.mentorIdoFeedback),
+        // Orit
+        mentor_orit_experience: num(body.mentorOritExperience),
+        mentor_orit_availability: num(body.mentorOritAvailability),
+        mentor_orit_feedback: str(body.mentorOritFeedback),
+        // Direction
+        knows_where_to_turn: str(body.knowsWhereToTurn),
+        // Community
+        community_satisfaction: num(body.communitySatisfaction),
+        community_helpfulness: str(body.communityHelpfulness),
+        community_missing: str(body.communityMissing),
+        // Overall
+        overall_satisfaction: num(body.overallSatisfaction),
+        overall_feedback: str(body.overallFeedback),
+        additional_notes: str(body.additionalNotes),
       });
 
     if (dbError) {

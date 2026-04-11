@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, integer, timestamp, boolean } from "drizzle-orm/pg-core";
 
 export const participants = pgTable("participants", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -63,13 +63,48 @@ export const surveyResponses = pgTable("survey_responses", {
   saasDescription: text("saas_description"),
   stuckAreas: text("stuck_areas").array(),
   whatHelpsProgress: text("what_helps_progress"),
+  // Content section
   contentSatisfaction: integer("content_satisfaction"),
-  contentFeedback: text("content_feedback"),
-  sessionsSatisfaction: integer("sessions_satisfaction"),
-  sessionsFeedback: text("sessions_feedback"),
+  trainingPercentComplete: text("training_percent_complete"),
+  outdatedModuleFlag: boolean("outdated_module_flag"),
+  outdatedModuleName: text("outdated_module_name"),
+  contentImprovementSuggestion: text("content_improvement_suggestion"),
+  // Zoom section
+  zoomsAttendedLastMonth: text("zooms_attended_last_month"),
+  zoomNoAttendReason: text("zoom_no_attend_reason"),
+  zoomValueRating: integer("zoom_value_rating"),
+  officeHoursAttended: boolean("office_hours_attended"),
+  officeHoursNoAttendReason: text("office_hours_no_attend_reason"),
+  // Mentor: Eilon
+  mentorEilonExperience: integer("mentor_eilon_experience"),
+  mentorEilonAvailability: integer("mentor_eilon_availability"),
+  mentorEilonFeedback: text("mentor_eilon_feedback"),
+  // Mentor: Daniel
+  mentorDanielExperience: integer("mentor_daniel_experience"),
+  mentorDanielAvailability: integer("mentor_daniel_availability"),
+  mentorDanielFeedback: text("mentor_daniel_feedback"),
+  // Mentor: Ido
+  mentorIdoExperience: integer("mentor_ido_experience"),
+  mentorIdoAvailability: integer("mentor_ido_availability"),
+  mentorIdoFeedback: text("mentor_ido_feedback"),
+  // Orit (community manager)
+  mentorOritExperience: integer("mentor_orit_experience"),
+  mentorOritAvailability: integer("mentor_orit_availability"),
+  mentorOritFeedback: text("mentor_orit_feedback"),
+  // Direction
+  knowsWhereToTurn: text("knows_where_to_turn"),
+  // Community
+  communitySatisfaction: integer("community_satisfaction"),
+  communityHelpfulness: text("community_helpfulness"),
+  communityMissing: text("community_missing"),
+  // Overall
   overallSatisfaction: integer("overall_satisfaction"),
   overallFeedback: text("overall_feedback"),
   additionalNotes: text("additional_notes"),
+  // Legacy (kept for backwards compat with old responses)
+  sessionsSatisfaction: integer("sessions_satisfaction"),
+  sessionsFeedback: text("sessions_feedback"),
+  contentFeedback: text("content_feedback"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
