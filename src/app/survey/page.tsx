@@ -36,6 +36,35 @@ const TRAINING_PERCENT_OPTIONS = [
   "75-100%",
 ] as const;
 
+const TRAINING_MODULES = [
+  "עוד לא התחלתי",
+  "מבוא להכשרה",
+  "מבוא ל-SaaS",
+  "רעיונאות ויציאה לדרך",
+  "ולידציה וחקר שוק",
+  "איפיון MVP",
+  "פיתוח עם Lovable",
+  "פיתוח עם Claude Code",
+  "תמחור והצעה",
+  "קופירייט ודפי נחיתה",
+  "השקה, מיוג ואסטרטגיה",
+  "עולם השיווק",
+  "פסיכולוגיה צרכנית ושיווקית",
+  "קמפיינים ממומנים",
+  "פרודקט",
+  "פיננסים בעסק שלך",
+  "משפטים וחוק",
+  "רשימת תפוצה ודיוור",
+  "השלמתי את כל ההכשרה",
+] as const;
+
+const OFFICE_HOURS_NO_REASON_OPTIONS = [
+  { value: "bad_timing", label: "הזמנים לא נוחים לי" },
+  { value: "didnt_know", label: "לא ידעתי" },
+  { value: "didnt_need", label: "לא הייתי צריך" },
+  { value: "other", label: "אחר" },
+] as const;
+
 const ZOOMS_ATTENDED_OPTIONS = ["0", "1", "2-3", "4+"] as const;
 
 const COMMUNITY_HELPFULNESS_OPTIONS = [
@@ -275,7 +304,7 @@ function MentorBlock({
 
       <div>
         <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-          מה היית משפר?
+          מה היית רוצה לקבל ממנו שעדיין לא קיבלת?
         </label>
         <textarea
           value={feedback}
@@ -312,6 +341,7 @@ export default function SurveyPage() {
   const [outdatedModuleName, setOutdatedModuleName] = useState("");
   const [contentImprovementSuggestion, setContentImprovementSuggestion] = useState("");
   const [trainingPercentComplete, setTrainingPercentComplete] = useState("");
+  const [currentModule, setCurrentModule] = useState("");
 
   // Section: zooms
   const [zoomsAttendedLastMonth, setZoomsAttendedLastMonth] = useState("");
@@ -320,6 +350,7 @@ export default function SurveyPage() {
   const [zoomFrequencyFeedback, setZoomFrequencyFeedback] = useState("");
   const [officeHoursAttended, setOfficeHoursAttended] = useState<boolean | null>(null);
   const [officeHoursNoAttendReason, setOfficeHoursNoAttendReason] = useState("");
+  const [officeHoursNoAttendOther, setOfficeHoursNoAttendOther] = useState("");
 
   // Section: frontal
   const [frontalAttended, setFrontalAttended] = useState<boolean | null>(null);
@@ -351,7 +382,13 @@ export default function SurveyPage() {
   const [communitySatisfaction, setCommunitySatisfaction] = useState<number | null>(null);
   const [communityHelpfulness, setCommunityHelpfulness] = useState("");
   const [communityMissing, setCommunityMissing] = useState("");
-  const [preferredSupportChannel, setPreferredSupportChannel] = useState("");
+  const [preferredSupportChannels, setPreferredSupportChannels] = useState<string[]>([]);
+
+  function togglePreferredChannel(value: string) {
+    setPreferredSupportChannels((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  }
 
   // Section: overall
   const [overallSatisfaction, setOverallSatisfaction] = useState<number | null>(null);
@@ -393,6 +430,7 @@ export default function SurveyPage() {
         whatHelpsProgress,
         contentSatisfaction,
         trainingPercentComplete,
+        currentModule,
         outdatedModuleFlag,
         outdatedModuleName: outdatedModuleFlag ? outdatedModuleName : null,
         contentImprovementSuggestion,
@@ -402,7 +440,11 @@ export default function SurveyPage() {
         zoomFrequencyFeedback,
         officeHoursAttended,
         officeHoursNoAttendReason:
-          officeHoursAttended === false ? officeHoursNoAttendReason : null,
+          officeHoursAttended === false
+            ? officeHoursNoAttendReason === "other"
+              ? officeHoursNoAttendOther
+              : officeHoursNoAttendReason
+            : null,
         frontalAttended,
         frontalSpeakersRating,
         frontalContentPreferences,
@@ -428,7 +470,7 @@ export default function SurveyPage() {
         communitySatisfaction,
         communityHelpfulness,
         communityMissing,
-        preferredSupportChannel,
+        preferredSupportChannel: preferredSupportChannels.join(","),
         overallSatisfaction,
         overallFeedback:
           overallSatisfaction !== null && overallSatisfaction < 8 ? overallFeedback : null,
@@ -507,7 +549,7 @@ export default function SurveyPage() {
     ),
 
     journey: (
-      <SectionCard key="journey" title="המסע שלך">
+      <SectionCard key="journey" title="איפה את/ה עומד/ת">
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
             באיזה שלב ה-SaaS שלך היום? *
@@ -608,6 +650,26 @@ export default function SurveyPage() {
             <span>בכלל לא</span>
             <span>מאוד</span>
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+            באיזה מודול את/ה עכשיו?
+          </label>
+          <select
+            value={currentModule}
+            onChange={(e) => setCurrentModule(e.target.value)}
+            className={`${inputClass} cursor-pointer appearance-none`}
+          >
+            <option value="" disabled>
+              בחר/י מודול
+            </option>
+            {TRAINING_MODULES.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -754,12 +816,33 @@ export default function SurveyPage() {
             ))}
           </div>
           {officeHoursAttended === false && (
-            <textarea
-              value={officeHoursNoAttendReason}
-              onChange={(e) => setOfficeHoursNoAttendReason(e.target.value)}
-              className={inputClass + " mt-2 h-20 resize-none"}
-              placeholder="למה לא? (תזמון, לא ידעת, לא היה לך צורך, אחר)"
-            />
+            <div className="mt-3 space-y-2">
+              <label className="block text-xs text-zinc-400">למה לא?</label>
+              <div className="grid grid-cols-2 gap-2">
+                {OFFICE_HOURS_NO_REASON_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setOfficeHoursNoAttendReason(opt.value)}
+                    className={`px-3 py-2.5 rounded-lg text-sm transition-all duration-200 border ${
+                      officeHoursNoAttendReason === opt.value
+                        ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                        : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {officeHoursNoAttendReason === "other" && (
+                <input
+                  value={officeHoursNoAttendOther}
+                  onChange={(e) => setOfficeHoursNoAttendOther(e.target.value)}
+                  className={inputClass + " mt-2"}
+                  placeholder="מה הסיבה?"
+                />
+              )}
+            </div>
           )}
         </div>
 
@@ -827,7 +910,7 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-3">
-            איזה סוגי תוכן היית רוצה לראות יותר בפרונטליים?
+            איזה סוגי תוכן היית רוצה שיהיו בפרונטליים?
           </label>
           <div className="grid grid-cols-2 gap-2">
             {FRONTAL_CONTENT_OPTIONS.map((opt) => (
@@ -866,7 +949,7 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-            מה היית רוצה שיהיה אחרת בפרונטלי הבא?
+            מה היית רוצה שיהיה בפרונטלי? איזה תכנים היית רוצה לקבל?
           </label>
           <textarea
             value={frontalNextWishes}
@@ -880,6 +963,9 @@ export default function SurveyPage() {
 
     mentors: (
       <SectionCard key="mentors" title="מנטורים וצוות">
+        <p className="text-sm text-indigo-200/90 bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-3">
+          אל תרגישו לא בנוח, אנחנו רוצים להשתפר בשבילכם.
+        </p>
         <MentorBlock
           name="אילון"
           description="מנטור טכני, Office Hours שבועי בדיסקורד"
@@ -896,7 +982,7 @@ export default function SurveyPage() {
 
         <MentorBlock
           name="דניאל"
-          description="מנטור טכני להתייעצויות מהותיות"
+          description="מנטור טכני"
           experience={mentorDanielExperience}
           setExperience={setMentorDanielExperience}
           professionalism={mentorDanielProfessionalism}
@@ -938,7 +1024,7 @@ export default function SurveyPage() {
 
         <div className="pt-2">
           <label className="block text-sm text-zinc-100 font-medium mb-2">
-            כשיש לך שאלה או צורך — את/ה יודע/ת לאן לפנות?
+            כשיש לך שאלה או צורך, את/ה יודע/ת לאן לפנות?
           </label>
           <div className="grid grid-cols-3 gap-2">
             {KNOWS_WHERE_OPTIONS.map((opt) => (
@@ -997,7 +1083,7 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-            מה חסר לך בקהילה?
+            מה היה משפר לך את הקהילה?
           </label>
           <textarea
             value={communityMissing}
@@ -1009,20 +1095,23 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-2">
-            באיזה ערוץ הכי נוח לך לקבל עזרה?
+            באילו ערוצים הכי נוח לך לקבל עזרה? (אפשר לבחור כמה)
           </label>
           <div className="grid grid-cols-1 gap-2">
             {PREFERRED_CHANNEL_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
                 type="button"
-                onClick={() => setPreferredSupportChannel(opt.value)}
+                onClick={() => togglePreferredChannel(opt.value)}
                 className={`px-4 py-2.5 rounded-lg text-sm text-right transition-all duration-200 border ${
-                  preferredSupportChannel === opt.value
+                  preferredSupportChannels.includes(opt.value)
                     ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
                     : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
                 }`}
               >
+                {preferredSupportChannels.includes(opt.value) && (
+                  <span className="inline-block ml-1.5 text-indigo-400">&#10003;</span>
+                )}
                 {opt.label}
               </button>
             ))}

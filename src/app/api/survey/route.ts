@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
         // Content
         content_satisfaction: num(body.contentSatisfaction),
         training_percent_complete: str(body.trainingPercentComplete),
+        current_module: str(body.currentModule),
         outdated_module_flag: bool(body.outdatedModuleFlag),
         outdated_module_name: str(body.outdatedModuleName),
         content_improvement_suggestion: str(body.contentImprovementSuggestion),
