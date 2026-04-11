@@ -51,6 +51,26 @@ const KNOWS_WHERE_OPTIONS = [
   { value: "no", label: "לא" },
 ] as const;
 
+const ZOOM_FREQUENCY_OPTIONS = [
+  { value: "enough", label: "מספיק לי" },
+  { value: "want_more", label: "פחות מדי" },
+  { value: "too_much", label: "יותר מדי" },
+] as const;
+
+const FRONTAL_CONTENT_OPTIONS = [
+  "הרצאות מקצועיות",
+  "סדנאות פרקטיות",
+  "נטוורקינג",
+  "אחר",
+] as const;
+
+const PREFERRED_CHANNEL_OPTIONS = [
+  { value: "community_group", label: "קבוצת הקהילה" },
+  { value: "personal_mentor", label: "וואטסאפ אישי למנטור" },
+  { value: "office_hours", label: "Office Hours / זום שאלות-תשובות" },
+  { value: "no_preference", label: "לא משנה לי" },
+] as const;
+
 type StageCategory = "learning" | "building" | "selling" | "other";
 
 function getStageCategory(stage: string): StageCategory {
@@ -74,6 +94,7 @@ type SectionKey =
   | "struggles"
   | "content"
   | "zooms"
+  | "frontal"
   | "mentors"
   | "community"
   | "overall"
@@ -86,13 +107,13 @@ function getSectionOrder(category: StageCategory): SectionKey[] {
 
   let middle: SectionKey[];
   if (category === "learning") {
-    middle = ["content", "zooms", "mentors", "community"];
+    middle = ["content", "zooms", "frontal", "mentors", "community"];
   } else if (category === "building") {
-    middle = ["mentors", "zooms", "content", "community"];
+    middle = ["mentors", "zooms", "frontal", "content", "community"];
   } else if (category === "selling") {
-    middle = ["mentors", "community", "zooms", "content"];
+    middle = ["mentors", "community", "zooms", "frontal", "content"];
   } else {
-    middle = ["content", "zooms", "mentors", "community"];
+    middle = ["content", "zooms", "frontal", "mentors", "community"];
   }
 
   return [...fixedStart, ...middle, ...fixedEnd];
@@ -194,6 +215,8 @@ function MentorBlock({
   description,
   experience,
   setExperience,
+  professionalism,
+  setProfessionalism,
   availability,
   setAvailability,
   feedback,
@@ -204,6 +227,8 @@ function MentorBlock({
   description: string;
   experience: number | null;
   setExperience: (n: number) => void;
+  professionalism: number | null;
+  setProfessionalism: (n: number) => void;
   availability: number | null;
   setAvailability: (n: number) => void;
   feedback: string;
@@ -225,6 +250,17 @@ function MentorBlock({
         <div className="flex justify-between text-xs text-zinc-400 px-0.5">
           <span>בכלל לא</span>
           <span>מעולה</span>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm text-zinc-100 font-medium">
+          מקצועיות ואיכות התשובות
+        </label>
+        <RatingButtons value={professionalism} onChange={setProfessionalism} />
+        <div className="flex justify-between text-xs text-zinc-400 px-0.5">
+          <span>נמוכה</span>
+          <span>גבוהה</span>
         </div>
       </div>
 
@@ -281,20 +317,32 @@ export default function SurveyPage() {
   const [zoomsAttendedLastMonth, setZoomsAttendedLastMonth] = useState("");
   const [zoomNoAttendReason, setZoomNoAttendReason] = useState("");
   const [zoomValueRating, setZoomValueRating] = useState<number | null>(null);
+  const [zoomFrequencyFeedback, setZoomFrequencyFeedback] = useState("");
   const [officeHoursAttended, setOfficeHoursAttended] = useState<boolean | null>(null);
   const [officeHoursNoAttendReason, setOfficeHoursNoAttendReason] = useState("");
 
+  // Section: frontal
+  const [frontalAttended, setFrontalAttended] = useState<boolean | null>(null);
+  const [frontalSpeakersRating, setFrontalSpeakersRating] = useState<number | null>(null);
+  const [frontalContentPreferences, setFrontalContentPreferences] = useState<string[]>([]);
+  const [frontalLastNegative, setFrontalLastNegative] = useState("");
+  const [frontalNextWishes, setFrontalNextWishes] = useState("");
+
   // Section: mentors
   const [mentorEilonExperience, setMentorEilonExperience] = useState<number | null>(null);
+  const [mentorEilonProfessionalism, setMentorEilonProfessionalism] = useState<number | null>(null);
   const [mentorEilonAvailability, setMentorEilonAvailability] = useState<number | null>(null);
   const [mentorEilonFeedback, setMentorEilonFeedback] = useState("");
   const [mentorDanielExperience, setMentorDanielExperience] = useState<number | null>(null);
+  const [mentorDanielProfessionalism, setMentorDanielProfessionalism] = useState<number | null>(null);
   const [mentorDanielAvailability, setMentorDanielAvailability] = useState<number | null>(null);
   const [mentorDanielFeedback, setMentorDanielFeedback] = useState("");
   const [mentorIdoExperience, setMentorIdoExperience] = useState<number | null>(null);
+  const [mentorIdoProfessionalism, setMentorIdoProfessionalism] = useState<number | null>(null);
   const [mentorIdoAvailability, setMentorIdoAvailability] = useState<number | null>(null);
   const [mentorIdoFeedback, setMentorIdoFeedback] = useState("");
   const [mentorOritExperience, setMentorOritExperience] = useState<number | null>(null);
+  const [mentorOritProfessionalism, setMentorOritProfessionalism] = useState<number | null>(null);
   const [mentorOritAvailability, setMentorOritAvailability] = useState<number | null>(null);
   const [mentorOritFeedback, setMentorOritFeedback] = useState("");
   const [knowsWhereToTurn, setKnowsWhereToTurn] = useState("");
@@ -303,6 +351,7 @@ export default function SurveyPage() {
   const [communitySatisfaction, setCommunitySatisfaction] = useState<number | null>(null);
   const [communityHelpfulness, setCommunityHelpfulness] = useState("");
   const [communityMissing, setCommunityMissing] = useState("");
+  const [preferredSupportChannel, setPreferredSupportChannel] = useState("");
 
   // Section: overall
   const [overallSatisfaction, setOverallSatisfaction] = useState<number | null>(null);
@@ -317,6 +366,12 @@ export default function SurveyPage() {
   function toggleStuckArea(area: string) {
     setStuckAreas((prev) =>
       prev.includes(area) ? prev.filter((a) => a !== area) : [...prev, area]
+    );
+  }
+
+  function toggleFrontalContent(opt: string) {
+    setFrontalContentPreferences((prev) =>
+      prev.includes(opt) ? prev.filter((a) => a !== opt) : [...prev, opt]
     );
   }
 
@@ -344,25 +399,36 @@ export default function SurveyPage() {
         zoomsAttendedLastMonth,
         zoomNoAttendReason: zoomsAttendedLastMonth === "0" ? zoomNoAttendReason : null,
         zoomValueRating: zoomsAttendedLastMonth !== "0" ? zoomValueRating : null,
+        zoomFrequencyFeedback,
         officeHoursAttended,
         officeHoursNoAttendReason:
           officeHoursAttended === false ? officeHoursNoAttendReason : null,
+        frontalAttended,
+        frontalSpeakersRating,
+        frontalContentPreferences,
+        frontalLastNegative: frontalAttended ? frontalLastNegative : null,
+        frontalNextWishes,
         mentorEilonExperience,
+        mentorEilonProfessionalism,
         mentorEilonAvailability,
         mentorEilonFeedback,
         mentorDanielExperience,
+        mentorDanielProfessionalism,
         mentorDanielAvailability,
         mentorDanielFeedback,
         mentorIdoExperience,
+        mentorIdoProfessionalism,
         mentorIdoAvailability,
         mentorIdoFeedback,
         mentorOritExperience,
+        mentorOritProfessionalism,
         mentorOritAvailability,
         mentorOritFeedback,
         knowsWhereToTurn,
         communitySatisfaction,
         communityHelpfulness,
         communityMissing,
+        preferredSupportChannel,
         overallSatisfaction,
         overallFeedback:
           overallSatisfaction !== null && overallSatisfaction < 8 ? overallFeedback : null,
@@ -696,6 +762,119 @@ export default function SurveyPage() {
             />
           )}
         </div>
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-2">
+            כמות הזומים בחודש (3-4 היום)
+          </label>
+          <div className="grid grid-cols-3 gap-2">
+            {ZOOM_FREQUENCY_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setZoomFrequencyFeedback(opt.value)}
+                className={`px-3 py-2.5 rounded-lg text-sm transition-all duration-200 border ${
+                  zoomFrequencyFeedback === opt.value
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </SectionCard>
+    ),
+
+    frontal: (
+      <SectionCard key="frontal" title="מפגשים פרונטליים">
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-2">
+            הגעת בעבר למפגש פרונטלי?
+          </label>
+          <div className="flex gap-2">
+            {[
+              { v: true, label: "כן" },
+              { v: false, label: "לא" },
+            ].map((opt) => (
+              <button
+                key={String(opt.v)}
+                type="button"
+                onClick={() => setFrontalAttended(opt.v)}
+                className={`flex-1 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 border ${
+                  frontalAttended === opt.v
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-sm text-zinc-100 font-medium">
+            כמה אתה מרוצה מהמרצים האורחים בפרונטליים?
+          </label>
+          <RatingButtons value={frontalSpeakersRating} onChange={setFrontalSpeakersRating} />
+          <div className="flex justify-between text-xs text-zinc-400 px-0.5">
+            <span>בכלל לא</span>
+            <span>מאוד</span>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-3">
+            איזה סוגי תוכן היית רוצה לראות יותר בפרונטליים?
+          </label>
+          <div className="grid grid-cols-2 gap-2">
+            {FRONTAL_CONTENT_OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => toggleFrontalContent(opt)}
+                className={`px-3 py-2.5 rounded-lg text-sm text-right transition-all duration-200 border ${
+                  frontalContentPreferences.includes(opt)
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80 hover:text-white"
+                }`}
+              >
+                {frontalContentPreferences.includes(opt) && (
+                  <span className="inline-block ml-1.5 text-indigo-400">&#10003;</span>
+                )}
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {frontalAttended === true && (
+          <div>
+            <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+              מה הכי הפריע לך בפרונטלי האחרון?
+            </label>
+            <textarea
+              value={frontalLastNegative}
+              onChange={(e) => setFrontalLastNegative(e.target.value)}
+              className={inputClass + " h-20 resize-none"}
+              placeholder="אופציונלי"
+            />
+          </div>
+        )}
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+            מה היית רוצה שיהיה אחרת בפרונטלי הבא?
+          </label>
+          <textarea
+            value={frontalNextWishes}
+            onChange={(e) => setFrontalNextWishes(e.target.value)}
+            className={inputClass + " h-20 resize-none"}
+            placeholder="אופציונלי"
+          />
+        </div>
       </SectionCard>
     ),
 
@@ -706,6 +885,8 @@ export default function SurveyPage() {
           description="מנטור טכני, Office Hours שבועי בדיסקורד"
           experience={mentorEilonExperience}
           setExperience={setMentorEilonExperience}
+          professionalism={mentorEilonProfessionalism}
+          setProfessionalism={setMentorEilonProfessionalism}
           availability={mentorEilonAvailability}
           setAvailability={setMentorEilonAvailability}
           feedback={mentorEilonFeedback}
@@ -718,6 +899,8 @@ export default function SurveyPage() {
           description="מנטור טכני להתייעצויות מהותיות"
           experience={mentorDanielExperience}
           setExperience={setMentorDanielExperience}
+          professionalism={mentorDanielProfessionalism}
+          setProfessionalism={setMentorDanielProfessionalism}
           availability={mentorDanielAvailability}
           setAvailability={setMentorDanielAvailability}
           feedback={mentorDanielFeedback}
@@ -730,6 +913,8 @@ export default function SurveyPage() {
           description="מנטור עסקי, אסטרטגי ומנטלי"
           experience={mentorIdoExperience}
           setExperience={setMentorIdoExperience}
+          professionalism={mentorIdoProfessionalism}
+          setProfessionalism={setMentorIdoProfessionalism}
           availability={mentorIdoAvailability}
           setAvailability={setMentorIdoAvailability}
           feedback={mentorIdoFeedback}
@@ -742,6 +927,8 @@ export default function SurveyPage() {
           description="אחראי קהילה ושיחות אונבורדינג"
           experience={mentorOritExperience}
           setExperience={setMentorOritExperience}
+          professionalism={mentorOritProfessionalism}
+          setProfessionalism={setMentorOritProfessionalism}
           availability={mentorOritAvailability}
           setAvailability={setMentorOritAvailability}
           feedback={mentorOritFeedback}
@@ -818,6 +1005,28 @@ export default function SurveyPage() {
             className={inputClass + " h-20 resize-none"}
             placeholder="אופציונלי"
           />
+        </div>
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-2">
+            באיזה ערוץ הכי נוח לך לקבל עזרה?
+          </label>
+          <div className="grid grid-cols-1 gap-2">
+            {PREFERRED_CHANNEL_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setPreferredSupportChannel(opt.value)}
+                className={`px-4 py-2.5 rounded-lg text-sm text-right transition-all duration-200 border ${
+                  preferredSupportChannel === opt.value
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         </div>
       </SectionCard>
     ),

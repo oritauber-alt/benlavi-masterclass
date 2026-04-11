@@ -53,22 +53,35 @@ export async function POST(req: NextRequest) {
         zooms_attended_last_month: str(body.zoomsAttendedLastMonth),
         zoom_no_attend_reason: str(body.zoomNoAttendReason),
         zoom_value_rating: num(body.zoomValueRating),
+        zoom_frequency_feedback: str(body.zoomFrequencyFeedback),
         office_hours_attended: bool(body.officeHoursAttended),
         office_hours_no_attend_reason: str(body.officeHoursNoAttendReason),
+        // Frontal
+        frontal_attended: bool(body.frontalAttended),
+        frontal_speakers_rating: num(body.frontalSpeakersRating),
+        frontal_content_preferences: Array.isArray(body.frontalContentPreferences)
+          ? body.frontalContentPreferences
+          : null,
+        frontal_last_negative: str(body.frontalLastNegative),
+        frontal_next_wishes: str(body.frontalNextWishes),
         // Mentors: Eilon
         mentor_eilon_experience: num(body.mentorEilonExperience),
+        mentor_eilon_professionalism: num(body.mentorEilonProfessionalism),
         mentor_eilon_availability: num(body.mentorEilonAvailability),
         mentor_eilon_feedback: str(body.mentorEilonFeedback),
         // Mentors: Daniel
         mentor_daniel_experience: num(body.mentorDanielExperience),
+        mentor_daniel_professionalism: num(body.mentorDanielProfessionalism),
         mentor_daniel_availability: num(body.mentorDanielAvailability),
         mentor_daniel_feedback: str(body.mentorDanielFeedback),
         // Mentors: Ido
         mentor_ido_experience: num(body.mentorIdoExperience),
+        mentor_ido_professionalism: num(body.mentorIdoProfessionalism),
         mentor_ido_availability: num(body.mentorIdoAvailability),
         mentor_ido_feedback: str(body.mentorIdoFeedback),
         // Orit
         mentor_orit_experience: num(body.mentorOritExperience),
+        mentor_orit_professionalism: num(body.mentorOritProfessionalism),
         mentor_orit_availability: num(body.mentorOritAvailability),
         mentor_orit_feedback: str(body.mentorOritFeedback),
         // Direction
@@ -77,6 +90,7 @@ export async function POST(req: NextRequest) {
         community_satisfaction: num(body.communitySatisfaction),
         community_helpfulness: str(body.communityHelpfulness),
         community_missing: str(body.communityMissing),
+        preferred_support_channel: str(body.preferredSupportChannel),
         // Overall
         overall_satisfaction: num(body.overallSatisfaction),
         overall_feedback: str(body.overallFeedback),

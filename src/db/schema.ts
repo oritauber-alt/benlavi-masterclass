@@ -73,24 +73,37 @@ export const surveyResponses = pgTable("survey_responses", {
   zoomsAttendedLastMonth: text("zooms_attended_last_month"),
   zoomNoAttendReason: text("zoom_no_attend_reason"),
   zoomValueRating: integer("zoom_value_rating"),
+  zoomFrequencyFeedback: text("zoom_frequency_feedback"),
   officeHoursAttended: boolean("office_hours_attended"),
   officeHoursNoAttendReason: text("office_hours_no_attend_reason"),
+  // Frontal section
+  frontalAttended: boolean("frontal_attended"),
+  frontalSpeakersRating: integer("frontal_speakers_rating"),
+  frontalContentPreferences: text("frontal_content_preferences").array(),
+  frontalLastNegative: text("frontal_last_negative"),
+  frontalNextWishes: text("frontal_next_wishes"),
   // Mentor: Eilon
   mentorEilonExperience: integer("mentor_eilon_experience"),
+  mentorEilonProfessionalism: integer("mentor_eilon_professionalism"),
   mentorEilonAvailability: integer("mentor_eilon_availability"),
   mentorEilonFeedback: text("mentor_eilon_feedback"),
   // Mentor: Daniel
   mentorDanielExperience: integer("mentor_daniel_experience"),
+  mentorDanielProfessionalism: integer("mentor_daniel_professionalism"),
   mentorDanielAvailability: integer("mentor_daniel_availability"),
   mentorDanielFeedback: text("mentor_daniel_feedback"),
   // Mentor: Ido
   mentorIdoExperience: integer("mentor_ido_experience"),
+  mentorIdoProfessionalism: integer("mentor_ido_professionalism"),
   mentorIdoAvailability: integer("mentor_ido_availability"),
   mentorIdoFeedback: text("mentor_ido_feedback"),
   // Orit (community manager)
   mentorOritExperience: integer("mentor_orit_experience"),
+  mentorOritProfessionalism: integer("mentor_orit_professionalism"),
   mentorOritAvailability: integer("mentor_orit_availability"),
   mentorOritFeedback: text("mentor_orit_feedback"),
+  // Channel preference
+  preferredSupportChannel: text("preferred_support_channel"),
   // Direction
   knowsWhereToTurn: text("knows_where_to_turn"),
   // Community
