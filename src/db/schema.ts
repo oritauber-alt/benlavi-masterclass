@@ -66,7 +66,6 @@ export const surveyResponses = pgTable("survey_responses", {
   // Content section
   contentSatisfaction: integer("content_satisfaction"),
   trainingPercentComplete: text("training_percent_complete"),
-  currentModule: text("current_module"),
   outdatedModuleFlag: boolean("outdated_module_flag"),
   outdatedModuleName: text("outdated_module_name"),
   contentImprovementSuggestion: text("content_improvement_suggestion"),

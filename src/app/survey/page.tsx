@@ -36,28 +36,6 @@ const TRAINING_PERCENT_OPTIONS = [
   "75-100%",
 ] as const;
 
-const TRAINING_MODULES = [
-  "עוד לא התחלתי",
-  "מבוא להכשרה",
-  "מבוא ל-SaaS",
-  "רעיונאות ויציאה לדרך",
-  "ולידציה וחקר שוק",
-  "איפיון MVP",
-  "פיתוח עם Lovable",
-  "פיתוח עם Claude Code",
-  "תמחור והצעה",
-  "קופירייט ודפי נחיתה",
-  "השקה, מיוג ואסטרטגיה",
-  "עולם השיווק",
-  "פסיכולוגיה צרכנית ושיווקית",
-  "קמפיינים ממומנים",
-  "פרודקט",
-  "פיננסים בעסק שלך",
-  "משפטים וחוק",
-  "רשימת תפוצה ודיוור",
-  "השלמתי את כל ההכשרה",
-] as const;
-
 const OFFICE_HOURS_NO_REASON_OPTIONS = [
   { value: "bad_timing", label: "הזמנים לא נוחים לי" },
   { value: "didnt_know", label: "לא ידעתי" },
@@ -84,13 +62,6 @@ const ZOOM_FREQUENCY_OPTIONS = [
   { value: "enough", label: "מספיק לי" },
   { value: "want_more", label: "פחות מדי" },
   { value: "too_much", label: "יותר מדי" },
-] as const;
-
-const FRONTAL_CONTENT_OPTIONS = [
-  "הרצאות מקצועיות",
-  "סדנאות פרקטיות",
-  "נטוורקינג",
-  "אחר",
 ] as const;
 
 const PREFERRED_CHANNEL_OPTIONS = [
@@ -304,7 +275,7 @@ function MentorBlock({
 
       <div>
         <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-          מה היית רוצה לקבל ממנו שעדיין לא קיבלת?
+          חוות דעת / מה היית רוצה שישתפר?
         </label>
         <textarea
           value={feedback}
@@ -341,7 +312,6 @@ export default function SurveyPage() {
   const [outdatedModuleName, setOutdatedModuleName] = useState("");
   const [contentImprovementSuggestion, setContentImprovementSuggestion] = useState("");
   const [trainingPercentComplete, setTrainingPercentComplete] = useState("");
-  const [currentModule, setCurrentModule] = useState("");
 
   // Section: zooms
   const [zoomsAttendedLastMonth, setZoomsAttendedLastMonth] = useState("");
@@ -355,9 +325,9 @@ export default function SurveyPage() {
   // Section: frontal
   const [frontalAttended, setFrontalAttended] = useState<boolean | null>(null);
   const [frontalSpeakersRating, setFrontalSpeakersRating] = useState<number | null>(null);
-  const [frontalContentPreferences, setFrontalContentPreferences] = useState<string[]>([]);
-  const [frontalLastNegative, setFrontalLastNegative] = useState("");
   const [frontalNextWishes, setFrontalNextWishes] = useState("");
+  const [frontalNoAttendReason, setFrontalNoAttendReason] = useState("");
+  const [frontalNoAttendOther, setFrontalNoAttendOther] = useState("");
 
   // Section: mentors
   const [mentorEilonExperience, setMentorEilonExperience] = useState<number | null>(null);
@@ -406,11 +376,6 @@ export default function SurveyPage() {
     );
   }
 
-  function toggleFrontalContent(opt: string) {
-    setFrontalContentPreferences((prev) =>
-      prev.includes(opt) ? prev.filter((a) => a !== opt) : [...prev, opt]
-    );
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -430,7 +395,6 @@ export default function SurveyPage() {
         whatHelpsProgress,
         contentSatisfaction,
         trainingPercentComplete,
-        currentModule,
         outdatedModuleFlag,
         outdatedModuleName: outdatedModuleFlag ? outdatedModuleName : null,
         contentImprovementSuggestion,
@@ -447,9 +411,13 @@ export default function SurveyPage() {
             : null,
         frontalAttended,
         frontalSpeakersRating,
-        frontalContentPreferences,
-        frontalLastNegative: frontalAttended ? frontalLastNegative : null,
         frontalNextWishes,
+        frontalLastNegative:
+          frontalAttended === false
+            ? frontalNoAttendReason === "other"
+              ? frontalNoAttendOther
+              : frontalNoAttendReason
+            : null,
         mentorEilonExperience,
         mentorEilonProfessionalism,
         mentorEilonAvailability,
@@ -654,26 +622,6 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-            באיזה מודול את/ה עכשיו?
-          </label>
-          <select
-            value={currentModule}
-            onChange={(e) => setCurrentModule(e.target.value)}
-            className={`${inputClass} cursor-pointer appearance-none`}
-          >
-            <option value="" disabled>
-              בחר/י מודול
-            </option>
-            {TRAINING_MODULES.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm text-zinc-100 font-medium mb-1.5">
             כמה אחוז מההכשרה השלמת?
           </label>
           <div className="grid grid-cols-4 gap-2">
@@ -848,7 +796,7 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-2">
-            כמות הזומים בחודש (3-4 היום)
+            מה דעתך על כמות הזומים החודשיים? (3-4 בחודש)
           </label>
           <div className="grid grid-cols-3 gap-2">
             {ZOOM_FREQUENCY_OPTIONS.map((opt) => (
@@ -895,6 +843,36 @@ export default function SurveyPage() {
               </button>
             ))}
           </div>
+
+          {frontalAttended === false && (
+            <div className="mt-3 space-y-2">
+              <label className="block text-xs text-zinc-400">למה לא?</label>
+              <div className="grid grid-cols-2 gap-2">
+                {OFFICE_HOURS_NO_REASON_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setFrontalNoAttendReason(opt.value)}
+                    className={`px-3 py-2.5 rounded-lg text-sm transition-all duration-200 border ${
+                      frontalNoAttendReason === opt.value
+                        ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                        : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {frontalNoAttendReason === "other" && (
+                <input
+                  value={frontalNoAttendOther}
+                  onChange={(e) => setFrontalNoAttendOther(e.target.value)}
+                  className={inputClass + " mt-2"}
+                  placeholder="מה הסיבה?"
+                />
+              )}
+            </div>
+          )}
         </div>
 
         <div className="space-y-2">
@@ -909,47 +887,8 @@ export default function SurveyPage() {
         </div>
 
         <div>
-          <label className="block text-sm text-zinc-100 font-medium mb-3">
-            איזה סוגי תוכן היית רוצה שיהיו בפרונטליים?
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            {FRONTAL_CONTENT_OPTIONS.map((opt) => (
-              <button
-                key={opt}
-                type="button"
-                onClick={() => toggleFrontalContent(opt)}
-                className={`px-3 py-2.5 rounded-lg text-sm text-right transition-all duration-200 border ${
-                  frontalContentPreferences.includes(opt)
-                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
-                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80 hover:text-white"
-                }`}
-              >
-                {frontalContentPreferences.includes(opt) && (
-                  <span className="inline-block ml-1.5 text-indigo-400">&#10003;</span>
-                )}
-                {opt}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {frontalAttended === true && (
-          <div>
-            <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-              מה הכי הפריע לך בפרונטלי האחרון?
-            </label>
-            <textarea
-              value={frontalLastNegative}
-              onChange={(e) => setFrontalLastNegative(e.target.value)}
-              className={inputClass + " h-20 resize-none"}
-              placeholder="אופציונלי"
-            />
-          </div>
-        )}
-
-        <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-            מה היית רוצה שיהיה בפרונטלי? איזה תכנים היית רוצה לקבל?
+            עוד משהו שחשוב שנדע?
           </label>
           <textarea
             value={frontalNextWishes}
