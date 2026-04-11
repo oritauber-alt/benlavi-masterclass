@@ -39,8 +39,15 @@ const TRAINING_PERCENT_OPTIONS = [
 const OFFICE_HOURS_NO_REASON_OPTIONS = [
   { value: "bad_timing", label: "הזמנים לא נוחים לי" },
   { value: "didnt_know", label: "לא ידעתי" },
-  { value: "didnt_need", label: "לא הייתי צריך" },
+  { value: "didnt_connect", label: "לא התחברתי לתוכן" },
   { value: "other", label: "אחר" },
+] as const;
+
+const FRONTAL_CONTENT_OPTIONS = [
+  "הרצאות מקצועיות",
+  "סדנאות פרקטיות",
+  "נטוורקינג",
+  "אחר",
 ] as const;
 
 const ZOOMS_ATTENDED_OPTIONS = ["0", "1", "2-3", "4+"] as const;
@@ -321,10 +328,12 @@ export default function SurveyPage() {
   const [officeHoursAttended, setOfficeHoursAttended] = useState<boolean | null>(null);
   const [officeHoursNoAttendReason, setOfficeHoursNoAttendReason] = useState("");
   const [officeHoursNoAttendOther, setOfficeHoursNoAttendOther] = useState("");
+  const [zoomContentWishes, setZoomContentWishes] = useState("");
 
   // Section: frontal
   const [frontalAttended, setFrontalAttended] = useState<boolean | null>(null);
   const [frontalSpeakersRating, setFrontalSpeakersRating] = useState<number | null>(null);
+  const [frontalContentPreferences, setFrontalContentPreferences] = useState<string[]>([]);
   const [frontalNextWishes, setFrontalNextWishes] = useState("");
   const [frontalNoAttendReason, setFrontalNoAttendReason] = useState("");
   const [frontalNoAttendOther, setFrontalNoAttendOther] = useState("");
@@ -376,6 +385,12 @@ export default function SurveyPage() {
     );
   }
 
+  function toggleFrontalContent(opt: string) {
+    setFrontalContentPreferences((prev) =>
+      prev.includes(opt) ? prev.filter((a) => a !== opt) : [...prev, opt]
+    );
+  }
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -402,6 +417,7 @@ export default function SurveyPage() {
         zoomNoAttendReason: zoomsAttendedLastMonth === "0" ? zoomNoAttendReason : null,
         zoomValueRating: zoomsAttendedLastMonth !== "0" ? zoomValueRating : null,
         zoomFrequencyFeedback,
+        zoomContentWishes,
         officeHoursAttended,
         officeHoursNoAttendReason:
           officeHoursAttended === false
@@ -410,7 +426,8 @@ export default function SurveyPage() {
               : officeHoursNoAttendReason
             : null,
         frontalAttended,
-        frontalSpeakersRating,
+        frontalSpeakersRating: frontalAttended ? frontalSpeakersRating : null,
+        frontalContentPreferences,
         frontalNextWishes,
         frontalLastNegative:
           frontalAttended === false
@@ -815,6 +832,18 @@ export default function SurveyPage() {
             ))}
           </div>
         </div>
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+            איזה תכנים היית רוצה שנביא בזומים?
+          </label>
+          <textarea
+            value={zoomContentWishes}
+            onChange={(e) => setZoomContentWishes(e.target.value)}
+            className={inputClass + " h-20 resize-none"}
+            placeholder="אופציונלי"
+          />
+        </div>
       </SectionCard>
     ),
 
@@ -875,14 +904,41 @@ export default function SurveyPage() {
           )}
         </div>
 
-        <div className="space-y-2">
-          <label className="block text-sm text-zinc-100 font-medium">
-            כמה אתה מרוצה מהמרצים האורחים בפרונטליים?
+        {frontalAttended === true && (
+          <div className="space-y-2">
+            <label className="block text-sm text-zinc-100 font-medium">
+              כמה אתה מרוצה מהמרצים האורחים בפרונטליים?
+            </label>
+            <RatingButtons value={frontalSpeakersRating} onChange={setFrontalSpeakersRating} />
+            <div className="flex justify-between text-xs text-zinc-400 px-0.5">
+              <span>בכלל לא</span>
+              <span>מאוד</span>
+            </div>
+          </div>
+        )}
+
+        <div>
+          <label className="block text-sm text-zinc-100 font-medium mb-3">
+            איזה תכנים היית רוצה?
           </label>
-          <RatingButtons value={frontalSpeakersRating} onChange={setFrontalSpeakersRating} />
-          <div className="flex justify-between text-xs text-zinc-400 px-0.5">
-            <span>בכלל לא</span>
-            <span>מאוד</span>
+          <div className="grid grid-cols-2 gap-2">
+            {FRONTAL_CONTENT_OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => toggleFrontalContent(opt)}
+                className={`px-3 py-2.5 rounded-lg text-sm text-right transition-all duration-200 border ${
+                  frontalContentPreferences.includes(opt)
+                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-200"
+                    : "bg-zinc-800/60 border-zinc-700/50 text-zinc-200 hover:bg-zinc-700/80 hover:text-white"
+                }`}
+              >
+                {frontalContentPreferences.includes(opt) && (
+                  <span className="inline-block ml-1.5 text-indigo-400">&#10003;</span>
+                )}
+                {opt}
+              </button>
+            ))}
           </div>
         </div>
 

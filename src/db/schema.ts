@@ -74,6 +74,7 @@ export const surveyResponses = pgTable("survey_responses", {
   zoomNoAttendReason: text("zoom_no_attend_reason"),
   zoomValueRating: integer("zoom_value_rating"),
   zoomFrequencyFeedback: text("zoom_frequency_feedback"),
+  zoomContentWishes: text("zoom_content_wishes"),
   officeHoursAttended: boolean("office_hours_attended"),
   officeHoursNoAttendReason: text("office_hours_no_attend_reason"),
   // Frontal section

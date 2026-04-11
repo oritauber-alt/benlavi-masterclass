@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
         zoom_no_attend_reason: str(body.zoomNoAttendReason),
         zoom_value_rating: num(body.zoomValueRating),
         zoom_frequency_feedback: str(body.zoomFrequencyFeedback),
+        zoom_content_wishes: str(body.zoomContentWishes),
         office_hours_attended: bool(body.officeHoursAttended),
         office_hours_no_attend_reason: str(body.officeHoursNoAttendReason),
         // Frontal
