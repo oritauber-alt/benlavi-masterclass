@@ -39,6 +39,13 @@ const TRAINING_PERCENT_OPTIONS = [
 const OFFICE_HOURS_NO_REASON_OPTIONS = [
   { value: "bad_timing", label: "הזמנים לא נוחים לי" },
   { value: "didnt_know", label: "לא ידעתי" },
+  { value: "didnt_need", label: "לא הייתי צריך" },
+  { value: "other", label: "אחר" },
+] as const;
+
+const FRONTAL_NO_REASON_OPTIONS = [
+  { value: "bad_timing", label: "הזמנים לא נוחים לי" },
+  { value: "didnt_know", label: "לא ידעתי" },
   { value: "didnt_connect", label: "לא התחברתי לתוכן" },
   { value: "other", label: "אחר" },
 ] as const;
@@ -282,7 +289,7 @@ function MentorBlock({
 
       <div>
         <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-          חוות דעת / מה היית רוצה שישתפר?
+          חוויה אישית / מה היית רוצה שישתפר?
         </label>
         <textarea
           value={feedback}
@@ -835,7 +842,7 @@ export default function SurveyPage() {
 
         <div>
           <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-            איזה תכנים היית רוצה שנביא בזומים?
+            איזה תכנים היית רוצה שנביא לזומים?
           </label>
           <textarea
             value={zoomContentWishes}
@@ -877,7 +884,7 @@ export default function SurveyPage() {
             <div className="mt-3 space-y-2">
               <label className="block text-xs text-zinc-400">למה לא?</label>
               <div className="grid grid-cols-2 gap-2">
-                {OFFICE_HOURS_NO_REASON_OPTIONS.map((opt) => (
+                {FRONTAL_NO_REASON_OPTIONS.map((opt) => (
                   <button
                     key={opt.value}
                     type="button"
