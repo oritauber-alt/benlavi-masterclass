@@ -517,24 +517,22 @@ export default function SurveyPage() {
     personal: (
       <SectionCard key="personal" title="פרטים אישיים">
         <div>
-          <label className="block text-sm text-zinc-100 font-medium mb-1.5">שם מלא *</label>
+          <label className="block text-sm text-zinc-100 font-medium mb-1.5">שם מלא</label>
           <input
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             className={inputClass}
             placeholder="ישראל ישראלי"
-            required
           />
         </div>
         <div>
-          <label className="block text-sm text-zinc-100 font-medium mb-1.5">טלפון *</label>
+          <label className="block text-sm text-zinc-100 font-medium mb-1.5">טלפון</label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className={inputClass}
             placeholder="050-1234567"
-            required
           />
         </div>
       </SectionCard>
@@ -997,7 +995,7 @@ export default function SurveyPage() {
         />
 
         <MentorBlock
-          name="עידו ראם"
+          name="עידו"
           description="מנטור עסקי, אסטרטגי ומנטלי"
           experience={mentorIdoExperience}
           setExperience={setMentorIdoExperience}
@@ -1189,7 +1187,7 @@ export default function SurveyPage() {
           <div className="pt-2 pb-8">
             <button
               type="submit"
-              disabled={loading || !fullName || !phone || !projectStage}
+              disabled={loading || !projectStage}
               className="w-full py-4 rounded-xl font-semibold text-lg text-white transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed bg-gradient-to-l from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 cta-glow"
             >
               {loading ? "שולח..." : "שליחת השאלון"}

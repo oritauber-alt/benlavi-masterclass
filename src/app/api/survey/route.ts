@@ -25,18 +25,21 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    if (!body?.fullName || !body?.phone || !body?.projectStage) {
+    if (!body?.projectStage) {
       return NextResponse.json(
         { error: "חסרים שדות חובה" },
         { status: 400 }
       );
     }
 
+    const fullNameValue = body.fullName ? String(body.fullName).trim() : "";
+    const phoneValue = body.phone ? String(body.phone).trim() : "";
+
     const { error: dbError } = await supabaseAdmin
       .from("survey_responses")
       .insert({
-        full_name: String(body.fullName).trim(),
-        phone: String(body.phone).trim(),
+        full_name: fullNameValue || "אנונימי",
+        phone: phoneValue || "-",
         project_stage: String(body.projectStage).trim(),
         project_stage_other: str(body.projectStageOther),
         saas_description: str(body.saasDescription),
