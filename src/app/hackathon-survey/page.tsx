@@ -123,7 +123,6 @@ export default function HackathonSurveyPage() {
 
   /* ── Shared fields ── */
   const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
   const [branch, setBranch] = useState<Branch>(null);
 
   /* ── "Has product" fields ── */
@@ -171,7 +170,7 @@ export default function HackathonSurveyPage() {
 
       body = {
         fullName,
-        phone,
+        phone: "-",
         projectStage: customerCount === "אחר" ? customerCountOther || "אחר" : customerCount,
         projectStageOther: customerCount === "אחר" ? customerCountOther : null,
         saasDescription: saasDescription || null,
@@ -191,7 +190,7 @@ export default function HackathonSurveyPage() {
 
       body = {
         fullName,
-        phone,
+        phone: "-",
         projectStage: saasStage || null,
         saasDescription: devSaasDescription || null,
         stuckAreas: areasWithOther.length > 0 ? areasWithOther : null,
@@ -268,7 +267,7 @@ export default function HackathonSurveyPage() {
     );
   }
 
-  const isSubmitDisabled = loading || !fullName || !phone || !branch;
+  const isSubmitDisabled = loading || !fullName || !branch;
 
   return (
     <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
@@ -302,18 +301,6 @@ export default function HackathonSurveyPage() {
                   onChange={(e) => setFullName(e.target.value)}
                   className={inputClass}
                   placeholder="ישראל ישראלי"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-zinc-100 font-medium mb-1.5">טלפון *</label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={inputClass}
-                  placeholder="050-1234567"
                   required
                 />
               </div>
