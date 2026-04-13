@@ -3079,39 +3079,14 @@
     .sec-lifeshift {
       position: relative;
       padding: 110px 24px 130px;
-      background: var(--bg-dark);
+      background: var(--bg-alt);
       overflow: hidden;
-    }
-
-    .sec-lifeshift::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(217,119,87,0.12) 0%, transparent 60%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .sec-lifeshift::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(232,143,111,0.08) 0%, transparent 60%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .sec-lifeshift .container-narrow {
       position: relative;
       z-index: 2;
+      max-width: 1500px;
     }
 
     .lifeshift-intro {
@@ -3124,7 +3099,7 @@
       font-family: var(--font-mono);
       font-size: 13px;
       font-weight: 600;
-      color: var(--accent-light);
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.18em;
       margin-bottom: 22px;
@@ -3136,7 +3111,7 @@
       font-weight: 900;
       letter-spacing: -0.03em;
       line-height: 1.25;
-      color: var(--text-on-dark);
+      color: var(--text);
       margin-bottom: 44px;
     }
 
@@ -3147,7 +3122,7 @@
     .lifeshift-subheadline {
       font-size: clamp(22px, 3vw, 32px);
       font-weight: 800;
-      color: var(--text-on-dark);
+      color: var(--text);
       margin-top: 24px;
       margin-bottom: 16px;
       letter-spacing: -0.015em;
@@ -3157,7 +3132,7 @@
       font-family: 'Heebo', sans-serif;
       font-size: clamp(17px, 1.8vw, 20px);
       line-height: 1.75;
-      color: rgba(245,241,232,0.92);
+      color: var(--text-muted);
       max-width: 680px;
       margin: 20px auto 40px;
       font-weight: 400;
@@ -3180,13 +3155,13 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
-      max-width: 1200px;
+      max-width: 100%;
       margin: 0 auto;
     }
 
     .lifeshift-grid > :nth-child(5) {
       grid-column: 1 / -1;
-      max-width: 720px;
+      max-width: 100%;
       margin: 0 auto;
       width: 100%;
     }
@@ -3194,10 +3169,11 @@
     .lifeshift-card {
       position: relative;
       background: var(--bg-dark);
-      border: 1px solid rgba(217,119,87,0.2);
-      border-radius: 12px;
+      border: 1px solid rgba(217,119,87,0.22);
+      border-radius: 14px;
       padding: 0;
       overflow: hidden;
+      box-shadow: 0 20px 60px rgba(26,22,19,0.18);
       transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
     }
 
@@ -3312,107 +3288,15 @@
       font-weight: 500;
     }
 
-    /* === Lifeshift animations === */
-    .lifeshift-side-before { position: relative; overflow: hidden; }
-    .lifeshift-side-after { position: relative; overflow: hidden; }
+    .lifeshift-side-before { position: relative; }
+    .lifeshift-side-after { position: relative; }
 
-    .lifeshift-card .lifeshift-text-before,
-    .lifeshift-card .lifeshift-label-before {
-      opacity: 0;
-      transform: translateX(20px);
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    }
-    .lifeshift-card .lifeshift-text-after,
-    .lifeshift-card .lifeshift-label-after {
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.7s var(--ease) 0.5s, transform 0.7s var(--ease) 0.5s;
-    }
-    .lifeshift-card.visible .lifeshift-text-before,
-    .lifeshift-card.visible .lifeshift-label-before {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .lifeshift-card.visible .lifeshift-text-after,
-    .lifeshift-card.visible .lifeshift-label-after {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Sweep line animation when card appears */
-    .lifeshift-card-inner::after { display: none; }
-
-    /* Continuous glow pulse on the "after" dot - green */
-    .lifeshift-card.visible .lifeshift-label-after::before {
-      animation: lifeshiftDotPulse 2.6s ease-in-out infinite 1.4s;
-    }
-    @keyframes lifeshiftDotPulse {
-      0%, 100% {
-        box-shadow: 0 0 10px rgba(39,201,63,0.8);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 18px rgba(39,201,63,1), 0 0 30px rgba(39,201,63,0.6);
-        transform: scale(1.25);
-      }
-    }
-
-    /* Smooth pulse on "before" dot - red */
-    .lifeshift-card.visible .lifeshift-label-before::before {
-      animation: lifeshiftDotPulseRed 2.6s ease-in-out infinite 1s;
-    }
-    @keyframes lifeshiftDotPulseRed {
-      0%, 100% {
-        box-shadow: 0 0 10px rgba(255,77,77,0.8);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 18px rgba(255,77,77,1), 0 0 30px rgba(255,77,77,0.6);
-        transform: scale(1.25);
-      }
-    }
-
-    /* Card topic floats in */
-    .lifeshift-card .lifeshift-card-topic {
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    }
-    .lifeshift-card.visible .lifeshift-card-topic {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* After side ambient glow */
-    .lifeshift-side-after::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        circle at 30% 50%,
-        rgba(217,119,87,0.08),
-        transparent 60%
-      );
-      opacity: 0;
-      transition: opacity 1s ease 1s;
-      pointer-events: none;
-    }
-    .lifeshift-card.visible .lifeshift-side-after::before {
-      opacity: 1;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .lifeshift-card .lifeshift-text-before,
-      .lifeshift-card .lifeshift-label-before,
-      .lifeshift-card .lifeshift-text-after,
-      .lifeshift-card .lifeshift-label-after,
-      .lifeshift-card .lifeshift-card-topic {
-        opacity: 1; transform: none; transition: none;
-      }
-      .lifeshift-card.visible .lifeshift-card-inner::after,
-      .lifeshift-card.visible .lifeshift-label-after::before,
-      .lifeshift-card.visible .lifeshift-label-before::before { animation: none; }
-    }
+    /* Terminal-style stagger reveal for lifeshift cards */
+    .lifeshift-grid .lifeshift-card:nth-child(1) { transition-delay: 0ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(2) { transition-delay: 100ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(3) { transition-delay: 200ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(4) { transition-delay: 300ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(5) { transition-delay: 400ms; }
 
     @media (max-width: 960px) {
       .sec-lifeshift { padding: 80px 20px 90px; }
