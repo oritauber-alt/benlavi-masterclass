@@ -3152,17 +3152,9 @@
     }
 
     .lifeshift-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-direction: column;
       gap: 24px;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-
-    .lifeshift-grid > :nth-child(5) {
-      grid-column: 1 / -1;
-      max-width: 100%;
-      margin: 0 auto;
       width: 100%;
     }
 
@@ -3291,23 +3283,17 @@
     .lifeshift-side-before { position: relative; }
     .lifeshift-side-after { position: relative; }
 
-    /* Terminal-style stagger reveal for lifeshift cards */
-    .lifeshift-grid .lifeshift-card:nth-child(1) { transition-delay: 0ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(2) { transition-delay: 100ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(3) { transition-delay: 200ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(4) { transition-delay: 300ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(5) { transition-delay: 400ms; }
+    /* Stagger reveal for lifeshift cards */
+    .lifeshift-card.fade-up { transition-duration: 0.6s; }
+    .lifeshift-grid .lifeshift-card:nth-child(2).fade-up { transition-delay: 120ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(3).fade-up { transition-delay: 240ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(4).fade-up { transition-delay: 360ms; }
+    .lifeshift-grid .lifeshift-card:nth-child(5).fade-up { transition-delay: 480ms; }
 
     @media (max-width: 960px) {
       .sec-lifeshift { padding: 80px 20px 90px; }
       .lifeshift-intro { margin-bottom: 56px; }
-      .lifeshift-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .lifeshift-grid > :nth-child(5) {
-        grid-column: auto;
-      }
+      .lifeshift-grid { gap: 20px; }
     }
 
     @media (max-width: 640px) {
