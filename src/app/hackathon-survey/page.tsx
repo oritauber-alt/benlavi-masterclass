@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 /* ── Options for "has product" branch (existing survey) ── */
 const CUSTOMER_COUNTS = ["1-5", "6-20", "21-50", "51-100", "100+", "אחר"] as const;
@@ -95,9 +95,7 @@ function useSpotlight() {
 }
 
 function useFadeUp() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
+  const ref = useCallback((el: HTMLDivElement | null) => {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -109,7 +107,6 @@ function useFadeUp() {
       { threshold: 0.1 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
   }, []);
   return ref;
 }
