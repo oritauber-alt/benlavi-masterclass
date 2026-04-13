@@ -3208,22 +3208,22 @@
     .lifeshift-card-inner {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      padding: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 28px;
     }
 
     .lifeshift-side {
-      padding: 6px 24px 14px;
+      padding: 10px 32px 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      min-height: 130px;
     }
 
     .lifeshift-side-before {
-      border-left: 1px solid rgba(217,119,87,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 18px;
+      margin-bottom: 4px;
     }
 
     .lifeshift-label {
@@ -3266,29 +3266,35 @@
 
     .lifeshift-text {
       font-family: var(--font-sans);
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.75;
     }
 
     .lifeshift-text-before {
-      color: rgba(245,241,232,0.82);
-      font-size: 14px;
+      color: rgba(245,241,232,0.55);
+      font-size: 15px;
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,77,77,0.4);
     }
 
     .lifeshift-text-after {
       color: var(--text-on-dark);
       font-weight: 500;
+      font-size: 17px;
     }
 
-    .lifeshift-side-before { position: relative; }
-    .lifeshift-side-after { position: relative; }
+    /* Typing cursor on after text */
+    .lifeshift-text-after.typing::after {
+      content: '▌';
+      color: var(--accent);
+      animation: termCursorBlink 0.6s step-end infinite;
+      margin-right: 2px;
+    }
 
-    /* Stagger reveal for lifeshift cards */
-    .lifeshift-card.fade-up { transition-duration: 0.6s; }
-    .lifeshift-grid .lifeshift-card:nth-child(2).fade-up { transition-delay: 120ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(3).fade-up { transition-delay: 240ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(4).fade-up { transition-delay: 360ms; }
-    .lifeshift-grid .lifeshift-card:nth-child(5).fade-up { transition-delay: 480ms; }
+    @keyframes termCursorBlink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
 
     @media (max-width: 960px) {
       .sec-lifeshift { padding: 80px 20px 90px; }
@@ -3297,36 +3303,13 @@
     }
 
     @media (max-width: 640px) {
-      .sec-lifeshift { padding: 70px 16px 80px; }
-      .lifeshift-card-inner {
-        grid-template-columns: 1fr;
-        padding: 10px 0 28px;
-      }
+      .sec-lifeshift { padding: 70px 8px 80px; }
       .lifeshift-side {
-        padding: 20px 28px;
-        min-height: auto;
-        gap: 14px;
-      }
-      .lifeshift-side-before {
-        border-left: none;
-        border-bottom: 1px solid rgba(217,119,87,0.12);
+        padding: 10px 20px;
       }
       .lifeshift-card-topic {
-        padding: 22px 28px 0;
-        font-size: 24px;
-      }
-      .lifeshift-text {
-        font-size: 19px !important;
-        line-height: 1.7 !important;
-        font-weight: 600 !important;
-      }
-      .lifeshift-text-before {
-        font-size: 17px !important;
-        font-weight: 500 !important;
-      }
-      .lifeshift-label {
-        font-size: 13px !important;
-        letter-spacing: 0.18em;
+        padding: 16px 20px 0;
+        font-size: 20px;
       }
     }
   </style>
@@ -4184,6 +4167,40 @@
       card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
       card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
     });
+  });
+
+  // Typing animation for lifeshift "after" text
+  document.querySelectorAll('.lifeshift-card').forEach((card, i) => {
+    const afterText = card.querySelector('.lifeshift-text-after');
+    if (!afterText) return;
+    const fullText = afterText.textContent;
+    afterText.textContent = '';
+    afterText.classList.add('typing');
+    let typed = false;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || typed) return;
+        typed = true;
+        obs.unobserve(card);
+        const delay = i * 200;
+        setTimeout(() => {
+          let idx = 0;
+          const speed = 12;
+          function type() {
+            const chunk = Math.min(3, fullText.length - idx);
+            afterText.textContent = fullText.slice(0, idx + chunk);
+            idx += chunk;
+            if (idx < fullText.length) {
+              setTimeout(type, speed);
+            } else {
+              afterText.classList.remove('typing');
+            }
+          }
+          type();
+        }, delay);
+      });
+    }, { threshold: 0.3 });
+    obs.observe(card);
   });
 
   // Savings counter - spring physics animation
