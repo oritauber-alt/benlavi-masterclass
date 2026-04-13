@@ -3314,7 +3314,7 @@
     /* Card body hidden until command finishes typing */
     .lifeshift-card-body {
       opacity: 0;
-      transition: opacity 0.6s var(--ease);
+      transition: opacity 0.35s var(--ease);
     }
 
     .lifeshift-card-body.revealed {
@@ -4243,7 +4243,7 @@
         fired = true;
         obs.unobserve(card);
         let idx = 0;
-        const speed = 35;
+        const speed = 22;
         function type() {
           idx++;
           cmd.textContent = fullCmd.slice(0, idx);
