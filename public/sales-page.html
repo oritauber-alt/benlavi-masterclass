@@ -3271,10 +3271,8 @@
     }
 
     .lifeshift-text-before {
-      color: rgba(245,241,232,0.55);
+      color: rgba(245,241,232,0.65);
       font-size: 15px;
-      text-decoration: line-through;
-      text-decoration-color: rgba(255,77,77,0.4);
     }
 
     .lifeshift-text-after {
@@ -4182,10 +4180,10 @@
         if (!entry.isIntersecting || typed) return;
         typed = true;
         obs.unobserve(card);
-        const delay = i * 200;
+        const delay = 300;
         setTimeout(() => {
           let idx = 0;
-          const speed = 12;
+          const speed = 25;
           function type() {
             const chunk = Math.min(3, fullText.length - idx);
             afterText.textContent = fullText.slice(0, idx + chunk);
