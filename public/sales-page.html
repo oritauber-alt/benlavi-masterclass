@@ -3282,8 +3282,8 @@
       font-size: 17px;
     }
 
-    /* Typing cursor on after text */
-    .lifeshift-text-after.typing::after {
+    /* Typing cursor on before text */
+    .lifeshift-text-before.typing::after {
       content: '▌';
       color: var(--accent);
       animation: termCursorBlink 0.6s step-end infinite;
@@ -3293,6 +3293,15 @@
     @keyframes termCursorBlink {
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0; }
+    }
+
+    /* Fade-in for after side */
+    .lifeshift-side-after {
+      opacity: 0;
+      transition: opacity 0.8s var(--ease);
+    }
+    .lifeshift-side-after.revealed {
+      opacity: 1;
     }
 
     @media (max-width: 960px) {
@@ -4168,35 +4177,36 @@
     });
   });
 
-  // Typing animation for lifeshift "after" text
-  document.querySelectorAll('.lifeshift-card').forEach((card, i) => {
-    const afterText = card.querySelector('.lifeshift-text-after');
-    if (!afterText) return;
-    const fullText = afterText.textContent;
-    afterText.textContent = '';
-    afterText.classList.add('typing');
+  // Typing on "before", fade-in on "after"
+  document.querySelectorAll('.lifeshift-card').forEach(card => {
+    const beforeText = card.querySelector('.lifeshift-text-before');
+    const afterSide = card.querySelector('.lifeshift-side-after');
+    if (!beforeText) return;
+    const fullText = beforeText.textContent;
+    beforeText.textContent = '';
+    beforeText.classList.add('typing');
     let typed = false;
     const obs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting || typed) return;
         typed = true;
         obs.unobserve(card);
-        const delay = 300;
         setTimeout(() => {
           let idx = 0;
           const speed = 25;
           function type() {
             const chunk = Math.min(3, fullText.length - idx);
-            afterText.textContent = fullText.slice(0, idx + chunk);
+            beforeText.textContent = fullText.slice(0, idx + chunk);
             idx += chunk;
             if (idx < fullText.length) {
               setTimeout(type, speed);
             } else {
-              afterText.classList.remove('typing');
+              beforeText.classList.remove('typing');
+              if (afterSide) afterSide.classList.add('revealed');
             }
           }
           type();
-        }, delay);
+        }, 300);
       });
     }, { threshold: 0.3 });
     obs.observe(card);
