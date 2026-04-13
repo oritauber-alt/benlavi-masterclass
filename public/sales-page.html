@@ -3193,9 +3193,9 @@
 
     .lifeshift-card {
       position: relative;
-      background: #1F1A17;
-      border: 1px solid rgba(217,119,87,0.15);
-      border-radius: 22px;
+      background: var(--bg-dark);
+      border: 1px solid rgba(217,119,87,0.2);
+      border-radius: 12px;
       padding: 0;
       overflow: hidden;
       transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
@@ -3222,20 +3222,19 @@
 
     .lifeshift-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(217,119,87,0.35);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--accent);
     }
 
     .lifeshift-card-topic {
       position: relative;
       z-index: 2;
-      padding: 22px 32px 0;
-      font-family: 'Heebo', sans-serif;
-      font-size: 22px;
+      padding: 18px 24px 0;
+      font-family: var(--font-sans);
+      font-size: 20px;
       font-weight: 800;
-      color: var(--accent-light);
+      color: var(--text-on-dark);
       letter-spacing: 0.02em;
-      text-shadow: 0 0 20px rgba(217,119,87,0.35);
     }
 
     .lifeshift-card-inner {
@@ -3248,7 +3247,7 @@
     }
 
     .lifeshift-side {
-      padding: 6px 32px 14px;
+      padding: 6px 24px 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -3298,9 +3297,9 @@
     }
 
     .lifeshift-text {
-      font-family: 'Heebo', sans-serif;
+      font-family: var(--font-sans);
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .lifeshift-text-before {
@@ -3534,6 +3533,10 @@
 
     <div class="lifeshift-grid">
       <div class="lifeshift-card fade-up">
+        <div class="terminal-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-filename">agent_whatsapp.sh</div>
+        </div>
         <div class="lifeshift-card-topic">וואטסאפ</div>
         <div class="lifeshift-card-inner">
           <div class="lifeshift-side lifeshift-side-before">
@@ -3548,6 +3551,10 @@
       </div>
 
       <div class="lifeshift-card fade-up">
+        <div class="terminal-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-filename">agent_clients.sh</div>
+        </div>
         <div class="lifeshift-card-topic">לקוחות קיימים</div>
         <div class="lifeshift-card-inner">
           <div class="lifeshift-side lifeshift-side-before">
@@ -3562,6 +3569,10 @@
       </div>
 
       <div class="lifeshift-card fade-up">
+        <div class="terminal-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-filename">agent_email.sh</div>
+        </div>
         <div class="lifeshift-card-topic">מיילים</div>
         <div class="lifeshift-card-inner">
           <div class="lifeshift-side lifeshift-side-before">
@@ -3576,6 +3587,10 @@
       </div>
 
       <div class="lifeshift-card fade-up">
+        <div class="terminal-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-filename">agent_quotes.sh</div>
+        </div>
         <div class="lifeshift-card-topic">הצעות מחיר</div>
         <div class="lifeshift-card-inner">
           <div class="lifeshift-side lifeshift-side-before">
@@ -3590,6 +3605,10 @@
       </div>
 
       <div class="lifeshift-card fade-up">
+        <div class="terminal-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-filename">agent_content.sh</div>
+        </div>
         <div class="lifeshift-card-topic">תוכן לרשתות</div>
         <div class="lifeshift-card-inner">
           <div class="lifeshift-side lifeshift-side-before">
