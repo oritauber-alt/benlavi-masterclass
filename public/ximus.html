@@ -3209,14 +3209,29 @@
     /* ═══════════════════════════════════════ */
     /* ══════ SECTION: LIFE SHIFT ══════════ */
     /* ═══════════════════════════════════════ */
-    .sec-lifeshift {
-      position: relative;
-      padding: 110px 24px 130px;
+    /* Shared warm grid background - applied to all light sections */
+    .sec-lifeshift,
+    .sec-outcomes,
+    .sec-ben,
+    .sec-bonuses,
+    .sec-faq,
+    .sec-whynow,
+    .sec-prep,
+    .sec-offer,
+    .sec-filter,
+    .sec-different,
+    .sec-liveit,
+    .sec-whyncode {
       background:
         linear-gradient(rgba(217, 119, 87, 0.09) 1px, transparent 1px) 0 0 / 56px 56px,
         linear-gradient(90deg, rgba(217, 119, 87, 0.09) 1px, transparent 1px) 0 0 / 56px 56px,
         radial-gradient(ellipse at top, rgba(217, 119, 87, 0.06), transparent 65%),
         var(--bg-alt);
+    }
+
+    .sec-lifeshift {
+      position: relative;
+      padding: 110px 24px 130px;
       overflow: hidden;
     }
 
@@ -3527,7 +3542,7 @@
     <div class="hero-photo-wrap fade-up visible">
       <div class="hero-photo">
         <img src="https://benla.co.il/images/timeline/saas-ncode.jpg" alt="בן לביא מרצה">
-        <div class="hero-photo-badge">בן לביא · הכשיר מאות מנהלים ובעלי עסקים בישראל</div>
+        <div class="hero-photo-badge">בן לביא · מייסד מכללת nCode</div>
       </div>
     </div>
   </div>
@@ -3864,14 +3879,6 @@
       </div>
     </div>
 
-    <div class="savings-counter fade-up">
-      <div class="savings-counter-label">שעות מנכ"ל שחוזרות אליך בחודש</div>
-      <div class="savings-counter-number">
-        <span class="savings-value" data-target="40">0</span>
-        <span class="savings-currency">+</span>
-      </div>
-      <div class="savings-counter-sub">בחזרה אליך - לאסטרטגיה, לצוות, למשפחה</div>
-    </div>
   </div>
 </section>
 
