@@ -1,0 +1,23 @@
+CREATE TABLE "business_intake" (
+  "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  "first_name" text NOT NULL,
+  "last_name" text NOT NULL,
+  "business_name" text NOT NULL,
+  "business_type" text NOT NULL,
+  "business_services" text,
+  "target_audience" text,
+  "instagram_url" text,
+  "facebook_url" text,
+  "website_url" text,
+  "employee_count" text,
+  "customer_handling" text,
+  "finance_handling" text,
+  "content_creation" text,
+  "quotes_or_team_bottleneck" text,
+  "calendar_management" text,
+  "brand_voice" text,
+  "ai_experience" integer,
+  "desired_agent" text,
+  "additional_notes" text,
+  "created_at" timestamp DEFAULT now()
+);

@@ -122,6 +122,30 @@ export const surveyResponses = pgTable("survey_responses", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const businessIntake = pgTable("business_intake", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  businessName: text("business_name").notNull(),
+  businessType: text("business_type").notNull(),
+  businessServices: text("business_services"),
+  targetAudience: text("target_audience"),
+  instagramUrl: text("instagram_url"),
+  facebookUrl: text("facebook_url"),
+  websiteUrl: text("website_url"),
+  employeeCount: text("employee_count"),
+  customerHandling: text("customer_handling"),
+  financeHandling: text("finance_handling"),
+  contentCreation: text("content_creation"),
+  quotesOrTeamBottleneck: text("quotes_or_team_bottleneck"),
+  calendarManagement: text("calendar_management"),
+  brandVoice: text("brand_voice"),
+  aiExperience: integer("ai_experience"),
+  desiredAgent: text("desired_agent"),
+  additionalNotes: text("additional_notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const mcpGuides = pgTable("mcp_guides", {
   id: uuid("id").primaryKey().defaultRandom(),
   mcpName: text("mcp_name").notNull().unique(),
