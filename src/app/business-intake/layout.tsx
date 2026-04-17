@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://benlavi-masterclass.vercel.app"),
   title: "האקתון AI לבעלי עסקים | 30 באפריל 2026",
   description:
     "שאלון מקדים לאקתון. עזרו לנו להכיר את העסק שלכם כדי שנבנה לכם חבילת סוכן AI אישית.",
