@@ -227,7 +227,7 @@ export default function BusinessIntakePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold gradient-text">
-            אקתון AI לבעלי עסקים
+            האקתון AI לבעלי עסקים
           </h1>
           <p className="text-zinc-400 mt-3">
             השאלון הזה יעזור לנו לבנות לך חבילה אישית לפני האקתון
