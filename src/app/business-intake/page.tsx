@@ -248,7 +248,7 @@ export default function BusinessIntakePage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    שם פרטי *
+                    שם פרטי
                   </label>
                   <input
                     value={firstName}
@@ -260,7 +260,7 @@ export default function BusinessIntakePage() {
                 </div>
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    שם משפחה *
+                    שם משפחה
                   </label>
                   <input
                     value={lastName}
@@ -274,7 +274,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  שם העסק / חברה *
+                  שם העסק / חברה
                 </label>
                 <input
                   value={businessName}
@@ -289,7 +289,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  קישור לאינסטגרם *
+                  קישור לאינסטגרם
                 </label>
                 <input
                   type="url"
@@ -304,7 +304,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  קישור לפייסבוק *
+                  קישור לפייסבוק
                 </label>
                 <input
                   type="url"
@@ -319,7 +319,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  אתר / דף נחיתה *
+                  אתר / דף נחיתה
                 </label>
                 <input
                   type="url"
@@ -346,7 +346,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-3">
-                  מה מתאר אותך? *
+                  מה מתאר אותך?
                 </label>
                 <div className="flex gap-3">
                   <button
@@ -372,7 +372,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  מה העסק/חברה שלך עושה? איזה שירותים/מוצרים אתם מציעים? *
+                  מה העסק/חברה שלך עושה? איזה שירותים/מוצרים אתם מציעים?
                 </label>
                 <textarea
                   value={businessServices}
@@ -385,7 +385,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  מי קהל היעד שלכם? *
+                  מי קהל היעד שלכם?
                 </label>
                 <textarea
                   value={targetAudience}
@@ -413,7 +413,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מטפל/ת בפניות לקוחות היום? *
+                    איך את/ה מטפל/ת בפניות לקוחות היום?
                   </label>
                   <textarea
                     value={customerHandling}
@@ -426,7 +426,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מנהל/ת את הכספים והחשבוניות? *
+                    איך את/ה מנהל/ת את הכספים והחשבוניות?
                   </label>
                   <textarea
                     value={financeHandling}
@@ -439,7 +439,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה יוצר/ת תוכן לרשתות? *
+                    איך את/ה יוצר/ת תוכן לרשתות?
                   </label>
                   <textarea
                     value={contentCreation}
@@ -452,7 +452,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה שולח/ת הצעות מחיר? *
+                    איך את/ה שולח/ת הצעות מחיר?
                   </label>
                   <textarea
                     value={quotesHandling}
@@ -465,7 +465,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מנהל/ת את היומן והמשימות? *
+                    איך את/ה מנהל/ת את היומן והמשימות?
                   </label>
                   <textarea
                     value={calendarManagement}
@@ -493,7 +493,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    כמה עובדים יש בחברה? *
+                    כמה עובדים יש בחברה?
                   </label>
                   <select
                     value={employeeCount}
@@ -513,7 +513,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך מתנהלת התקשורת עם לקוחות בחברה? *
+                    איך מתנהלת התקשורת עם לקוחות בחברה?
                   </label>
                   <textarea
                     value={companyCustomerHandling}
@@ -528,7 +528,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך מנוהלים תהליכי הכספים? (חשבוניות, דיווחים, תשלומים) *
+                    איך מנוהלים תהליכי הכספים? (חשבוניות, דיווחים, תשלומים)
                   </label>
                   <textarea
                     value={companyFinanceHandling}
@@ -543,7 +543,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך נוצר תוכן שיווקי בחברה? *
+                    איך נוצר תוכן שיווקי בחברה?
                   </label>
                   <textarea
                     value={companyContentCreation}
@@ -558,7 +558,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    מה התהליכים שגוזלים הכי הרבה זמן לצוות? *
+                    מה התהליכים שגוזלים הכי הרבה זמן לצוות?
                   </label>
                   <textarea
                     value={teamBottleneck}
@@ -588,7 +588,7 @@ export default function BusinessIntakePage() {
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                      איך היית מתאר/ת את הטון של העסק/חברה? *
+                      איך היית מתאר/ת את הטון של העסק/חברה?
                     </label>
                     <textarea
                       value={brandVoice}
@@ -601,7 +601,7 @@ export default function BusinessIntakePage() {
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-3">
-                      מה רמת הניסיון שלך עם כלי AI? *
+                      מה רמת הניסיון שלך עם כלי AI?
                     </label>
                     <div className="flex gap-2">
                       {[1, 2, 3, 4, 5].map((level) => (
@@ -625,7 +625,7 @@ export default function BusinessIntakePage() {
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                      איזה סוכן AI הכי מעניין אותך? *
+                      איזה סוכן AI הכי מעניין אותך?
                     </label>
                     <textarea
                       value={desiredAgent}
