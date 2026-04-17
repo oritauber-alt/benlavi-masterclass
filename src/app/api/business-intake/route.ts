@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
         business_type: str(body.businessType),
         business_services: str(body.businessServices),
         target_audience: str(body.targetAudience),
+        dream_employee: str(body.dreamEmployee),
         instagram_url: str(body.instagramUrl),
         facebook_url: str(body.facebookUrl),
         website_url: str(body.websiteUrl),

@@ -57,6 +57,7 @@ export default function BusinessIntakePage() {
   const [businessType, setBusinessType] = useState<BusinessType>(null);
   const [businessServices, setBusinessServices] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
+  const [dreamEmployee, setDreamEmployee] = useState("");
 
   /* ── Section 3: Processes (business owner) ── */
   const [customerHandling, setCustomerHandling] = useState("");
@@ -90,6 +91,7 @@ export default function BusinessIntakePage() {
       businessType: businessType === "business-owner" ? "בעל/ת עסק" : "מנהל/ת חברה",
       businessServices: businessServices || null,
       targetAudience: targetAudience || null,
+      dreamEmployee: dreamEmployee || null,
       instagramUrl: instagramUrl || null,
       facebookUrl: facebookUrl || null,
       websiteUrl: websiteUrl || null,
@@ -200,7 +202,7 @@ export default function BusinessIntakePage() {
   }
 
   const sharedRequired =
-    !firstName || !lastName || !businessName || !businessType || !businessServices || !targetAudience || !instagramUrl || !facebookUrl || !websiteUrl || !brandVoice || aiExperience === null || !desiredAgent;
+    !firstName || !lastName || !businessName || !businessType || !businessServices || !targetAudience || !dreamEmployee || !instagramUrl || !facebookUrl || !websiteUrl || !brandVoice || aiExperience === null || !desiredAgent;
 
   const ownerRequired =
     businessType === "business-owner"
@@ -392,6 +394,24 @@ export default function BusinessIntakePage() {
                   onChange={(e) => setTargetAudience(e.target.value)}
                   className={inputClass + " h-20 resize-none"}
                   placeholder="למשל: בעלי עסקים קטנים, זוגות צעירים, חברות הייטק..."
+                  required
+                />
+              </div>
+
+              <div style={dividerStyle} className="gradient-divider" />
+
+              <div>
+                <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+                  אם היית יכול/ה לגייס עובד/ת מושלם/ת שעובד/ת 24/7, נשאר/ת לנצח ולא נשחק/ת - את מי היית מגייס/ת?
+                </label>
+                <p className="text-xs text-zinc-400 mb-3">
+                  איך התפקיד היה נראה? באיזו תדירות? לאיזה מערכות צריך גישה?
+                </p>
+                <textarea
+                  value={dreamEmployee}
+                  onChange={(e) => setDreamEmployee(e.target.value)}
+                  className={inputClass + " h-28 resize-none"}
+                  placeholder="למשל: מנהל/ת לקוחות שעוקב אחרי כל ליד, שומע שיחות מכירה, עובד עם ה-CRM..."
                   required
                 />
               </div>

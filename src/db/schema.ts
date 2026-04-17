@@ -130,6 +130,7 @@ export const businessIntake = pgTable("business_intake", {
   businessType: text("business_type").notNull(),
   businessServices: text("business_services"),
   targetAudience: text("target_audience"),
+  dreamEmployee: text("dream_employee"),
   instagramUrl: text("instagram_url"),
   facebookUrl: text("facebook_url"),
   websiteUrl: text("website_url"),
