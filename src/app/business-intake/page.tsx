@@ -199,8 +199,21 @@ export default function BusinessIntakePage() {
     );
   }
 
+  const sharedRequired =
+    !firstName || !lastName || !businessName || !businessType || !businessServices || !targetAudience || !instagramUrl || !facebookUrl || !websiteUrl || !brandVoice || aiExperience === null || !desiredAgent;
+
+  const ownerRequired =
+    businessType === "business-owner"
+      ? !customerHandling || !financeHandling || !contentCreation || !quotesHandling || !calendarManagement
+      : false;
+
+  const managerRequired =
+    businessType === "company-manager"
+      ? !employeeCount || !companyCustomerHandling || !companyFinanceHandling || !companyContentCreation || !teamBottleneck
+      : false;
+
   const isSubmitDisabled =
-    loading || !firstName || !lastName || !businessName || !businessType || !businessServices;
+    loading || sharedRequired || ownerRequired || managerRequired;
 
   return (
     <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
@@ -276,7 +289,7 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  קישור לאינסטגרם
+                  קישור לאינסטגרם *
                 </label>
                 <input
                   type="url"
@@ -285,12 +298,13 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://instagram.com/your_business"
                   dir="ltr"
+                  required
                 />
               </div>
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  קישור לפייסבוק
+                  קישור לפייסבוק *
                 </label>
                 <input
                   type="url"
@@ -299,12 +313,13 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://facebook.com/your_business"
                   dir="ltr"
+                  required
                 />
               </div>
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  אתר / דף נחיתה
+                  אתר / דף נחיתה *
                 </label>
                 <input
                   type="url"
@@ -313,6 +328,7 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://your-website.com"
                   dir="ltr"
+                  required
                 />
               </div>
             </div>
@@ -369,13 +385,14 @@ export default function BusinessIntakePage() {
 
               <div>
                 <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                  מי קהל היעד שלכם?
+                  מי קהל היעד שלכם? *
                 </label>
                 <textarea
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
                   className={inputClass + " h-20 resize-none"}
                   placeholder="למשל: בעלי עסקים קטנים, זוגות צעירים, חברות הייטק..."
+                  required
                 />
               </div>
             </div>
@@ -396,61 +413,66 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מטפל/ת בפניות לקוחות היום?
+                    איך את/ה מטפל/ת בפניות לקוחות היום? *
                   </label>
                   <textarea
                     value={customerHandling}
                     onChange={(e) => setCustomerHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: עונה בוואטסאפ ידנית, יש מזכירה, לא מספיק לענות לכולם..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מנהל/ת את הכספים והחשבוניות?
+                    איך את/ה מנהל/ת את הכספים והחשבוניות? *
                   </label>
                   <textarea
                     value={financeHandling}
                     onChange={(e) => setFinanceHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: אקסל, רואה חשבון אחת לחודש, תוכנת חשבשבת..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה יוצר/ת תוכן לרשתות?
+                    איך את/ה יוצר/ת תוכן לרשתות? *
                   </label>
                   <textarea
                     value={contentCreation}
                     onChange={(e) => setContentCreation(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: כותב/ת לבד, מעסיק/ה קופירייטר, לא מפרסם/ת..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה שולח/ת הצעות מחיר?
+                    איך את/ה שולח/ת הצעות מחיר? *
                   </label>
                   <textarea
                     value={quotesHandling}
                     onChange={(e) => setQuotesHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: וורד, PDF, בוואטסאפ בטקסט חופשי..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך את/ה מנהל/ת את היומן והמשימות?
+                    איך את/ה מנהל/ת את היומן והמשימות? *
                   </label>
                   <textarea
                     value={calendarManagement}
                     onChange={(e) => setCalendarManagement(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: Google Calendar, פתקים, בראש..."
+                    required
                   />
                 </div>
               </div>
@@ -471,7 +493,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    כמה עובדים יש בחברה?
+                    כמה עובדים יש בחברה? *
                   </label>
                   <select
                     value={employeeCount}
@@ -491,7 +513,7 @@ export default function BusinessIntakePage() {
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך מתנהלת התקשורת עם לקוחות בחברה?
+                    איך מתנהלת התקשורת עם לקוחות בחברה? *
                   </label>
                   <textarea
                     value={companyCustomerHandling}
@@ -500,12 +522,13 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: נציגי שירות בוואטסאפ, מוקד טלפוני, CRM..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך מנוהלים תהליכי הכספים? (חשבוניות, דיווחים, תשלומים)
+                    איך מנוהלים תהליכי הכספים? (חשבוניות, דיווחים, תשלומים) *
                   </label>
                   <textarea
                     value={companyFinanceHandling}
@@ -514,12 +537,13 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: מנהלת חשבונות, תוכנת ERP, אקסלים..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    איך נוצר תוכן שיווקי בחברה?
+                    איך נוצר תוכן שיווקי בחברה? *
                   </label>
                   <textarea
                     value={companyContentCreation}
@@ -528,18 +552,20 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: צוות שיווק פנימי, סוכנות חיצונית, לא עושים..."
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                    מה התהליכים שגוזלים הכי הרבה זמן לצוות?
+                    מה התהליכים שגוזלים הכי הרבה זמן לצוות? *
                   </label>
                   <textarea
                     value={teamBottleneck}
                     onChange={(e) => setTeamBottleneck(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: דיווחים שבועיים, ניהול לידים, תיאומי פגישות..."
+                    required
                   />
                 </div>
               </div>
@@ -562,19 +588,20 @@ export default function BusinessIntakePage() {
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                      איך היית מתאר/ת את הטון של העסק/חברה?
+                      איך היית מתאר/ת את הטון של העסק/חברה? *
                     </label>
                     <textarea
                       value={brandVoice}
                       onChange={(e) => setBrandVoice(e.target.value)}
                       className={inputClass + " h-20 resize-none"}
                       placeholder="למשל: מקצועי, חברי, ענייני..."
+                      required
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-3">
-                      מה רמת הניסיון שלך עם כלי AI?
+                      מה רמת הניסיון שלך עם כלי AI? *
                     </label>
                     <div className="flex gap-2">
                       {[1, 2, 3, 4, 5].map((level) => (
@@ -598,13 +625,14 @@ export default function BusinessIntakePage() {
 
                   <div>
                     <label className="block text-sm text-zinc-100 font-medium mb-1.5">
-                      איזה סוכן AI הכי מעניין אותך?
+                      איזה סוכן AI הכי מעניין אותך? *
                     </label>
                     <textarea
                       value={desiredAgent}
                       onChange={(e) => setDesiredAgent(e.target.value)}
                       className={inputClass + " h-20 resize-none"}
                       placeholder="למשל: סוכן שעונה ללקוחות בוואטסאפ, סוכן שמארגן חשבוניות..."
+                      required
                     />
                   </div>
 
