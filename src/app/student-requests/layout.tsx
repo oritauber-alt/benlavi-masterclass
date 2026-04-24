@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     locale: "he_IL",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1024,
-        height: 1024,
+        url: "/og-student-requests.jpeg",
+        width: 1200,
+        height: 630,
         alt: "בקשות סטודנטים | ncode",
       },
     ],
