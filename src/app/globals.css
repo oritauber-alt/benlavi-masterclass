@@ -112,6 +112,14 @@ body {
   );
 }
 
+.spotlight-card.spotlight-teal::before {
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(30, 104, 128, 0.15),
+    transparent 40%
+  );
+}
+
 /* Animated border gradient */
 @keyframes border-flow {
   0%, 100% { background-position: 0% 50%; }

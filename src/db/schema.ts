@@ -154,3 +154,11 @@ export const mcpGuides = pgTable("mcp_guides", {
   guideContentMd: text("guide_content_md").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const studentRequests = pgTable("student_requests", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  fullName: text("full_name").notNull(),
+  topic: text("topic").notNull(),
+  details: text("details").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
