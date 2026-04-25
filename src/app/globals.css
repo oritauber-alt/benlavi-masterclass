@@ -168,6 +168,44 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
+/* ── Disco Party Mode ── */
+@keyframes disco-color-1 {
+  0% { background: rgba(255, 0, 100, 0.25); }
+  25% { background: rgba(0, 200, 255, 0.25); }
+  50% { background: rgba(180, 0, 255, 0.25); }
+  75% { background: rgba(255, 200, 0, 0.25); }
+  100% { background: rgba(255, 0, 100, 0.25); }
+}
+@keyframes disco-color-2 {
+  0% { background: rgba(0, 255, 150, 0.2); }
+  25% { background: rgba(255, 100, 0, 0.2); }
+  50% { background: rgba(0, 100, 255, 0.2); }
+  75% { background: rgba(255, 0, 200, 0.2); }
+  100% { background: rgba(0, 255, 150, 0.2); }
+}
+@keyframes disco-color-3 {
+  0% { background: rgba(255, 200, 0, 0.15); }
+  33% { background: rgba(0, 255, 100, 0.15); }
+  66% { background: rgba(100, 0, 255, 0.15); }
+  100% { background: rgba(255, 200, 0, 0.15); }
+}
+@keyframes disco-color-4 {
+  0% { background: rgba(0, 150, 255, 0.15); }
+  33% { background: rgba(255, 50, 150, 0.15); }
+  66% { background: rgba(50, 255, 50, 0.15); }
+  100% { background: rgba(0, 150, 255, 0.15); }
+}
+@keyframes disco-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.disco-orb-1 { animation: disco-color-1 2s ease-in-out infinite; }
+.disco-orb-2 { animation: disco-color-2 2.5s ease-in-out infinite; }
+.disco-orb-3 { animation: disco-color-3 3s ease-in-out infinite; }
+.disco-orb-4 { animation: disco-color-4 1.8s ease-in-out infinite; }
+.disco-bounce { animation: disco-bounce 0.5s ease-in-out infinite; }
+
 /* Remove number input arrows */
 input[type="tel"]::-webkit-outer-spin-button,
 input[type="tel"]::-webkit-inner-spin-button {
