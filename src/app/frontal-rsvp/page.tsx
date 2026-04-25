@@ -71,6 +71,20 @@ export default function FrontalRsvpPage() {
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Preload audio and gif on mount
+  useEffect(() => {
+    const audio = new Audio("/crab-dance.mp3");
+    audio.preload = "auto";
+    audio.addEventListener("ended", () => {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    });
+    audioRef.current = audio;
+    // Preload gif
+    const img = new Image();
+    img.src = "/dance.gif";
+  }, []);
   const [confetti, setConfetti] = useState<Array<{ id: number; y: number; color: string; delay: number; size: number; side: "left" | "right"; dx: number; dy: number }>>([]);
 
   function spawnConfetti() {
@@ -95,19 +109,10 @@ export default function FrontalRsvpPage() {
   function handleStatusSelect(value: string) {
     setStatus(value);
     if (value === "מגיע/ה") {
-      // Play crab dance music
-      if (!audioRef.current) {
-        audioRef.current = new Audio("/crab-dance.mp3");
-        audioRef.current.addEventListener("ended", () => {
-          const a = audioRef.current;
-          if (a) {
-            a.currentTime = 0;
-            a.play().catch(() => {});
-          }
-        });
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(() => {});
       }
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(() => {});
       spawnConfetti();
       // Vibrate on Android
       if (navigator.vibrate) {
