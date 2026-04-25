@@ -182,20 +182,13 @@ export default function FrontalRsvpPage() {
   }
 
   const showVideo = status === "מגיע/ה באיחור" || status === "לא מגיע/ה";
-  const isPartyMode = status === "מגיע/ה";
   const isSubmitDisabled = loading || !firstName || !lastName || !status;
 
   return (
-    <div className={`min-h-screen bg-zinc-950 relative overflow-hidden ${isPartyMode ? "disco-mode" : ""}`}>
+    <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
       <div className="fixed inset-0 noise-grain opacity-[0.03] pointer-events-none z-50" />
-      <div className={`absolute top-20 right-10 w-96 h-96 rounded-full blur-3xl ${isPartyMode ? "disco-orb-1" : "bg-[#1e6880]/15 orb"}`} />
-      <div className={`absolute top-[60%] left-10 w-72 h-72 rounded-full blur-3xl ${isPartyMode ? "disco-orb-2" : "bg-[#2d9ab8]/15 orb-2"}`} />
-      {isPartyMode && (
-        <>
-          <div className="disco-orb-3 absolute top-[30%] left-[60%] w-80 h-80 rounded-full blur-3xl" />
-          <div className="disco-orb-4 absolute top-[70%] right-[50%] w-64 h-64 rounded-full blur-3xl" />
-        </>
-      )}
+      <div className="absolute top-20 right-10 w-96 h-96 bg-[#1e6880]/15 rounded-full blur-3xl orb" />
+      <div className="absolute top-[60%] left-10 w-72 h-72 bg-[#2d9ab8]/15 rounded-full blur-3xl orb-2" />
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 py-12">
         {/* Header */}
@@ -396,6 +389,7 @@ export default function FrontalRsvpPage() {
                 <img
                   src="/dance.gif"
                   alt="ריקוד"
+                  loading="eager"
                   className="w-full rounded-xl"
                 />
               </div>
