@@ -78,6 +78,7 @@ export default function FrontalRsvpPage() {
       // Play crab dance music
       if (!audioRef.current) {
         audioRef.current = new Audio("/crab-dance.mp3");
+        audioRef.current.loop = true;
       }
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch(() => {});
@@ -375,6 +376,9 @@ export default function FrontalRsvpPage() {
                 <h2 className="text-lg font-semibold text-white text-center">
                   pov: אנחנו ביום שני
                 </h2>
+                <p className="text-center text-zinc-300 text-sm">
+                  🔊 תגבירו את הסאונד 🔊
+                </p>
                 <div style={dividerStyle} className="gradient-divider mb-4" />
                 <img
                   src="/dance.gif"
