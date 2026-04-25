@@ -358,7 +358,7 @@ export default function FrontalRsvpPage() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src="https://www.youtube.com/embed/hf7J87c_iy8?start=1&autoplay=1"
+                    src="https://www.youtube.com/embed/hf7J87c_iy8?start=1&autoplay=1&mute=1"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
