@@ -197,7 +197,7 @@ export default function FrontalRsvpPage() {
         </>
       )}
 
-      <div className={`relative z-10 max-w-2xl mx-auto px-4 py-12 ${isPartyMode ? "disco-bounce" : ""}`}>
+      <div className="relative z-10 max-w-2xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold gradient-text">פרונטלי ncode</h1>
