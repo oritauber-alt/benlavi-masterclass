@@ -78,11 +78,11 @@ export default function FrontalRsvpPage() {
       // Play crab dance music
       if (!audioRef.current) {
         audioRef.current = new Audio("/crab-dance.mp3");
-        audioRef.current.currentTime = 0.05;
-        audioRef.current.addEventListener("timeupdate", () => {
+        audioRef.current.addEventListener("ended", () => {
           const a = audioRef.current;
-          if (a && a.duration - a.currentTime < 0.15) {
-            a.currentTime = 0.05;
+          if (a) {
+            a.currentTime = 0;
+            a.play().catch(() => {});
           }
         });
       }
