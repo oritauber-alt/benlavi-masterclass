@@ -72,7 +72,7 @@ export default function FrontalRsvpPage() {
   const [status, setStatus] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Preload audio and gif on mount
+  // Preload audio and gif on mount, stop on unmount
   useEffect(() => {
     const audio = new Audio("/crab-dance.mp3");
     audio.preload = "auto";
@@ -84,6 +84,11 @@ export default function FrontalRsvpPage() {
     // Preload gif
     const img = new Image();
     img.src = "/dance.gif";
+    // Stop music when leaving page
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, []);
   const [confetti, setConfetti] = useState<Array<{ id: number; x: number; y: number; color: string; delay: number; size: number; dx: number; dy: number; rot: number; duration: number }>>([]);
 
@@ -161,6 +166,10 @@ export default function FrontalRsvpPage() {
       return;
     }
 
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setSubmitted(true);
     setLoading(false);
   }
