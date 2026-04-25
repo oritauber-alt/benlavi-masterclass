@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 const STATUS_OPTIONS = [
   { value: "מגיע/ה", label: "מגיע/ה" },
@@ -71,6 +71,20 @@ export default function FrontalRsvpPage() {
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [confetti, setConfetti] = useState<Array<{ id: number; x: number; color: string; delay: number; size: number }>>([]);
+
+  function spawnConfetti() {
+    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bd6", "#ffa94d", "#a66cff", "#00d2ff"];
+    const pieces = Array.from({ length: 60 }, (_, i) => ({
+      id: Date.now() + i,
+      x: Math.random() * 100,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      delay: Math.random() * 0.5,
+      size: Math.random() * 8 + 4,
+    }));
+    setConfetti(pieces);
+    setTimeout(() => setConfetti([]), 3000);
+  }
 
   function handleStatusSelect(value: string) {
     setStatus(value);
@@ -88,6 +102,7 @@ export default function FrontalRsvpPage() {
       }
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch(() => {});
+      spawnConfetti();
       // Vibrate on Android
       if (navigator.vibrate) {
         navigator.vibrate([200, 100, 200, 100, 200]);
@@ -187,6 +202,23 @@ export default function FrontalRsvpPage() {
   return (
     <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
       <div className="fixed inset-0 noise-grain opacity-[0.03] pointer-events-none z-50" />
+      {confetti.length > 0 && (
+        <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+          {confetti.map((c) => (
+            <div
+              key={c.id}
+              className="confetti-piece"
+              style={{
+                left: `${c.x}%`,
+                animationDelay: `${c.delay}s`,
+                width: c.size,
+                height: c.size * 1.5,
+                backgroundColor: c.color,
+              }}
+            />
+          ))}
+        </div>
+      )}
       <div className="absolute top-20 right-10 w-96 h-96 bg-[#1e6880]/15 rounded-full blur-3xl orb" />
       <div className="absolute top-[60%] left-10 w-72 h-72 bg-[#2d9ab8]/15 rounded-full blur-3xl orb-2" />
 
