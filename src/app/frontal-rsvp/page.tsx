@@ -85,25 +85,41 @@ export default function FrontalRsvpPage() {
     const img = new Image();
     img.src = "/dance.gif";
   }, []);
-  const [confetti, setConfetti] = useState<Array<{ id: number; y: number; color: string; delay: number; size: number; side: "left" | "right"; dx: number; dy: number }>>([]);
+  const [confetti, setConfetti] = useState<Array<{ id: number; x: number; y: number; color: string; delay: number; size: number; dx: number; dy: number; rot: number; duration: number }>>([]);
 
   function spawnConfetti() {
     const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bd6", "#ffa94d", "#a66cff", "#00d2ff"];
-    const pieces = Array.from({ length: 60 }, (_, i) => {
-      const side = i < 30 ? "left" as const : "right" as const;
-      return {
+    const pieces: typeof confetti = [];
+    // Left burst
+    for (let i = 0; i < 30; i++) {
+      pieces.push({
         id: Date.now() + i,
-        y: 20 + Math.random() * 60,
+        x: 0, y: 50,
         color: colors[Math.floor(Math.random() * colors.length)],
-        delay: Math.random() * 0.4,
+        delay: Math.random() * 0.15,
         size: Math.random() * 8 + 4,
-        side,
-        dx: (side === "left" ? 1 : -1) * (80 + Math.random() * 200),
-        dy: -(100 + Math.random() * 200) + Math.random() * 300,
-      };
-    });
+        dx: 50 + Math.random() * 300,
+        dy: -200 + Math.random() * 400,
+        rot: 360 + Math.random() * 720,
+        duration: 1.5 + Math.random() * 1,
+      });
+    }
+    // Right burst
+    for (let i = 0; i < 30; i++) {
+      pieces.push({
+        id: Date.now() + 30 + i,
+        x: 100, y: 50,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        delay: Math.random() * 0.15,
+        size: Math.random() * 8 + 4,
+        dx: -(50 + Math.random() * 300),
+        dy: -200 + Math.random() * 400,
+        rot: -(360 + Math.random() * 720),
+        duration: 1.5 + Math.random() * 1,
+      });
+    }
     setConfetti(pieces);
-    setTimeout(() => setConfetti([]), 3000);
+    setTimeout(() => setConfetti([]), 3500);
   }
 
   function handleStatusSelect(value: string) {
@@ -218,15 +234,18 @@ export default function FrontalRsvpPage() {
           {confetti.map((c) => (
             <div
               key={c.id}
-              className={`confetti-piece from-${c.side}`}
+              className="confetti-piece"
               style={{
+                left: `${c.x}%`,
                 top: `${c.y}%`,
-                animationDelay: `${c.delay}s`,
                 width: c.size,
                 height: c.size * 1.5,
                 backgroundColor: c.color,
                 "--dx": `${c.dx}px`,
                 "--dy": `${c.dy}px`,
+                "--rot": `${c.rot}deg`,
+                "--delay": `${c.delay}s`,
+                "--duration": `${c.duration}s`,
               } as React.CSSProperties}
             />
           ))}

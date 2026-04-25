@@ -169,39 +169,32 @@ textarea:focus-visible {
 }
 
 /* ── Confetti ── */
-@keyframes confetti-left {
+@keyframes confetti-burst {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
-  80% { opacity: 1; }
+  70% { opacity: 1; }
   100% {
-    transform: translate(var(--dx), var(--dy)) rotate(720deg);
-    opacity: 0;
-  }
-}
-@keyframes confetti-right {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 1;
-  }
-  80% { opacity: 1; }
-  100% {
-    transform: translate(var(--dx), var(--dy)) rotate(-720deg);
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.3);
     opacity: 0;
   }
 }
 .confetti-piece {
   position: absolute;
   border-radius: 2px;
+  will-change: transform, opacity;
+  animation: confetti-burst var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--delay);
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
-.confetti-piece.from-left {
-  left: 0;
-  animation: confetti-left 2.5s ease-out forwards;
+@keyframes confetti-appear {
+  0% { opacity: 0; }
+  1% { opacity: 1; }
 }
-.confetti-piece.from-right {
-  right: 0;
-  animation: confetti-right 2.5s ease-out forwards;
+.confetti-piece {
+  animation: confetti-appear 0s var(--delay) forwards, confetti-burst var(--duration) var(--delay) cubic-bezier(0.15, 0.6, 0.35, 1) forwards;
 }
 
 /* ── Disco Party Mode ── */
