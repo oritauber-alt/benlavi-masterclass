@@ -71,6 +71,7 @@ export default function FrontalRsvpPage() {
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sadRef = useRef<HTMLAudioElement | null>(null);
 
   // Preload audio and gif on mount, stop on unmount
   useEffect(() => {
@@ -81,6 +82,9 @@ export default function FrontalRsvpPage() {
       audio.play().catch(() => {});
     });
     audioRef.current = audio;
+    const sad = new Audio("/sad-trombone.mp3");
+    sad.preload = "auto";
+    sadRef.current = sad;
     // Preload gif
     const img = new Image();
     img.src = "/dance.gif";
@@ -88,6 +92,8 @@ export default function FrontalRsvpPage() {
     return () => {
       audio.pause();
       audio.currentTime = 0;
+      sad.pause();
+      sad.currentTime = 0;
     };
   }, []);
   const [confetti, setConfetti] = useState<Array<{ id: number; x: number; y: number; color: string; delay: number; size: number; dx: number; dy: number; rot: number; duration: number }>>([]);
@@ -140,10 +146,15 @@ export default function FrontalRsvpPage() {
         navigator.vibrate([200, 100, 200, 100, 200]);
       }
     } else {
-      // Stop music if switching away
+      // Stop crab dance if switching away
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
+      }
+      // Play sad trombone once
+      if (sadRef.current) {
+        sadRef.current.currentTime = 0;
+        sadRef.current.play().catch(() => {});
       }
     }
   }
