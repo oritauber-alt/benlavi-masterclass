@@ -341,6 +341,27 @@ export default function FrontalRsvpPage() {
             </div>
           </div>
 
+          {/* Dance GIF for "מגיע/ה" */}
+          {status === "מגיע/ה" && (
+            <div ref={fadeRef4} className="fade-up">
+              <div
+                ref={spot4.ref}
+                onMouseMove={spot4.onMouseMove}
+                className="spotlight-card spotlight-teal bg-zinc-900 border border-zinc-700/50 rounded-2xl p-6 space-y-5"
+              >
+                <h2 className="text-lg font-semibold text-white text-center">
+                  pov: אנחנו ביום שני
+                </h2>
+                <div style={dividerStyle} className="gradient-divider mb-4" />
+                <img
+                  src="/dance.gif"
+                  alt="ריקוד"
+                  className="w-full rounded-xl"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Conditional video section */}
           {showVideo && (
             <div ref={fadeRef4} className="fade-up">
