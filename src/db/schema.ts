@@ -162,3 +162,11 @@ export const studentRequests = pgTable("student_requests", {
   details: text("details").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const frontalRsvp = pgTable("frontal_rsvp", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  status: text("status").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
