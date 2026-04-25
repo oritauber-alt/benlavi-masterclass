@@ -71,17 +71,23 @@ export default function FrontalRsvpPage() {
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [confetti, setConfetti] = useState<Array<{ id: number; x: number; color: string; delay: number; size: number }>>([]);
+  const [confetti, setConfetti] = useState<Array<{ id: number; y: number; color: string; delay: number; size: number; side: "left" | "right"; dx: number; dy: number }>>([]);
 
   function spawnConfetti() {
     const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bd6", "#ffa94d", "#a66cff", "#00d2ff"];
-    const pieces = Array.from({ length: 60 }, (_, i) => ({
-      id: Date.now() + i,
-      x: Math.random() * 100,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      delay: Math.random() * 0.5,
-      size: Math.random() * 8 + 4,
-    }));
+    const pieces = Array.from({ length: 60 }, (_, i) => {
+      const side = i < 30 ? "left" as const : "right" as const;
+      return {
+        id: Date.now() + i,
+        y: 20 + Math.random() * 60,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        delay: Math.random() * 0.4,
+        size: Math.random() * 8 + 4,
+        side,
+        dx: (side === "left" ? 1 : -1) * (80 + Math.random() * 200),
+        dy: -(100 + Math.random() * 200) + Math.random() * 300,
+      };
+    });
     setConfetti(pieces);
     setTimeout(() => setConfetti([]), 3000);
   }
@@ -207,14 +213,16 @@ export default function FrontalRsvpPage() {
           {confetti.map((c) => (
             <div
               key={c.id}
-              className="confetti-piece"
+              className={`confetti-piece from-${c.side}`}
               style={{
-                left: `${c.x}%`,
+                top: `${c.y}%`,
                 animationDelay: `${c.delay}s`,
                 width: c.size,
                 height: c.size * 1.5,
                 backgroundColor: c.color,
-              }}
+                "--dx": `${c.dx}px`,
+                "--dy": `${c.dy}px`,
+              } as React.CSSProperties}
             />
           ))}
         </div>
