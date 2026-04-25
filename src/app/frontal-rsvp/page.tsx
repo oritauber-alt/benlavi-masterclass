@@ -70,6 +70,29 @@ export default function FrontalRsvpPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("");
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  function handleStatusSelect(value: string) {
+    setStatus(value);
+    if (value === "מגיע/ה") {
+      // Play crab dance music
+      if (!audioRef.current) {
+        audioRef.current = new Audio("/crab-dance.mp3");
+      }
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(() => {});
+      // Vibrate on Android
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 200]);
+      }
+    } else {
+      // Stop music if switching away
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -326,7 +349,7 @@ export default function FrontalRsvpPage() {
                   <button
                     key={opt.value}
                     type="button"
-                    onClick={() => setStatus(opt.value)}
+                    onClick={() => handleStatusSelect(opt.value)}
                     className={statusBtnClass(status === opt.value)}
                   >
                     {status === opt.value && (
