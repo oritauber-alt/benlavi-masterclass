@@ -201,21 +201,7 @@ export default function BusinessIntakePage() {
     );
   }
 
-  const sharedRequired =
-    !firstName || !lastName || !businessName || !businessType || !businessServices || !targetAudience || !dreamEmployee || !instagramUrl || !facebookUrl || !websiteUrl || !brandVoice || aiExperience === null || !desiredAgent;
-
-  const ownerRequired =
-    businessType === "business-owner"
-      ? !customerHandling || !financeHandling || !contentCreation || !quotesHandling || !calendarManagement
-      : false;
-
-  const managerRequired =
-    businessType === "company-manager"
-      ? !employeeCount || !companyCustomerHandling || !companyFinanceHandling || !companyContentCreation || !teamBottleneck
-      : false;
-
-  const isSubmitDisabled =
-    loading || sharedRequired || ownerRequired || managerRequired;
+  const isSubmitDisabled = loading || !businessType;
 
   return (
     <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
@@ -257,7 +243,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setFirstName(e.target.value)}
                     className={inputClass}
                     placeholder="ישראל"
-                    required
                   />
                 </div>
                 <div>
@@ -269,7 +254,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setLastName(e.target.value)}
                     className={inputClass}
                     placeholder="ישראלי"
-                    required
                   />
                 </div>
               </div>
@@ -283,7 +267,6 @@ export default function BusinessIntakePage() {
                   onChange={(e) => setBusinessName(e.target.value)}
                   className={inputClass}
                   placeholder="למשל: סטודיו עיצוב שלווה"
-                  required
                 />
               </div>
 
@@ -300,7 +283,6 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://instagram.com/your_business"
                   dir="ltr"
-                  required
                 />
               </div>
 
@@ -315,7 +297,6 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://facebook.com/your_business"
                   dir="ltr"
-                  required
                 />
               </div>
 
@@ -330,7 +311,6 @@ export default function BusinessIntakePage() {
                   className={inputClass}
                   placeholder="https://your-website.com"
                   dir="ltr"
-                  required
                 />
               </div>
             </div>
@@ -381,7 +361,6 @@ export default function BusinessIntakePage() {
                   onChange={(e) => setBusinessServices(e.target.value)}
                   className={inputClass + " h-24 resize-none"}
                   placeholder="למשל: עיצוב גרפי ובניית אתרים לעסקים קטנים, ייעוץ עסקי..."
-                  required
                 />
               </div>
 
@@ -394,7 +373,6 @@ export default function BusinessIntakePage() {
                   onChange={(e) => setTargetAudience(e.target.value)}
                   className={inputClass + " h-20 resize-none"}
                   placeholder="למשל: בעלי עסקים קטנים, זוגות צעירים, חברות הייטק..."
-                  required
                 />
               </div>
 
@@ -412,7 +390,6 @@ export default function BusinessIntakePage() {
                   onChange={(e) => setDreamEmployee(e.target.value)}
                   className={inputClass + " h-28 resize-none"}
                   placeholder="למשל: מנהל/ת לקוחות שעוקב אחרי כל ליד, שומע שיחות מכירה, עובד עם ה-CRM..."
-                  required
                 />
               </div>
             </div>
@@ -440,7 +417,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setCustomerHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: עונה בוואטסאפ ידנית, יש מזכירה, לא מספיק לענות לכולם..."
-                    required
                   />
                 </div>
 
@@ -453,7 +429,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setFinanceHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: אקסל, רואה חשבון אחת לחודש, תוכנת חשבשבת..."
-                    required
                   />
                 </div>
 
@@ -466,7 +441,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setContentCreation(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: כותב/ת לבד, מעסיק/ה קופירייטר, לא מפרסם/ת..."
-                    required
                   />
                 </div>
 
@@ -479,7 +453,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setQuotesHandling(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: וורד, PDF, בוואטסאפ בטקסט חופשי..."
-                    required
                   />
                 </div>
 
@@ -492,7 +465,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setCalendarManagement(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: Google Calendar, פתקים, בראש..."
-                    required
                   />
                 </div>
               </div>
@@ -542,7 +514,6 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: נציגי שירות בוואטסאפ, מוקד טלפוני, CRM..."
-                    required
                   />
                 </div>
 
@@ -557,7 +528,6 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: מנהלת חשבונות, תוכנת ERP, אקסלים..."
-                    required
                   />
                 </div>
 
@@ -572,7 +542,6 @@ export default function BusinessIntakePage() {
                     }
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: צוות שיווק פנימי, סוכנות חיצונית, לא עושים..."
-                    required
                   />
                 </div>
 
@@ -585,7 +554,6 @@ export default function BusinessIntakePage() {
                     onChange={(e) => setTeamBottleneck(e.target.value)}
                     className={inputClass + " h-20 resize-none"}
                     placeholder="למשל: דיווחים שבועיים, ניהול לידים, תיאומי פגישות..."
-                    required
                   />
                 </div>
               </div>
@@ -615,7 +583,6 @@ export default function BusinessIntakePage() {
                       onChange={(e) => setBrandVoice(e.target.value)}
                       className={inputClass + " h-20 resize-none"}
                       placeholder="למשל: מקצועי, חברי, ענייני..."
-                      required
                     />
                   </div>
 
@@ -652,7 +619,6 @@ export default function BusinessIntakePage() {
                       onChange={(e) => setDesiredAgent(e.target.value)}
                       className={inputClass + " h-20 resize-none"}
                       placeholder="למשל: סוכן שעונה ללקוחות בוואטסאפ, סוכן שמארגן חשבוניות..."
-                      required
                     />
                   </div>
 

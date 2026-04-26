@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    if (!body?.firstName || !body?.lastName || !body?.businessName || !body?.businessType) {
+    if (!body?.businessType) {
       return NextResponse.json(
         { error: "חסרים שדות חובה" },
         { status: 400 }

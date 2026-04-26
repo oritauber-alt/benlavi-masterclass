@@ -53,16 +53,38 @@ export default function StudentRequestsPage() {
   const [fullName, setFullName] = useState("");
   const [topic, setTopic] = useState("");
   const [details, setDetails] = useState("");
+  const [mediaFile, setMediaFile] = useState<File | null>(null);
+  const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0] ?? null;
+    setMediaFile(file);
+    if (mediaPreview) URL.revokeObjectURL(mediaPreview);
+    setMediaPreview(file ? URL.createObjectURL(file) : null);
+  }
+
+  function removeFile() {
+    setMediaFile(null);
+    if (mediaPreview) URL.revokeObjectURL(mediaPreview);
+    setMediaPreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError("");
 
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("topic", topic);
+    formData.append("details", details);
+    if (mediaFile) formData.append("media", mediaFile);
+
     const res = await fetch("/api/student-requests", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fullName, topic, details }),
+      body: formData,
     });
 
     const data = await res.json();
@@ -225,6 +247,54 @@ export default function StudentRequestsPage() {
                     placeholder="ספר/י לנו מה הבקשה שלך..."
                     required
                   />
+                </div>
+
+                <div style={dividerStyle} className="gradient-divider" />
+
+                <div>
+                  <label className="block text-sm text-zinc-100 font-medium mb-1.5">
+                    צרף/י תמונה או סרטון (אופציונלי)
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*,video/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  {!mediaFile ? (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full py-8 rounded-xl border-2 border-dashed border-zinc-600 bg-zinc-800/40 hover:bg-zinc-800/70 hover:border-[#1e6880]/50 transition-all duration-200 flex flex-col items-center gap-2 group"
+                    >
+                      <svg className="w-8 h-8 text-zinc-400 group-hover:text-[#5bb8d4] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 16v-8m0 0l-3 3m3-3l3 3M6.75 19.25h10.5a2 2 0 002-2V6.75a2 2 0 00-2-2H6.75a2 2 0 00-2 2v10.5a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-sm text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                        לחצ/י להעלאת תמונה או סרטון
+                      </span>
+                    </button>
+                  ) : (
+                    <div className="relative rounded-xl overflow-hidden border border-zinc-700 bg-zinc-800/60">
+                      {mediaFile.type.startsWith("image/") && mediaPreview && (
+                        <img src={mediaPreview} alt="תצוגה מקדימה" className="w-full max-h-64 object-contain" />
+                      )}
+                      {mediaFile.type.startsWith("video/") && mediaPreview && (
+                        <video src={mediaPreview} controls className="w-full max-h-64" />
+                      )}
+                      <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/80">
+                        <span className="text-sm text-zinc-300 truncate max-w-[70%]">{mediaFile.name}</span>
+                        <button
+                          type="button"
+                          onClick={removeFile}
+                          className="text-red-400 hover:text-red-300 text-sm font-medium transition-colors"
+                        >
+                          הסר
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
